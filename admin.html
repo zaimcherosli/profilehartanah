@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Panel pengurusan hartanah dan muat naik gambar Zaim Rosli.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .admin-wrapper {
+      padding-top: 100px;
+      padding-bottom: 60px;
+    }
+
+    .admin-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 20px 28px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .admin-table th, .admin-table td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .admin-table th {
+      background: var(--bg-alt);
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    .thumbs-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      min-height: 80px;
+      padding: 12px;
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      border: 2px dashed var(--border-color);
+    }
+
+    @media (max-width: 768px) {
+      .admin-header-bar {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .admin-table th:nth-child(3), .admin-table td:nth-child(3) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <span class="logo-main">ZAIM<span>ROSLI</span></span>
+        <span class="logo-sub">PANEL PENGURUSAN ADMIN</span>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span id="user-display" style="font-size: 0.9rem; font-weight: 700; color: var(--accent-gold);">huzaimrosli@gmail.com</span>
+        <button onclick="handleLogout()" class="btn btn-outline btn-sm">🚪 Log Keluar</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Main Section -->
+  <div class="container admin-wrapper">
+    
+    <div class="admin-header-bar">
+      <div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 4px;">Pengurusan Listing Hartanah</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Tambah, edit, padam & susun gambar hartanah anda di zaimrosli.my</p>
+      </div>
+      <button onclick="openModal()" class="btn btn-accent">+ Tambah Hartanah Baharu</button>
+    </div>
+
+    <!-- Listings Table -->
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Hartanah</th>
+          <th>Harga</th>
+          <th>Lokasi / Negeri</th>
+          <th>Status</th>
+          <th>Tindakan</th>
+        </tr>
+      </thead>
+      <tbody id="admin-listings-tbody">
+        <!-- Rendered dynamically -->
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- Modal Add/Edit Property -->
+  <div id="property-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <h3 id="modal-title" style="font-size: 1.3rem;">Tambah Hartanah Baharu</h3>
+        <button onclick="closeModal()" style="background: none; border: none; font-size: 1.8rem; cursor: pointer;">&times;</button>
+      </div>
+
+      <form id="prop-form" onsubmit="saveProperty(event)">
+        <input type="hidden" id="form-id">
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>Tajuk Hartanah</label>
+          <input type="text" id="form-title" class="form-control" placeholder="Contoh: The Grand Pavilion Penthouse" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Harga (RM)</label>
+            <input type="number" id="form-price" class="form-control" placeholder="1250000" required>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="form-status" class="form-control" required>
+              <option value="sale">Untuk Dijual (FOR SALE)</option>
+              <option value="rent">Untuk Disewa (FOR RENT)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Lokasi (Bandar / kawasan)</label>
+            <input type="text" id="form-location" class="form-control" placeholder="KLCC, Kuala Lumpur" required>
+          </div>
+          <div class="form-group">
+            <label>Negeri</label>
+            <select id="form-region" class="form-control" required>
+              <option value="Kuala Lumpur">Kuala Lumpur</option>
+              <option value="Selangor">Selangor</option>
+              <option value="Pulau Pinang">Pulau Pinang</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Jenis</label>
+            <select id="form-type" class="form-control" required>
+              <option value="Kondominium">Kondominium</option>
+              <option value="Teres">Teres</option>
+              <option value="Banglo">Banglo</option>
+              <option value="Semi-D">Semi-D</option>
+              <option value="Studio">Studio</option>
+              <option value="Townhouse">Townhouse</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Bilik Tidur</label>
+            <input type="number" id="form-beds" class="form-control" value="3" required>
+          </div>
+          <div class="form-group">
+            <label>Bilik Air</label>
+            <input type="number" id="form-baths" class="form-control" value="2" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label>Keluasan (sqft)</label>
+            <input type="number" id="form-size" class="form-control" placeholder="1200" required>
+          </div>
+          <div class="form-group">
+            <label>Pegangan</label>
+            <select id="form-tenure" class="form-control">
+              <option value="Freehold">Freehold</option>
+              <option value="Leasehold">Leasehold</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Status Lot</label>
+            <select id="form-lotType" class="form-control">
+              <option value="Non-Bumi Lot">Non-Bumi Lot</option>
+              <option value="Bumi Lot">Bumi Lot</option>
+              <option value="Open Title">Open Title</option>
+              <option value="Rezab Melayu">Rezab Melayu</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Image Upload & Drag Drop Grid -->
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label>Gambar Hartanah</label>
+          <div style="display: flex; gap: 10px; margin-bottom: 8px;">
+            <input type="file" id="form-image-file" multiple accept="image/*" class="form-control" onchange="handleImageUpload(event)">
+          </div>
+          <input type="hidden" id="form-prop-image">
+
+          <div id="image-thumbs-grid" class="thumbs-grid">
+            <!-- Rendered thumbs -->
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">
+            💡 Petua: Tahan dan seret gambar untuk ubah susunan. Gambar 1 adalah "Utama".
+          </p>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label>Penerangan / Deskripsi Hartanah</label>
+          <textarea id="form-description" class="form-control" style="min-height: 120px;" required></textarea>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+          <button type="button" onclick="closeModal()" class="btn btn-outline">Batal</button>
+          <button type="submit" class="btn btn-accent">Simpan Hartanah</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="properties-data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    const SUPABASE_URL = 'https://csrzhidtzqxfbapsenhu.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzcnpoaWR0enF4ZmJhcHNlbmh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0OTM3OTYsImV4cCI6MjEwMTA2OTc5Nn0.NnHFURbQTvsdgGbm1d_PC-hkOgQFQIHKTMQaS2n44SU';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let currentProperties = [];
+    let uploadedImageUrls = [];
+    let draggedIdx = null;
+
+    async function checkAuth() {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      const localSess = localStorage.getItem('ZAIM_ROSLI_SESSION');
+      if (!session && !localSess) {
+        window.location.href = 'login.html';
+        return;
+      }
+      loadPropertiesList();
+    }
+    checkAuth();
+
+    async function handleLogout() {
+      try {
+        await supabaseClient.auth.signOut();
+      } catch(e) {}
+      localStorage.removeItem('ZAIM_ROSLI_SESSION');
+      window.location.href = 'login.html?logout=true';
+    }
+
+    function loadPropertiesList() {
+      const stored = localStorage.getItem('ZAIM_ROSLI_PROPERTIES');
+      if (stored) {
+        try {
+          currentProperties = JSON.parse(stored);
+        } catch(e) {
+          currentProperties = PROPERTIES_DATA;
+        }
+      } else {
+        currentProperties = PROPERTIES_DATA;
+      }
+
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('admin-listings-tbody');
+      tbody.innerHTML = currentProperties.map((p, idx) => `
+        <tr>
+          <td>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img src="${p.image}" style="width: 50px; height: 40px; object-fit: cover; border-radius: 6px;">
+              <div>
+                <strong>${p.title}</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">${p.type}</div>
+              </div>
+            </div>
+          </td>
+          <td><strong style="color: var(--accent-gold);">${p.priceStr}</strong></td>
+          <td>${p.location}</td>
+          <td><span class="property-badge ${p.status === 'sale' ? 'badge-sale' : 'badge-rent'}" style="position:static;">${p.status.toUpperCase()}</span></td>
+          <td>
+            <button onclick="editProperty(${idx})" class="btn btn-outline btn-sm">Edit</button>
+            <button onclick="deleteProperty(${idx})" class="btn btn-sm" style="background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; margin-left: 6px;">Padam</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openModal() {
+      document.getElementById('prop-form').reset();
+      document.getElementById('form-id').value = '';
+      document.getElementById('modal-title').textContent = 'Tambah Hartanah Baharu';
+      uploadedImageUrls = [];
+      rebuildImageThumbsGrid();
+      document.getElementById('property-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('property-modal').style.display = 'none';
+    }
+
+    function editProperty(idx) {
+      const p = currentProperties[idx];
+      document.getElementById('form-id').value = idx;
+      document.getElementById('form-title').value = p.title;
+      document.getElementById('form-price').value = p.price;
+      document.getElementById('form-status').value = p.status;
+      document.getElementById('form-location').value = p.location;
+      document.getElementById('form-region').value = p.region;
+      document.getElementById('form-type').value = p.type;
+      document.getElementById('form-beds').value = p.beds;
+      document.getElementById('form-baths').value = p.baths;
+      document.getElementById('form-size').value = p.size;
+      document.getElementById('form-tenure').value = p.tenure;
+      document.getElementById('form-lotType').value = p.lotType;
+      document.getElementById('form-description').value = p.description;
+
+      uploadedImageUrls = p.image ? p.image.split(',').map(s => s.trim()) : [];
+      rebuildImageThumbsGrid();
+
+      document.getElementById('modal-title').textContent = 'Edit Hartanah';
+      document.getElementById('property-modal').style.display = 'flex';
+    }
+
+    function deleteProperty(idx) {
+      if (confirm('Adakah anda pasti untuk memadam hartanah ini?')) {
+        currentProperties.splice(idx, 1);
+        saveToStorage();
+        renderTable();
+      }
+    }
+
+    function saveProperty(e) {
+      e.preventDefault();
+      const idx = document.getElementById('form-id').value;
+      const title = document.getElementById('form-title').value.trim();
+      const price = parseFloat(document.getElementById('form-price').value);
+      const status = document.getElementById('form-status').value;
+      const location = document.getElementById('form-location').value.trim();
+      const region = document.getElementById('form-region').value;
+      const type = document.getElementById('form-type').value;
+      const beds = parseInt(document.getElementById('form-beds').value);
+      const baths = parseInt(document.getElementById('form-baths').value);
+      const size = parseInt(document.getElementById('form-size').value);
+      const tenure = document.getElementById('form-tenure').value;
+      const lotType = document.getElementById('form-lotType').value;
+      const description = document.getElementById('form-description').value.trim();
+
+      const image = uploadedImageUrls.length > 0 ? uploadedImageUrls.join(', ') : "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80";
+      const slug = slugify(title);
+
+      const propData = {
+        id: idx !== '' ? currentProperties[idx].id : `prop-${Date.now()}`,
+        slug: slug,
+        title: title,
+        price: price,
+        priceStr: status === 'sale' ? `RM ${price.toLocaleString('en-US')}` : `RM ${price.toLocaleString('en-US')} / bln`,
+        location: location,
+        region: region,
+        type: type,
+        status: status,
+        beds: beds,
+        baths: baths,
+        parking: 2,
+        size: size,
+        landSize: "-",
+        tenure: tenure,
+        lotType: lotType,
+        image: image,
+        description: description
+      };
+
+      if (idx !== '') {
+        currentProperties[idx] = propData;
+      } else {
+        currentProperties.unshift(propData);
+      }
+
+      saveToStorage();
+      renderTable();
+      closeModal();
+    }
+
+    function saveToStorage() {
+      localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(currentProperties));
+    }
+
+    // Image Upload & Pointer Drag Drop Grid Handler
+    function handleImageUpload(e) {
+      const files = Array.from(e.target.files);
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          uploadedImageUrls.push(ev.target.result);
+          rebuildImageThumbsGrid();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function rebuildImageThumbsGrid() {
+      const grid = document.getElementById('image-thumbs-grid');
+      grid.innerHTML = '';
+
+      uploadedImageUrls.forEach((url, idx) => {
+        const thumb = document.createElement('div');
+        thumb.dataset.index = idx;
+        thumb.style.cssText = 'position:relative; width:95px; height:75px; border-radius:10px; overflow:hidden; border:2px solid #cbd5e1; flex-shrink:0; cursor:grab; background:#fff; touch-action:none;';
+        
+        const isUtama = idx === 0;
+
+        thumb.innerHTML = `
+          <img src="${url}" style="width:100%;height:100%;object-fit:cover;pointer-events:none;" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80'">
+          <button type="button" onclick="removeUploadedImage(${idx})" style="position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;" title="Buang Gambar">&times;</button>
+          ${isUtama ? '<span style="position:absolute;bottom:4px;left:4px;background:#0f172a;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;z-index:2;">Utama</span>' : ''}
+        `;
+
+        // Pointer-based Touch + Mouse Drag Reorder
+        thumb.addEventListener('pointerdown', (e) => {
+          if (e.target.tagName === 'BUTTON') return;
+          e.preventDefault();
+          e.stopPropagation();
+          thumb.setPointerCapture(e.pointerId);
+
+          draggedIdx = idx;
+          const rect = thumb.getBoundingClientRect();
+          const ghost = thumb.cloneNode(true);
+          ghost.style.cssText = `position:fixed; width:${rect.width}px; height:${rect.height}px; left:${rect.left}px; top:${rect.top}px; opacity:0.8; z-index:9999; pointer-events:none; border-radius:10px; border:2px solid #d97706; box-shadow:0 8px 24px rgba(0,0,0,0.3); transform:scale(1.06); transition:none;`;
+          document.body.appendChild(ghost);
+          thumb.style.opacity = '0.25';
+
+          const offsetX = e.clientX - rect.left;
+          const offsetY = e.clientY - rect.top;
+          let dropTargetIdx = idx;
+
+          const onMove = (ev) => {
+            ghost.style.left = (ev.clientX - offsetX) + 'px';
+            ghost.style.top = (ev.clientY - offsetY) + 'px';
+
+            const thumbs = grid.querySelectorAll('[data-index]');
+            thumbs.forEach(t => {
+              const tRect = t.getBoundingClientRect();
+              if (ev.clientX >= tRect.left && ev.clientX <= tRect.right && ev.clientY >= tRect.top && ev.clientY <= tRect.bottom) {
+                dropTargetIdx = parseInt(t.dataset.index);
+              }
+            });
+          };
+
+          const onUp = () => {
+            thumb.removeEventListener('pointermove', onMove);
+            thumb.removeEventListener('pointerup', onUp);
+            ghost.remove();
+            thumb.style.opacity = '1';
+
+            if (draggedIdx !== null && dropTargetIdx !== draggedIdx) {
+              const [moved] = uploadedImageUrls.splice(draggedIdx, 1);
+              uploadedImageUrls.splice(dropTargetIdx, 0, moved);
+              rebuildImageThumbsGrid();
+            }
+            draggedIdx = null;
+          };
+
+          thumb.addEventListener('pointermove', onMove);
+          thumb.addEventListener('pointerup', onUp);
+        });
+
+        grid.appendChild(thumb);
+      });
+    }
+
+    function removeUploadedImage(idx) {
+      uploadedImageUrls.splice(idx, 1);
+      rebuildImageThumbsGrid();
+    }
+  </script>
+</body>
+</html>

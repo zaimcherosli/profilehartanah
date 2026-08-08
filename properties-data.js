@@ -181,3 +181,15 @@ function calcValuationFee(price) {
   }
   return Math.max(300, Math.round(fee));
 }
+
+// Load custom properties saved from admin portal
+try {
+  const customStored = localStorage.getItem('ZAIM_ROSLI_PROPERTIES');
+  if (customStored) {
+    const parsed = JSON.parse(customStored);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      PROPERTIES_DATA.length = 0;
+      PROPERTIES_DATA.push(...parsed);
+    }
+  }
+} catch (e) {}

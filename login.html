@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log Masuk Admin — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Laman log masuk admin pengurusan hartanah Zaim Rosli.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: var(--bg-primary);
+    }
+    
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-header .logo-main {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    .error-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #ef4444;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="logo">
+          <span class="logo-main">ZAIM<span>ROSLI</span></span>
+          <span class="logo-sub">PORTAL ADMIN HARTANAH</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">Log masuk untuk menguruskan senarai hartanah anda</p>
+      </div>
+
+      <div id="error-box" class="error-box"></div>
+
+      <form id="login-form-el">
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">ALAMAT E-MEL</label>
+          <input type="email" id="login-email" class="form-control" value="huzaimrosli@gmail.com" placeholder="contoh@gmail.com" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">KATA LALUAN</label>
+          <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" id="login-btn-submit" class="btn btn-accent" style="width: 100%;">
+          🔐 Log Masuk
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 24px;">
+        <a href="index.html" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">← Kembali ke Laman Utama</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://csrzhidtzqxfbapsenhu.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzcnpoaWR0enF4ZmJhcHNlbmh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0OTM3OTYsImV4cCI6MjEwMTA2OTc5Nn0.NnHFURbQTvsdgGbm1d_PC-hkOgQFQIHKTMQaS2n44SU';
+    
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function checkUser() {
+      if (window.location.search.includes('logout=true')) {
+        try {
+          await supabaseClient.auth.signOut();
+          localStorage.removeItem('ZAIM_ROSLI_SESSION');
+          sessionStorage.clear();
+        } catch (e) {}
+        return;
+      }
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      if (session || localStorage.getItem('ZAIM_ROSLI_SESSION')) {
+        window.location.href = 'admin.html';
+      }
+    }
+    checkUser();
+
+    const form = document.getElementById('login-form-el');
+    const submitBtn = document.getElementById('login-btn-submit');
+    const errorBox = document.getElementById('error-box');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Memproses...';
+      errorBox.style.display = 'none';
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      try {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) throw error;
+
+        localStorage.setItem('ZAIM_ROSLI_SESSION', JSON.stringify({ email: data.user.email, loggedInAt: Date.now() }));
+        window.location.href = 'admin.html';
+      } catch (err) {
+        console.error('Login error:', err);
+        errorBox.textContent = 'E-mel atau kata laluan tidak sah. Sila cuba lagi.';
+        errorBox.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '🔐 Log Masuk';
+      }
+    });
+  </script>
+</body>
+</html>
