@@ -1,0 +1,7 @@
+id,title,price,priceStr,location,region,type,status,beds,baths,size,image
+1,"The Grand Pavilion Penthouse",1250000,"RM 1,250,000","KLCC, Kuala Lumpur",KL,Kondominium,sale,3,3,1450,images/listing_condo.png
+2,"Avana Modern Double Storey",680000,"RM 680,000","Denai Alam, Shah Alam",Selangor,Teres,sale,4,4,2200,images/listing_terrace.png
+3,"Serene Suite Apartment",3200,"RM 3,200 / bln","Mont Kiara, Kuala Lumpur",KL,Kondominium,rent,2,2,950,images/hero_bg.png
+4,"Clover Semi-D Residence",1850000,"RM 1,850,000","Cyberjaya, Selangor",Selangor,Semi-D,sale,5,5,3200,images/hero_bg.png
+5,"Skyline Premium Studio",1800,"RM 1,800 / bln","Bangsar, Kuala Lumpur",KL,Kondominium,rent,1,1,550,images/listing_condo.png
+6,"Garden Homes Double Storey",750000,"RM 750,000","Puchong, Selangor",Selangor,Teres,sale,4,3,1800,images/listing_terrace.png
