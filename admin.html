@@ -7,8 +7,13 @@
   <meta name="description" content="Property listing and image management portal for Zaim Rosli.">
   <link rel="stylesheet" href="styles.css">
   <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden !important;
+    }
+
     .admin-wrapper {
-      padding-top: 100px;
+      padding-top: 90px;
       padding-bottom: 60px;
     }
 
@@ -18,10 +23,16 @@
       align-items: center;
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      padding: 20px 28px;
+      padding: 20px 24px;
       border-radius: var(--radius-lg);
-      margin-bottom: 30px;
+      margin-bottom: 24px;
       box-shadow: var(--shadow-sm);
+    }
+
+    .admin-table-wrap {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
     }
 
     .admin-table {
@@ -49,6 +60,10 @@
       color: var(--text-muted);
     }
 
+    .admin-mobile-wrap {
+      display: none;
+    }
+
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -61,7 +76,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
     }
 
     .modal-card {
@@ -71,13 +86,13 @@
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      padding: 32px;
+      padding: 28px 24px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     }
 
     .thumbs-grid {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       margin-top: 12px;
       min-height: 80px;
@@ -89,7 +104,7 @@
 
     .form-input, .form-select, .form-textarea {
       width: 100%;
-      padding: 12px 16px;
+      padding: 12px 14px;
       border-radius: 10px;
       border: 1.5px solid var(--border-color);
       font-size: 0.95rem;
@@ -103,13 +118,36 @@
     }
 
     @media (max-width: 768px) {
+      .admin-wrapper {
+        padding-top: 80px;
+      }
       .admin-header-bar {
         flex-direction: column;
-        gap: 16px;
+        gap: 14px;
         align-items: flex-start;
+        padding: 16px !important;
       }
-      .admin-table th:nth-child(3), .admin-table td:nth-child(3) {
-        display: none;
+      .admin-header-bar h2 {
+        font-size: 1.25rem !important;
+      }
+      .admin-header-bar button {
+        width: 100% !important;
+      }
+      .admin-table-wrap {
+        display: none !important;
+      }
+      .admin-mobile-wrap {
+        display: block !important;
+      }
+      #user-display {
+        font-size: 0.78rem !important;
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .modal-card {
+        padding: 20px 16px !important;
       }
     }
   </style>
@@ -121,12 +159,12 @@
     <div class="container nav-wrapper">
       <a href="index.html" class="logo">
         <span class="logo-main">ZAIM<span>ROSLI</span></span>
-        <span class="logo-sub">ADMIN MANAGEMENT PORTAL</span>
+        <span class="logo-sub">ADMIN PORTAL</span>
       </a>
 
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <span id="user-display" style="font-size: 0.9rem; font-weight: 700; color: var(--accent-gold);">huzaimrosli@gmail.com</span>
-        <button onclick="handleLogout()" class="btn btn-outline btn-sm">🚪 Sign Out</button>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span id="user-display" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-gold);">huzaimrosli@gmail.com</span>
+        <button onclick="handleLogout()" class="btn btn-outline btn-sm" style="padding: 6px 12px; font-size: 0.8rem;">🚪 Sign Out</button>
       </div>
     </div>
   </header>
@@ -136,53 +174,60 @@
     
     <div class="admin-header-bar">
       <div>
-        <h2 style="font-size: 1.5rem; margin-bottom: 4px;">Property Listing Management</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Add, edit, delete & reorder property photos for zaimrosli.my</p>
+        <h2 style="font-size: 1.4rem; margin-bottom: 4px;">Property Listing Management</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">Add, edit, delete & reorder property photos</p>
       </div>
       <button onclick="openModal()" class="btn btn-accent">+ Add New Property</button>
     </div>
 
-    <!-- Listings Table -->
-    <table class="admin-table">
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Price</th>
-          <th>Location / Region</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="admin-listings-tbody">
-        <!-- Rendered dynamically -->
-      </tbody>
-    </table>
+    <!-- Desktop Listings Table -->
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Price</th>
+            <th>Location / Region</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="admin-listings-tbody">
+          <!-- Rendered dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile Listings Vertical Cards Grid (< 768px) -->
+    <div id="admin-listings-mobile" class="admin-mobile-wrap">
+      <!-- Rendered dynamically for mobile -->
+    </div>
 
   </div>
 
   <!-- Modal Add/Edit Property -->
   <div id="property-modal" class="modal-overlay">
     <div class="modal-card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-        <h3 id="modal-title" style="font-size: 1.3rem;">Add New Property</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 id="modal-title" style="font-size: 1.25rem;">Add New Property</h3>
         <button onclick="closeModal()" style="background: none; border: none; font-size: 1.8rem; cursor: pointer;">&times;</button>
       </div>
 
       <form id="prop-form" onsubmit="saveProperty(event)">
         <input type="hidden" id="form-id">
 
-        <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">PROPERTY TITLE</label>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">PROPERTY TITLE</label>
           <input type="text" id="form-title" class="form-input" placeholder="e.g. The Grand Pavilion Penthouse" required>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">PRICE (RM)</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">PRICE (RM)</label>
             <input type="number" id="form-price" class="form-input" placeholder="1250000" required>
           </div>
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">STATUS</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">STATUS</label>
             <select id="form-status" class="form-select" required>
               <option value="sale">FOR SALE</option>
               <option value="rent">FOR RENT</option>
@@ -190,13 +235,13 @@
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">LOCATION (City / Area)</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">LOCATION (City / Area)</label>
             <input type="text" id="form-location" class="form-input" placeholder="KLCC, Kuala Lumpur" required>
           </div>
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">REGION</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">REGION</label>
             <select id="form-region" class="form-select" required>
               <option value="Kuala Lumpur">Kuala Lumpur</option>
               <option value="Selangor">Selangor</option>
@@ -205,9 +250,9 @@
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px;">
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">TYPE</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">TYPE</label>
             <select id="form-type" class="form-select" required>
               <option value="Condominium">Condominium</option>
               <option value="Terrace House">Terrace House</option>
@@ -218,29 +263,29 @@
             </select>
           </div>
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">BEDROOMS</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">BEDS</label>
             <input type="number" id="form-beds" class="form-input" value="3" required>
           </div>
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">BATHROOMS</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">BATHS</label>
             <input type="number" id="form-baths" class="form-input" value="2" required>
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px;">
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">BUILT-UP (SQFT)</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">SIZE (SQFT)</label>
             <input type="number" id="form-size" class="form-input" placeholder="1200" required>
           </div>
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">TENURE</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">TENURE</label>
             <select id="form-tenure" class="form-select">
               <option value="Freehold">Freehold</option>
               <option value="Leasehold">Leasehold</option>
             </select>
           </div>
           <div class="form-group">
-            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">LOT TYPE</label>
+            <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">LOT TYPE</label>
             <select id="form-lotType" class="form-select">
               <option value="Non-Bumi Lot">Non-Bumi Lot</option>
               <option value="Bumi Lot">Bumi Lot</option>
@@ -251,29 +296,28 @@
         </div>
 
         <!-- Image Upload & Drag Drop Grid -->
-        <div class="form-group" style="margin-bottom: 20px;">
-          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">PROPERTY PHOTOS</label>
-          <div style="display: flex; gap: 10px; margin-bottom: 8px;">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">PROPERTY PHOTOS (R2 STORAGE)</label>
+          <div style="display: flex; gap: 10px; margin-bottom: 6px;">
             <input type="file" id="form-image-file" multiple accept="image/*" class="form-input" onchange="handleImageUpload(event)">
           </div>
-          <input type="hidden" id="form-prop-image">
 
           <div id="image-thumbs-grid" class="thumbs-grid">
             <!-- Rendered thumbs -->
           </div>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">
-            💡 Tip: Hold and drag photos to reorder. Photo 1 will be the main feature photo.
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">
+            💡 Hold & drag photos to reorder. Photo 1 is the main photo.
           </p>
         </div>
 
-        <div class="form-group" style="margin-bottom: 24px;">
-          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">DESCRIPTION</label>
-          <textarea id="form-description" class="form-textarea" style="min-height: 120px;" required></textarea>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">DESCRIPTION</label>
+          <textarea id="form-description" class="form-textarea" style="min-height: 100px;" required></textarea>
         </div>
 
-        <div style="display: flex; gap: 12px; justify-content: flex-end;">
-          <button type="button" onclick="closeModal()" class="btn btn-outline">Cancel</button>
-          <button type="submit" class="btn btn-accent">Save Property</button>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <button type="button" onclick="closeModal()" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-accent btn-sm">Save Property</button>
         </div>
       </form>
 
@@ -338,12 +382,14 @@
     }
 
     function renderTable() {
-      const tbody = document.getElementById('admin-listings-tbody');
-      tbody.innerHTML = currentProperties.map((p, idx) => `
+      const desktopTbody = document.getElementById('admin-listings-tbody');
+      const mobileGrid = document.getElementById('admin-listings-mobile');
+
+      const desktopHTML = currentProperties.map((p, idx) => `
         <tr>
           <td>
             <div style="display: flex; align-items: center; gap: 12px;">
-              <img src="${p.image}" style="width: 50px; height: 40px; object-fit: cover; border-radius: 6px;">
+              <img src="${p.image.split(',')[0].trim()}" style="width: 50px; height: 40px; object-fit: cover; border-radius: 6px;" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80'">
               <div>
                 <strong>${p.title}</strong>
                 <div style="font-size: 0.8rem; color: var(--text-muted);">${p.type}</div>
@@ -359,6 +405,29 @@
           </td>
         </tr>
       `).join('');
+
+      const mobileHTML = currentProperties.map((p, idx) => `
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 12px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; gap: 12px; margin-bottom: 10px;">
+            <img src="${p.image.split(',')[0].trim()}" style="width: 70px; height: 56px; object-fit: cover; border-radius: 8px; flex-shrink: 0;" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80'">
+            <div style="flex: 1; min-width: 0;">
+              <h4 style="font-size: 0.9rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">${p.title}</h4>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">📍 ${p.location}</div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
+                <strong style="color: var(--accent-gold); font-size: 0.9rem;">${p.priceStr}</strong>
+                <span class="property-badge ${p.status === 'sale' ? 'badge-sale' : 'badge-rent'}" style="position:static; font-size: 0.6rem; padding: 2px 6px;">${p.status === 'sale' ? 'FOR SALE' : 'FOR RENT'}</span>
+              </div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 10px; border-top: 1px solid var(--border-color);">
+            <button onclick="editProperty(${idx})" class="btn btn-outline btn-sm" style="width: 100%; padding: 8px;">✏️ Edit</button>
+            <button onclick="deleteProperty(${idx})" class="btn btn-sm" style="width: 100%; padding: 8px; background: #fef2f2; color: #ef4444; border: 1px solid #fecaca;">🗑️ Delete</button>
+          </div>
+        </div>
+      `).join('');
+
+      if (desktopTbody) desktopTbody.innerHTML = desktopHTML;
+      if (mobileGrid) mobileGrid.innerHTML = mobileHTML;
     }
 
     function openModal() {
@@ -487,7 +556,6 @@
           }
         } catch (err) {
           console.error('Cloudflare R2 Upload error:', err);
-          // Fallback to FileReader DataURL
           await new Promise(resolve => {
             const reader = new FileReader();
             reader.onload = (ev) => {
@@ -508,14 +576,14 @@
       uploadedImageUrls.forEach((url, idx) => {
         const thumb = document.createElement('div');
         thumb.dataset.index = idx;
-        thumb.style.cssText = 'position:relative; width:95px; height:75px; border-radius:10px; overflow:hidden; border:2px solid #cbd5e1; flex-shrink:0; cursor:grab; background:#fff; touch-action:none;';
+        thumb.style.cssText = 'position:relative; width:85px; height:65px; border-radius:8px; overflow:hidden; border:2px solid #cbd5e1; flex-shrink:0; cursor:grab; background:#fff; touch-action:none;';
         
         const isMain = idx === 0;
 
         thumb.innerHTML = `
           <img src="${url}" style="width:100%;height:100%;object-fit:cover;pointer-events:none;" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80'">
-          <button type="button" onclick="removeUploadedImage(${idx})" style="position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;" title="Remove Photo">&times;</button>
-          ${isMain ? '<span style="position:absolute;bottom:4px;left:4px;background:#0f172a;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;z-index:2;">Main Photo</span>' : ''}
+          <button type="button" onclick="removeUploadedImage(${idx})" style="position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;cursor:pointer;font-size:11px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;" title="Remove Photo">&times;</button>
+          ${isMain ? '<span style="position:absolute;bottom:3px;left:3px;background:#0f172a;color:#fff;font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px;z-index:2;">Main Photo</span>' : ''}
         `;
 
         thumb.addEventListener('pointerdown', (e) => {
@@ -527,7 +595,7 @@
           draggedIdx = idx;
           const rect = thumb.getBoundingClientRect();
           const ghost = thumb.cloneNode(true);
-          ghost.style.cssText = `position:fixed; width:${rect.width}px; height:${rect.height}px; left:${rect.left}px; top:${rect.top}px; opacity:0.8; z-index:9999; pointer-events:none; border-radius:10px; border:2px solid #d97706; box-shadow:0 8px 24px rgba(0,0,0,0.3); transform:scale(1.06); transition:none;`;
+          ghost.style.cssText = `position:fixed; width:${rect.width}px; height:${rect.height}px; left:${rect.left}px; top:${rect.top}px; opacity:0.8; z-index:9999; pointer-events:none; border-radius:8px; border:2px solid #d97706; box-shadow:0 8px 24px rgba(0,0,0,0.3); transform:scale(1.06); transition:none;`;
           document.body.appendChild(ghost);
           thumb.style.opacity = '0.25';
 
