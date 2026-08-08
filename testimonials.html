@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimoni & Rekod Jualan — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Koleksi maklum balas dan ulasan klien pembeli, penjual dan pelabur hartanah bersama Zaim Rosli.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .testimonial-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .rating-stars {
+      color: #f59e0b;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+    }
+
+    .client-quote {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      flex: 1;
+      font-style: italic;
+    }
+
+    .client-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .client-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <span class="logo-main">ZAIM<span>ROSLI</span></span>
+        <span class="logo-sub">Perunding Hartanah Berdaftar</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Utama</a></li>
+        <li><a href="about.html" class="nav-link">Tentang Zaim</a></li>
+        <li><a href="properties.html" class="nav-link">Senarai Hartanah</a></li>
+        <li><a href="services.html" class="nav-link">Perkhidmatan</a></li>
+        <li><a href="calculator.html" class="nav-link">Kalkulator</a></li>
+        <li><a href="blog.html" class="nav-link">Artikel</a></li>
+        <li><a href="contact.html" class="nav-link">Hubungi</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="https://wa.me/60108118559" target="_blank" class="btn btn-whatsapp btn-sm">💬 WhatsApp Direct</a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-overlay" id="mobile-overlay">
+    <div class="mobile-drawer">
+      <div class="mobile-drawer-header">
+        <div class="logo"><span class="logo-main">ZAIM<span>ROSLI</span></span><span class="logo-sub">REN39575</span></div>
+        <button class="mobile-drawer-close" id="mobile-drawer-close">&times;</button>
+      </div>
+      <ul class="mobile-drawer-links">
+        <li><a href="index.html" class="mobile-drawer-link">🏠 Laman Utama</a></li>
+        <li><a href="about.html" class="mobile-drawer-link">👤 Tentang Zaim</a></li>
+        <li><a href="properties.html" class="mobile-drawer-link">🏢 Senarai Hartanah</a></li>
+        <li><a href="services.html" class="mobile-drawer-link">🛠️ Perkhidmatan</a></li>
+        <li><a href="calculator.html" class="mobile-drawer-link">🧮 Kalkulator Legal Fee</a></li>
+        <li><a href="blog.html" class="mobile-drawer-link">📰 Panduan & Artikel</a></li>
+        <li><a href="testimonials.html" class="mobile-drawer-link active">⭐ Testimoni Klien</a></li>
+        <li><a href="faq.html" class="mobile-drawer-link">❓ Soalan Lazim FAQ</a></li>
+        <li><a href="contact.html" class="mobile-drawer-link">📞 Hubungi Kami</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Page Hero Banner -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Testimoni & <span>Rekod Kejayaan</span></h1>
+      <p>Apa kata klien yang telah mendapatkan khidmat nasihat dan urusan hartanah bersama Zaim Rosli.</p>
+    </div>
+  </section>
+
+  <!-- Testimonials Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="testimonial-grid">
+
+        <div class="testimonial-card">
+          <div class="rating-stars">★★★★★</div>
+          <p class="client-quote">"Servis Bro Zaim memang tip-top! Beliau tolong semak kelayakan LPPSA saya & cari rumah teres kat Denai Alam. Proses dari awal sampai kunci siap sangat smooth."</p>
+          <div class="client-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" class="client-avatar" alt="Ahmad Hafiz">
+            <div>
+              <h4 style="font-size: 0.95rem;">Encik Ahmad Hafiz</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Pembeli Rumah Pertama • Shah Alam</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="rating-stars">★★★★★</div>
+          <p class="client-quote">"Rumah banglo saya di Bukit Jelutong dah 6 bulan tak terjual dengan ejen lain. Lepas serah kat Zaim, dalam 3 minggu dah ada buyer serius & terus sign SPA!"</p>
+          <div class="client-author">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" class="client-avatar" alt="Datin Suraya">
+            <div>
+              <h4 style="font-size: 0.95rem;">Datin Suraya</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Penjual Rumah • Shah Alam</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="rating-stars">★★★★★</div>
+          <p class="client-quote">"Penerangan yuran guaman & MOT daripada En Zaim sangat telus. Tak ada yuran tersembunyi langsung. Sangat profesional & mudah berurusan."</p>
+          <div class="client-author">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" class="client-avatar" alt="Kevin Tan">
+            <div>
+              <h4 style="font-size: 0.95rem;">Mr. Kevin Tan</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Pelabur Kondominium • KLCC</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Zaim Rosli Real Estate. Hak Cipta Terpelihara.</div>
+        <div>Perunding Hartanah Berdaftar REN39575</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senarai Hartanah — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Koleksi hartanah untuk dijual dan disewa di Kuala Lumpur, Selangor dan Pulau Pinang.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .filter-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr auto;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    @media (max-width: 992px) {
+      .filter-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <span class="logo-main">ZAIM<span>ROSLI</span></span>
+        <span class="logo-sub">Perunding Hartanah Berdaftar</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Utama</a></li>
+        <li><a href="about.html" class="nav-link">Tentang Zaim</a></li>
+        <li><a href="properties.html" class="nav-link active">Senarai Hartanah</a></li>
+        <li><a href="services.html" class="nav-link">Perkhidmatan</a></li>
+        <li><a href="calculator.html" class="nav-link">Kalkulator</a></li>
+        <li><a href="blog.html" class="nav-link">Artikel</a></li>
+        <li><a href="contact.html" class="nav-link">Hubungi</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="https://wa.me/60108118559" target="_blank" class="btn btn-whatsapp btn-sm">💬 WhatsApp Direct</a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-overlay" id="mobile-overlay">
+    <div class="mobile-drawer">
+      <div class="mobile-drawer-header">
+        <div class="logo"><span class="logo-main">ZAIM<span>ROSLI</span></span><span class="logo-sub">REN39575</span></div>
+        <button class="mobile-drawer-close" id="mobile-drawer-close">&times;</button>
+      </div>
+      <ul class="mobile-drawer-links">
+        <li><a href="index.html" class="mobile-drawer-link">🏠 Laman Utama</a></li>
+        <li><a href="about.html" class="mobile-drawer-link">👤 Tentang Zaim</a></li>
+        <li><a href="properties.html" class="mobile-drawer-link active">🏢 Senarai Hartanah</a></li>
+        <li><a href="services.html" class="mobile-drawer-link">🛠️ Perkhidmatan</a></li>
+        <li><a href="calculator.html" class="mobile-drawer-link">🧮 Kalkulator Legal Fee</a></li>
+        <li><a href="blog.html" class="mobile-drawer-link">📰 Panduan & Artikel</a></li>
+        <li><a href="testimonials.html" class="mobile-drawer-link">⭐ Testimoni Klien</a></li>
+        <li><a href="faq.html" class="mobile-drawer-link">❓ Soalan Lazim FAQ</a></li>
+        <li><a href="contact.html" class="mobile-drawer-link">📞 Hubungi Kami</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Page Hero Banner -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Katalok <span>Hartanah</span></h1>
+      <p>Cari unit kediaman idaman anda mengikut negeri, lokasi, jenis hartanah dan julat harga.</p>
+    </div>
+  </section>
+
+  <!-- Main Listings & Filter Section -->
+  <section class="section">
+    <div class="container">
+      <!-- Filter Bar -->
+      <div class="filter-card">
+        <form id="filter-form" onsubmit="event.preventDefault(); applyFilter();">
+          <div class="filter-grid">
+            <div class="form-group">
+              <label>Kata Kunci / Lokasi</label>
+              <input type="text" id="filter-keyword" placeholder="Cari nama projek, lokasi atau bandar..." class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Status</label>
+              <select id="filter-status" class="form-control">
+                <option value="">Semua Status</option>
+                <option value="sale">Untuk Dijual (FOR SALE)</option>
+                <option value="rent">Untuk Disewa (FOR RENT)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Negeri</label>
+              <select id="filter-region" class="form-control">
+                <option value="">Semua Negeri</option>
+                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                <option value="Selangor">Selangor</option>
+                <option value="Pulau Pinang">Pulau Pinang</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Jenis Hartanah</label>
+              <select id="filter-type" class="form-control">
+                <option value="">Semua Jenis</option>
+                <option value="Kondominium">Kondominium</option>
+                <option value="Teres">Teres</option>
+                <option value="Banglo">Banglo</option>
+                <option value="Semi-D">Semi-D</option>
+                <option value="Studio">Studio</option>
+                <option value="Townhouse">Townhouse</option>
+              </select>
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-accent" style="width: 100%;">Tapis</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Properties Results Grid -->
+      <div id="properties-results-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px;">
+        <!-- Dynamically rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Zaim Rosli Real Estate. Hak Cipta Terpelihara.</div>
+        <div>Perunding Hartanah Berdaftar REN39575</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="properties-data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Parse URL parameters if any
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('region')) document.getElementById('filter-region').value = urlParams.get('region');
+      if (urlParams.has('type')) document.getElementById('filter-type').value = urlParams.get('type');
+      if (urlParams.has('status')) document.getElementById('filter-status').value = urlParams.get('status');
+      
+      applyFilter();
+    });
+
+    function applyFilter() {
+      const keyword = document.getElementById('filter-keyword').value.toLowerCase().trim();
+      const status = document.getElementById('filter-status').value;
+      const region = document.getElementById('filter-region').value;
+      const type = document.getElementById('filter-type').value;
+
+      const filtered = PROPERTIES_DATA.filter(item => {
+        if (status && item.status !== status) return false;
+        if (region && item.region !== region) return false;
+        if (type && item.type !== type) return false;
+        if (keyword) {
+          const matchTitle = item.title.toLowerCase().includes(keyword);
+          const matchLoc = item.location.toLowerCase().includes(keyword);
+          const matchDesc = item.description.toLowerCase().includes(keyword);
+          if (!matchTitle && !matchLoc && !matchDesc) return false;
+        }
+        return true;
+      });
+
+      const grid = document.getElementById('properties-results-grid');
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: #fff; border-radius: var(--radius-lg); border: 2px dashed var(--border-color);">
+            <div style="font-size: 3rem; margin-bottom: 14px;">🔍</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 8px;">Tiada Hartanah Ditemui</h3>
+            <p style="color: var(--text-muted);">Sila ubah atau set semula kriteria carian penapis anda.</p>
+          </div>
+        `;
+      } else {
+        grid.innerHTML = filtered.map(item => createPropertyCardHTML(item)).join('');
+      }
+    }
+  </script>
+</body>
+</html>

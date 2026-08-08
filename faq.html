@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soalan Lazim FAQ — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Jawapan lengkap soalan lazim mengenai booking deposit, pinjaman bank, guaman SPA, dan prosedur hartanah.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      padding: 0 24px 20px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      display: none;
+      border-top: 1px solid var(--bg-alt);
+      margin-top: 10px;
+      padding-top: 16px;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <span class="logo-main">ZAIM<span>ROSLI</span></span>
+        <span class="logo-sub">Perunding Hartanah Berdaftar</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Utama</a></li>
+        <li><a href="about.html" class="nav-link">Tentang Zaim</a></li>
+        <li><a href="properties.html" class="nav-link">Senarai Hartanah</a></li>
+        <li><a href="services.html" class="nav-link">Perkhidmatan</a></li>
+        <li><a href="calculator.html" class="nav-link">Kalkulator</a></li>
+        <li><a href="blog.html" class="nav-link">Artikel</a></li>
+        <li><a href="contact.html" class="nav-link">Hubungi</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="https://wa.me/60108118559" target="_blank" class="btn btn-whatsapp btn-sm">💬 WhatsApp Direct</a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-overlay" id="mobile-overlay">
+    <div class="mobile-drawer">
+      <div class="mobile-drawer-header">
+        <div class="logo"><span class="logo-main">ZAIM<span>ROSLI</span></span><span class="logo-sub">REN39575</span></div>
+        <button class="mobile-drawer-close" id="mobile-drawer-close">&times;</button>
+      </div>
+      <ul class="mobile-drawer-links">
+        <li><a href="index.html" class="mobile-drawer-link">🏠 Laman Utama</a></li>
+        <li><a href="about.html" class="mobile-drawer-link">👤 Tentang Zaim</a></li>
+        <li><a href="properties.html" class="mobile-drawer-link">🏢 Senarai Hartanah</a></li>
+        <li><a href="services.html" class="mobile-drawer-link">🛠️ Perkhidmatan</a></li>
+        <li><a href="calculator.html" class="mobile-drawer-link">🧮 Kalkulator Legal Fee</a></li>
+        <li><a href="blog.html" class="mobile-drawer-link">📰 Panduan & Artikel</a></li>
+        <li><a href="testimonials.html" class="mobile-drawer-link">⭐ Testimoni Klien</a></li>
+        <li><a href="faq.html" class="mobile-drawer-link active">❓ Soalan Lazim FAQ</a></li>
+        <li><a href="contact.html" class="mobile-drawer-link">📞 Hubungi Kami</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Page Hero Banner -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Soalan <span>Lazim (FAQ)</span></h1>
+      <p>Jawapan telus kepada soalan-soalan yang sering ditanya oleh pembeli dan penjual rumah.</p>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="section">
+    <div class="container">
+      <div class="faq-list">
+
+        <div class="faq-item open">
+          <div class="faq-question">
+            <span>1. Berapa deposit booking yang biasa dikenakan untuk beli rumah?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            Biasanya deposit booking adalah sebanyak 3.18% daripada harga jualan rumah sebagai tanda setuju (*Earnest Deposit*). Baki 6.82% lagi dibayar semasa menandatangani Perjanjian Jual Beli (SPA) di pejabat peguam.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>2. Adakah wang deposit dipulangkan sekiranya pinjaman bank saya ditolak?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            Ya, sekiranya permohonan pinjaman anda ditolak oleh sekurang-kurangnya 2 buah bank (*2 rejection letters*), wang deposit 3.18% akan dipulangkan sepenuhnya 100% mengikut terma borang booking rasmi agensi.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>3. Apakah perbezaan antara rumah Pegangan Bebas (Freehold) dan Leasehold?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            Freehold bermaksud tanah dimiliki selama-lamanya tanpa had tempoh. Leasehold pula dimiliki mengikut tempoh pajakan kerajaan negeri (biasanya 99 tahun) dan memerlukan kebenaran Pihak Berkuasa Negeri (*State Consent*) untuk pindah milik.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>4. Boleh ke penjawat awam menggunakan pembiayaan LPPSA untuk beli rumah subsale?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            Boleh! LPPSA menyediakan Skim Pembiayaan Jenis 1 (Rumah Siap/Subsale). Zaim akan bantu menguruskan semakan kelayakan jawatan & borang permohonan LPPSA anda dari awal.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>5. Berapa lama proses pembelian rumah dari tarikh booking sehingga kunci diserahkan?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            Untuk rumah Freehold (tanpa sekatan), proses siap biasanya mengambil masa sekitar 3 hingga 4 bulan. Manakala untuk rumah Leasehold atau Master Title, ia mengambil masa sekitar 6 hingga 9 bulan disebabkan proses *State Consent*.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Zaim Rosli Real Estate. Hak Cipta Terpelihara.</div>
+        <div>Perunding Hartanah Berdaftar REN39575</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+          const item = q.parentElement;
+          item.classList.toggle('open');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

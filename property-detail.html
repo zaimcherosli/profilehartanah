@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Butiran Hartanah — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Butiran lengkap, spesifikasi, dan pengiraan kos guaman hartanah.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .detail-hero-img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 30px 0;
+    }
+
+    .spec-card {
+      background: var(--bg-alt);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .spec-card-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .spec-card-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    .sidebar-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 100px;
+    }
+
+    @media (max-width: 992px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+      .sidebar-card {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <span class="logo-main">ZAIM<span>ROSLI</span></span>
+        <span class="logo-sub">Perunding Hartanah Berdaftar</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Utama</a></li>
+        <li><a href="about.html" class="nav-link">Tentang Zaim</a></li>
+        <li><a href="properties.html" class="nav-link active">Senarai Hartanah</a></li>
+        <li><a href="services.html" class="nav-link">Perkhidmatan</a></li>
+        <li><a href="calculator.html" class="nav-link">Kalkulator</a></li>
+        <li><a href="blog.html" class="nav-link">Artikel</a></li>
+        <li><a href="contact.html" class="nav-link">Hubungi</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="https://wa.me/60108118559" target="_blank" class="btn btn-whatsapp btn-sm">💬 WhatsApp Direct</a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-overlay" id="mobile-overlay">
+    <div class="mobile-drawer">
+      <div class="mobile-drawer-header">
+        <div class="logo"><span class="logo-main">ZAIM<span>ROSLI</span></span><span class="logo-sub">REN39575</span></div>
+        <button class="mobile-drawer-close" id="mobile-drawer-close">&times;</button>
+      </div>
+      <ul class="mobile-drawer-links">
+        <li><a href="index.html" class="mobile-drawer-link">🏠 Laman Utama</a></li>
+        <li><a href="about.html" class="mobile-drawer-link">👤 Tentang Zaim</a></li>
+        <li><a href="properties.html" class="mobile-drawer-link active">🏢 Senarai Hartanah</a></li>
+        <li><a href="services.html" class="mobile-drawer-link">🛠️ Perkhidmatan</a></li>
+        <li><a href="calculator.html" class="mobile-drawer-link">🧮 Kalkulator Legal Fee</a></li>
+        <li><a href="blog.html" class="mobile-drawer-link">📰 Panduan & Artikel</a></li>
+        <li><a href="testimonials.html" class="mobile-drawer-link">⭐ Testimoni Klien</a></li>
+        <li><a href="faq.html" class="mobile-drawer-link">❓ Soalan Lazim FAQ</a></li>
+        <li><a href="contact.html" class="mobile-drawer-link">📞 Hubungi Kami</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Page Main Content -->
+  <section class="section" style="padding-top: 120px;">
+    <div class="container">
+
+      <div id="detail-loading" style="text-align: center; padding: 60px;">Memuatkan butiran hartanah...</div>
+
+      <div id="detail-container" style="display: none;">
+        <a href="properties.html" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: var(--text-muted); margin-bottom: 20px;">
+          ← Kembali ke Senarai Hartanah
+        </a>
+
+        <img id="d-image" src="" class="detail-hero-img" alt="Gambar Hartanah">
+
+        <div class="detail-grid">
+          <div>
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+              <span id="d-badge" class="property-badge badge-sale" style="position: static;"></span>
+              <span id="d-region" style="background: var(--bg-alt); padding: 4px 10px; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.8rem;"></span>
+            </div>
+
+            <h1 id="d-title" style="font-size: 2.2rem; margin-bottom: 8px;"></h1>
+            <p id="d-location" style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px;"></p>
+
+            <div id="d-price" style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: var(--accent-gold); margin-bottom: 30px;"></div>
+
+            <!-- Specs Grid -->
+            <div class="specs-grid">
+              <div class="spec-card">
+                <div class="spec-card-label">Bilik Tidur</div>
+                <div id="d-beds" class="spec-card-value"></div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card-label">Bilik Air</div>
+                <div id="d-baths" class="spec-card-value"></div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card-label">Keluasan Unit</div>
+                <div id="d-size" class="spec-card-value"></div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card-label">Pegangan</div>
+                <div id="d-tenure" class="spec-card-value"></div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card-label">Status Lot</div>
+                <div id="d-lotType" class="spec-card-value"></div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card-label">Kategori</div>
+                <div id="d-type" class="spec-card-value"></div>
+              </div>
+            </div>
+
+            <!-- Description Section -->
+            <div style="background: #fff; padding: 30px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-bottom: 40px;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 14px;">Penerangan Hartanah</h3>
+              <p id="d-description" style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; whitespace: pre-line;"></p>
+            </div>
+          </div>
+
+          <!-- Sidebar Agent CTA & Estimator -->
+          <div>
+            <div class="sidebar-card">
+              <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&q=80" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover;">
+                <div>
+                  <h4 style="font-size: 1.1rem;">Zaim Rosli</h4>
+                  <p style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700;">REN39575 • Ejen Berdaftar</p>
+                </div>
+              </div>
+
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+                Berminat dengan unit ini? Hubungi Zaim sekarang untuk semakan kelayakan loan atau sesi lawatan tapak (*viewing*).
+              </p>
+
+              <a id="d-whatsapp-btn" href="#" target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-bottom: 12px;">
+                💬 WhatsApp Ejen Direct
+              </a>
+              <a href="tel:+60108118559" class="btn btn-outline" style="width: 100%;">
+                📞 Hubungi Direct Phone
+              </a>
+
+              <hr style="margin: 24px 0; border: none; border-top: 1px solid var(--border-color);">
+
+              <h4 style="font-size: 0.95rem; margin-bottom: 12px;">Anggaran Yuran Masuk (SPA & MOT)</h4>
+              <div id="d-legal-summary" style="font-size: 0.85rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px;">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Zaim Rosli Real Estate. Hak Cipta Terpelihara.</div>
+        <div>Perunding Hartanah Berdaftar REN39575</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="properties-data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const propId = urlParams.get('id') || "prop-001";
+      
+      const prop = PROPERTIES_DATA.find(p => p.id === propId) || PROPERTIES_DATA[0];
+
+      document.getElementById('detail-loading').style.display = 'none';
+      document.getElementById('detail-container').style.display = 'block';
+
+      document.getElementById('d-title').textContent = prop.title;
+      document.getElementById('d-location').textContent = `📍 ${prop.location}`;
+      document.getElementById('d-price').textContent = prop.priceStr;
+      document.getElementById('d-image').src = prop.image;
+      document.getElementById('d-badge').textContent = prop.status === 'sale' ? 'FOR SALE' : 'FOR RENT';
+      document.getElementById('d-region').textContent = prop.region;
+      document.getElementById('d-beds').textContent = `${prop.beds} Bilik`;
+      document.getElementById('d-baths').textContent = `${prop.baths} Bilik Air`;
+      document.getElementById('d-size').textContent = `${prop.size} sqft`;
+      document.getElementById('d-tenure').textContent = prop.tenure;
+      document.getElementById('d-lotType').textContent = prop.lotType;
+      document.getElementById('d-type').textContent = prop.type;
+      document.getElementById('d-description').textContent = prop.description;
+
+      const waMsg = encodeURIComponent(`Salam Zaim, saya berminat dengan unit "${prop.title}" (${prop.priceStr}) di ${prop.location}. Boleh bantu saya untuk viewing / semakan kelayakan?`);
+      document.getElementById('d-whatsapp-btn').href = `https://wa.me/60108118559?text=${waMsg}`;
+
+      if (prop.status === 'sale') {
+        const spa = calcSPALegalFee(prop.price);
+        const mot = calcMOTStampDuty(prop.price);
+        const loanLegal = calcLoanLegalFee(prop.price * 0.9);
+        const loanStamp = calcLoanStampDuty(prop.price * 0.9);
+        const total = spa + mot + loanLegal + loanStamp;
+
+        document.getElementById('d-legal-summary').innerHTML = `
+          <div style="display:flex;justify-content:space-between;"><span>Yuran Guaman SPA:</span><strong>${formatCurrency(spa)}</strong></div>
+          <div style="display:flex;justify-content:space-between;"><span>Duti Setem MOT:</span><strong>${formatCurrency(mot)}</strong></div>
+          <div style="display:flex;justify-content:space-between;"><span>Loan Legal Fee:</span><strong>${formatCurrency(loanLegal)}</strong></div>
+          <div style="display:flex;justify-content:space-between;"><span>Loan Stamp Duty:</span><strong>${formatCurrency(loanStamp)}</strong></div>
+          <hr style="margin:4px 0;border-top:1px dashed #cbd5e1;">
+          <div style="display:flex;justify-content:space-between;color:var(--text-main);font-weight:700;"><span>Anggaran Anggaran Entry:</span><strong style="color:var(--accent-gold);">${formatCurrency(total)}</strong></div>
+        `;
+      } else {
+        document.getElementById('d-legal-summary').innerHTML = `
+          <div style="text-align:center;padding:10px;background:var(--bg-alt);border-radius:6px;">Unit Sewaan: Deposit biasa 2 bulan sewa + 0.5 bulan utiliti + Tenancy Agreement.</div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>
