@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact & Appointment Booking — Zaim Rosli (REN39575)</title>
   <meta name="description" content="Book a real estate consultation or submit property inquiries to Zaim Rosli (REN39575).">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
   <style>
     .contact-grid {
       display: grid;
@@ -127,7 +127,7 @@
               <input type="text" id="c-name" required placeholder="e.g. Ahmad Razak" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+            <div class="contact-form-row">
               <div>
                 <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">EMAIL ADDRESS</label>
                 <input type="email" id="c-email" required placeholder="name@example.com" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
@@ -174,7 +174,7 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('contact-form-el');

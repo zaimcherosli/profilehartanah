@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zaim Rosli — Registered Real Estate Negotiator REN39575</title>
   <meta name="description" content="Official real estate portal of Zaim Rosli (REN39575). Buy, sell, and rent premium properties in Kuala Lumpur & Selangor.">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
@@ -86,7 +86,7 @@
 
         <!-- Search Box Form -->
         <div class="search-box" style="background: #ffffff; padding: 24px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); color: var(--text-main); text-align: left;">
-          <form action="properties.html" method="GET" class="search-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 14px; align-items: center;">
+          <form action="properties.html" method="GET" class="search-grid">
             <div>
               <label style="display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase;">LOCATION / KEYWORD</label>
               <input type="text" name="q" placeholder="e.g. KLCC, Shah Alam, Bangsar" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
@@ -122,7 +122,7 @@
   <!-- Key Statistics -->
   <section class="stats-section-wrap" style="margin-top: -40px; position: relative; z-index: 10;">
     <div class="container">
-      <div class="stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; background: #ffffff; padding: 24px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border-color); text-align: center;">
+      <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-number" style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--accent-gold);">RM 50M+</div>
           <div class="stat-label" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Sales Volume</div>
@@ -152,7 +152,7 @@
         <p class="section-description">Explore premium verified residential listings available for sale and rent.</p>
       </div>
 
-      <div id="home-featured-grid" class="properties-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+      <div id="home-featured-grid" class="properties-grid">
         <!-- Dynamically rendered by JS -->
       </div>
 
@@ -171,7 +171,7 @@
         <p class="section-description">Tailored end-to-end guidance for buyers, sellers, and property investors.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <div class="services-grid">
         <div style="background: #ffffff; padding: 32px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
           <div style="font-size: 2.2rem; margin-bottom: 16px;">🏠</div>
           <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Property Acquisition</h3>
@@ -257,8 +257,8 @@
     </div>
   </footer>
 
-  <script src="properties-data.js"></script>
-  <script src="app.js"></script>
+  <script src="/properties-data.js"></script>
+  <script src="/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const grid = document.getElementById('home-featured-grid');

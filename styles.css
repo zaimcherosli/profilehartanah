@@ -709,6 +709,64 @@ footer.site-footer {
   color: var(--text-main);
 }
 
+/* Inner Pages Grid Classes */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.calc-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.about-badges-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
 @media (max-width: 992px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -895,9 +953,13 @@ footer.site-footer {
   }
 
   /* Property Cards & Inner Page Grids Override */
-  .properties-grid, .services-grid, .blog-grid, .testimonials-grid, .contact-grid, .calculator-grid, .about-grid, #home-featured-grid, #properties-results-grid {
+  .properties-grid, .services-grid, .blog-grid, .testimonials-grid, .contact-grid, .calc-grid, .calc-form-row, .contact-form-row, .about-hero-grid, .about-badges-grid, #home-featured-grid, #properties-results-grid {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: 16px !important;
+  }
+
+  .services-grid > div, .testimonials-grid > div, .contact-grid > div, .calc-card {
+    padding: 24px 18px !important;
   }
 
   .property-card {
