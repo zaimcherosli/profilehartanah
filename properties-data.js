@@ -5,6 +5,7 @@
 const PROPERTIES_DATA = [
   {
     id: "prop-001",
+    slug: "the-grand-pavilion-penthouse-klcc",
     title: "The Grand Pavilion Penthouse",
     price: 1250000,
     priceStr: "RM 1,250,000",
@@ -24,6 +25,7 @@ const PROPERTIES_DATA = [
   },
   {
     id: "prop-002",
+    slug: "avana-modern-double-storey-terrace-shah-alam",
     title: "Avana Modern Double Storey Terrace",
     price: 680000,
     priceStr: "RM 680,000",
@@ -43,6 +45,7 @@ const PROPERTIES_DATA = [
   },
   {
     id: "prop-003",
+    slug: "mutiara-hilltop-luxury-bungalow-bukit-jelutong",
     title: "Mutiara Hilltop Luxury Bungalow",
     price: 2450000,
     priceStr: "RM 2,450,000",
@@ -62,6 +65,7 @@ const PROPERTIES_DATA = [
   },
   {
     id: "prop-004",
+    slug: "eco-horizon-semi-d-residence-batu-kawan",
     title: "Eco Horizon Semi-D Residence",
     price: 1150000,
     priceStr: "RM 1,150,000",
@@ -81,6 +85,7 @@ const PROPERTIES_DATA = [
   },
   {
     id: "prop-005",
+    slug: "urban-studio-suite-bangsar-south",
     title: "Urban Studio Suite @ Bangsar South",
     price: 2300,
     priceStr: "RM 2,300 / bln",
@@ -100,6 +105,7 @@ const PROPERTIES_DATA = [
   },
   {
     id: "prop-006",
+    slug: "taman-melawati-scenic-townhouse-kl",
     title: "Taman Melawati Scenic Townhouse",
     price: 590000,
     priceStr: "RM 590,000",
@@ -118,6 +124,17 @@ const PROPERTIES_DATA = [
     description: "Townhouse aman berlatar belakangkan pemandangan Bukit Tabur. Lokasi strategik berdekatan Melawati Mall, sekolah, dan lebuhraya MRR2 / SPE."
   }
 ];
+
+// Helper to convert title to slug if needed dynamically
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-');
+}
 
 // Legal Fees Calculation Utilities
 function calcSPALegalFee(price) {

@@ -230,9 +230,10 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
-      const propId = urlParams.get('id') || "prop-001";
+      const slugParam = urlParams.get('slug');
+      const idParam = urlParams.get('id');
       
-      const prop = PROPERTIES_DATA.find(p => p.id === propId) || PROPERTIES_DATA[0];
+      const prop = PROPERTIES_DATA.find(p => p.slug === slugParam || p.id === idParam) || PROPERTIES_DATA[0];
 
       document.getElementById('detail-loading').style.display = 'none';
       document.getElementById('detail-container').style.display = 'block';

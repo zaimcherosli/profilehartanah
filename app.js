@@ -82,7 +82,7 @@ function createPropertyCardHTML(item) {
           <span class="property-spec-item">🚿 ${item.baths} B.Air</span>
           <span class="property-spec-item">📐 ${item.size} sqft</span>
         </div>
-        <a href="property-detail.html?id=${item.id}" class="btn btn-outline btn-sm" style="margin-top: 16px; width: 100%;">Lihat Butiran</a>
+        <a href="property-detail.html?slug=${item.slug || item.id}" class="btn btn-outline btn-sm" style="margin-top: 16px; width: 100%;">Lihat Butiran</a>
       </div>
     </div>
   `;
