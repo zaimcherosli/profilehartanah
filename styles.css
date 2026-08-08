@@ -623,9 +623,29 @@ footer.site-footer {
   }
 }
 
+.filter-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 14px;
+  align-items: flex-end;
+}
+
 @media (max-width: 992px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+  }
+  .filter-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .filter-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .filter-grid input, .filter-grid select, .filter-grid button {
+    width: 100% !important;
   }
 }
 
