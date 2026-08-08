@@ -450,6 +450,10 @@ header.site-header {
   text-align: center;
 }
 
+.stats-ticker-mobile {
+  display: none;
+}
+
 /* Property Card Component */
 .property-card {
   background: var(--bg-surface);
@@ -953,33 +957,63 @@ footer.site-footer {
     margin-top: 10px !important;
   }
 
+  /* Mobile Stats Running Marquee (1 Line Right to Left) */
+  .stats-desktop-only {
+    display: none !important;
+  }
+
   .stats-section-wrap {
-    margin-top: 15px !important;
+    margin-top: 10px !important;
   }
 
-  .search-grid {
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
+  .stats-ticker-mobile {
+    display: block !important;
+    width: 100%;
+    overflow: hidden;
+    background: #0f172a;
+    border-top: 1px solid #1e293b;
+    border-bottom: 1px solid #1e293b;
+    padding: 12px 0;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
   }
 
-  /* Stats Grid */
-  .stats-grid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-    margin-top: 24px !important;
+  .stats-ticker-track {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    width: max-content;
+    animation: statsMarqueeRun 16s linear infinite;
   }
 
-  .stat-card {
-    padding: 14px 10px !important;
-    border-radius: 12px !important;
+  .stat-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 4px;
   }
 
-  .stat-number {
-    font-size: 1.35rem !important;
+  .stat-ticker-item .stat-num {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--accent-gold, #d97706);
   }
 
-  .stat-label {
-    font-size: 0.75rem !important;
+  .stat-ticker-item .stat-txt {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .stat-ticker-dot {
+    color: var(--accent-gold, #d97706);
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0 14px;
+    opacity: 0.75;
   }
 
   /* Property Cards & Inner Page Grids Override */
@@ -1048,5 +1082,14 @@ footer.site-footer {
 
   .stat-card {
     padding: 12px 8px !important;
+  }
+}
+
+@keyframes statsMarqueeRun {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
