@@ -261,11 +261,15 @@
   <script src="/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const grid = document.getElementById('home-featured-grid');
-      if (grid && typeof PROPERTIES_DATA !== 'undefined') {
-        const featuredList = PROPERTIES_DATA.slice(0, 6);
-        grid.innerHTML = featuredList.map(item => createPropertyCardHTML(item)).join('');
+      function renderHomeFeatured() {
+        const grid = document.getElementById('home-featured-grid');
+        if (grid && typeof PROPERTIES_DATA !== 'undefined') {
+          const featuredList = PROPERTIES_DATA.slice(0, 6);
+          grid.innerHTML = featuredList.map(item => createPropertyCardHTML(item)).join('');
+        }
       }
+      renderHomeFeatured();
+      window.addEventListener('properties-updated', renderHomeFeatured);
     });
   </script>
 </body>

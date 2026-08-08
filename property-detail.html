@@ -213,58 +213,63 @@
   <script src="/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const querySlug = urlParams.get('slug');
-      const queryId = urlParams.get('id');
+      function renderDetail() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const querySlug = urlParams.get('slug');
+        const queryId = urlParams.get('id');
 
-      // Extract slug from URL path: /property-detail/the-grand-pavilion-penthouse
-      const pathParts = window.location.pathname.split('/').filter(Boolean);
-      const pathSlug = (pathParts.length >= 2 && pathParts[0] === 'property-detail') ? pathParts[1] : null;
+        // Extract slug from URL path: /property-detail/the-grand-pavilion-penthouse
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        const pathSlug = (pathParts.length >= 2 && pathParts[0] === 'property-detail') ? pathParts[1] : null;
 
-      const targetSlug = pathSlug || querySlug;
-      
-      const prop = PROPERTIES_DATA.find(p => p.slug === targetSlug || p.id === queryId || p.id === targetSlug) || PROPERTIES_DATA[0];
+        const targetSlug = pathSlug || querySlug;
+        
+        const prop = PROPERTIES_DATA.find(p => p.slug === targetSlug || p.id === queryId || p.id === targetSlug) || PROPERTIES_DATA[0];
 
-      document.getElementById('detail-loading').style.display = 'none';
-      document.getElementById('detail-container').style.display = 'block';
+        document.getElementById('detail-loading').style.display = 'none';
+        document.getElementById('detail-container').style.display = 'block';
 
-      document.getElementById('d-title').textContent = prop.title;
-      document.getElementById('d-location').innerHTML = `📍 ${prop.location}`;
-      document.getElementById('d-price').textContent = prop.priceStr;
-      document.getElementById('d-main-img').src = prop.image;
+        document.getElementById('d-title').textContent = prop.title;
+        document.getElementById('d-location').innerHTML = `📍 ${prop.location}`;
+        document.getElementById('d-price').textContent = prop.priceStr;
+        document.getElementById('d-main-img').src = prop.image;
 
-      const badge = document.getElementById('d-badge-status');
-      badge.textContent = prop.status === 'sale' ? 'FOR SALE' : 'FOR RENT';
-      badge.className = `property-badge ${prop.status === 'sale' ? 'badge-sale' : 'badge-rent'}`;
+        const badge = document.getElementById('d-badge-status');
+        badge.textContent = prop.status === 'sale' ? 'FOR SALE' : 'FOR RENT';
+        badge.className = `property-badge ${prop.status === 'sale' ? 'badge-sale' : 'badge-rent'}`;
 
-      document.getElementById('d-type').textContent = prop.type;
-      document.getElementById('d-beds').textContent = `${prop.beds} Beds`;
-      document.getElementById('d-baths').textContent = `${prop.baths} Baths`;
-      document.getElementById('d-size').textContent = `${prop.size} sqft`;
-      document.getElementById('d-tenure').textContent = prop.tenure;
-      document.getElementById('d-lotType').textContent = prop.lotType;
-      document.getElementById('d-desc').textContent = prop.description;
+        document.getElementById('d-type').textContent = prop.type;
+        document.getElementById('d-beds').textContent = `${prop.beds} Beds`;
+        document.getElementById('d-baths').textContent = `${prop.baths} Baths`;
+        document.getElementById('d-size').textContent = `${prop.size} sqft`;
+        document.getElementById('d-tenure').textContent = prop.tenure;
+        document.getElementById('d-lotType').textContent = prop.lotType;
+        document.getElementById('d-desc').textContent = prop.description;
 
-      // WhatsApp link
-      const waMsg = encodeURIComponent(`Hi Zaim, I am interested in inquiring about "${prop.title}" (${prop.priceStr}) located in ${prop.location}.`);
-      document.getElementById('d-whatsapp-btn').href = `https://wa.me/60108118559?text=${waMsg}`;
+        // WhatsApp link
+        const waMsg = encodeURIComponent(`Hi Zaim, I am interested in inquiring about "${prop.title}" (${prop.priceStr}) located in ${prop.location}.`);
+        document.getElementById('d-whatsapp-btn').href = `https://wa.me/60108118559?text=${waMsg}`;
 
-      // Calculate Statutory Legal Fees Breakdown
-      const spaFee = calcSPALegalFee(prop.price);
-      const motDuty = calcMOTStampDuty(prop.price);
-      const loanFee = calcLoanLegalFee(prop.price * 0.9);
-      const loanDuty = calcLoanStampDuty(prop.price * 0.9);
+        // Calculate Statutory Legal Fees Breakdown
+        const spaFee = calcSPALegalFee(prop.price);
+        const motDuty = calcMOTStampDuty(prop.price);
+        const loanFee = calcLoanLegalFee(prop.price * 0.9);
+        const loanDuty = calcLoanStampDuty(prop.price * 0.9);
 
-      document.getElementById('d-legal-summary').innerHTML = `
-        <div style="display:flex; justify-content:space-between;"><span>SPA Legal Fee:</span> <strong>RM ${spaFee.toLocaleString()}</strong></div>
-        <div style="display:flex; justify-content:space-between;"><span>MOT Stamp Duty:</span> <strong>RM ${motDuty.toLocaleString()}</strong></div>
-        <div style="display:flex; justify-content:space-between;"><span>Loan Legal Fee (90%):</span> <strong>RM ${loanFee.toLocaleString()}</strong></div>
-        <div style="display:flex; justify-content:space-between;"><span>Loan Stamp Duty:</span> <strong>RM ${loanDuty.toLocaleString()}</strong></div>
-        <hr style="margin: 4px 0; border-top: 1px dashed var(--border-color);">
-        <div style="display:flex; justify-content:space-between; font-size: 0.95rem; color: var(--text-main);">
-          <span>Est. Initial Entry Cost:</span> <strong style="color: var(--accent-gold);">RM ${(spaFee + motDuty + loanFee + loanDuty).toLocaleString()}</strong>
-        </div>
-      `;
+        document.getElementById('d-legal-summary').innerHTML = `
+          <div style="display:flex; justify-content:space-between;"><span>SPA Legal Fee:</span> <strong>RM ${spaFee.toLocaleString()}</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>MOT Stamp Duty:</span> <strong>RM ${motDuty.toLocaleString()}</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>Loan Legal Fee (90%):</span> <strong>RM ${loanFee.toLocaleString()}</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>Loan Stamp Duty:</span> <strong>RM ${loanDuty.toLocaleString()}</strong></div>
+          <hr style="margin: 4px 0; border-top: 1px dashed var(--border-color);">
+          <div style="display:flex; justify-content:space-between; font-size: 0.95rem; color: var(--text-main);">
+            <span>Est. Initial Entry Cost:</span> <strong style="color: var(--accent-gold);">RM ${(spaFee + motDuty + loanFee + loanDuty).toLocaleString()}</strong>
+          </div>
+        `;
+      }
+
+      renderDetail();
+      window.addEventListener('properties-updated', renderDetail);
     });
   </script>
 </body>
