@@ -181,6 +181,22 @@ function calcValuationFee(price) {
   return Math.max(300, Math.round(fee));
 }
 
+function sanitizePropertyData(list) {
+  if (!Array.isArray(list)) return list;
+  return list.map(item => {
+    if (Array.isArray(item.images) && item.images.length > 0) {
+      item.image = item.images[0];
+    } else if (typeof item.image === 'string' && item.image.includes(',')) {
+      const parts = item.image.split(',').map(s => s.trim()).filter(Boolean);
+      item.images = parts;
+      item.image = parts[0] || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80';
+    } else if (!item.images) {
+      item.images = [item.image || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80'];
+    }
+    return item;
+  });
+}
+
 // Load custom properties saved from admin portal
 try {
   const customStored = localStorage.getItem('ZAIM_ROSLI_PROPERTIES');
@@ -188,7 +204,7 @@ try {
     const parsed = JSON.parse(customStored);
     if (Array.isArray(parsed) && parsed.length > 0) {
       PROPERTIES_DATA.length = 0;
-      PROPERTIES_DATA.push(...parsed);
+      PROPERTIES_DATA.push(...sanitizePropertyData(parsed));
     }
   }
 } catch (e) {}
@@ -199,9 +215,10 @@ try {
     const res = await fetch(`https://zaimrosli-worker.huzaimrosli.workers.dev/api/properties?t=${Date.now()}`);
     const remoteList = await res.json();
     if (Array.isArray(remoteList) && remoteList.length > 0) {
+      const sanitized = sanitizePropertyData(remoteList);
       PROPERTIES_DATA.length = 0;
-      PROPERTIES_DATA.push(...remoteList);
-      localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(remoteList));
+      PROPERTIES_DATA.push(...sanitized);
+      localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(sanitized));
       window.dispatchEvent(new Event('properties-updated'));
     }
   } catch(e) {}

@@ -56,11 +56,14 @@ function initMobileDrawerNav() {
 function createPropertyCardHTML(item) {
   const badgeClass = item.status === 'sale' ? 'badge-sale' : 'badge-rent';
   const badgeLabel = item.status === 'sale' ? 'FOR SALE' : 'FOR RENT';
+  const cardImg = Array.isArray(item.images) && item.images.length > 0 
+    ? item.images[0] 
+    : (typeof item.image === 'string' ? item.image.split(',')[0].trim() : 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80');
 
   return `
     <div class="property-card">
       <div class="property-thumb-wrap">
-        <img src="${item.image}" class="property-thumb" alt="${item.title}" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'">
+        <img src="${cardImg}" class="property-thumb" alt="${item.title}" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'">
         <span class="property-badge ${badgeClass}">${badgeLabel}</span>
         <span class="property-region-badge">${item.region}</span>
       </div>
