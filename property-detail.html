@@ -216,10 +216,16 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
-      const slugParam = urlParams.get('slug');
-      const idParam = urlParams.get('id');
+      const querySlug = urlParams.get('slug');
+      const queryId = urlParams.get('id');
+
+      // Extract slug from URL path: /property-detail/the-grand-pavilion-penthouse
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+      const pathSlug = (pathParts.length >= 2 && pathParts[0] === 'property-detail') ? pathParts[1] : null;
+
+      const targetSlug = pathSlug || querySlug;
       
-      const prop = PROPERTIES_DATA.find(p => p.slug === slugParam || p.id === idParam) || PROPERTIES_DATA[0];
+      const prop = PROPERTIES_DATA.find(p => p.slug === targetSlug || p.id === queryId || p.id === targetSlug) || PROPERTIES_DATA[0];
 
       document.getElementById('detail-loading').style.display = 'none';
       document.getElementById('detail-container').style.display = 'block';
