@@ -481,88 +481,86 @@
       <form id="prop-form" onsubmit="saveProperty(event)">
         <input type="hidden" id="form-id">
 
-        <div class="form-group" style="margin-bottom: 14px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">TAJUK HARTANAH</label>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">NAMA / TAJUK HARTANAH</label>
           <input type="text" id="form-title" class="form-input" placeholder="Contoh: The Grand Pavilion Penthouse" required>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">HARGA (RM)</label>
-            <input type="number" id="form-price" class="form-input" placeholder="1250000" required>
-          </div>
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">STATUS</label>
-            <select id="form-status" class="form-select" required>
-              <option value="sale">FOR SALE</option>
-              <option value="rent">FOR RENT</option>
-            </select>
-          </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">HARGA (RM)</label>
+          <input type="number" id="form-price" class="form-input" placeholder="1250000" required>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">LOKASI (BANDAR / KAWASAN)</label>
-            <input type="text" id="form-location" class="form-input" placeholder="KLCC, Kuala Lumpur" required>
-          </div>
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">NEGERI</label>
-            <select id="form-region" class="form-select" required>
-              <option value="Kuala Lumpur">Kuala Lumpur</option>
-              <option value="Selangor">Selangor</option>
-              <option value="Penang">Penang</option>
-            </select>
-          </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">STATUS</label>
+          <select id="form-status" class="form-select" required>
+            <option value="sale">FOR SALE</option>
+            <option value="rent">FOR RENT</option>
+          </select>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px;">
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">JENIS</label>
-            <select id="form-type" class="form-select" required>
-              <option value="Kondominium">Kondominium</option>
-              <option value="Teres">Teres</option>
-              <option value="Banglo">Banglo</option>
-              <option value="Semi-D">Semi-D</option>
-              <option value="Studio">Studio</option>
-              <option value="Townhouse">Townhouse</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">BILIK</label>
-            <input type="number" id="form-beds" class="form-input" value="3" required>
-          </div>
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">B.AIR</label>
-            <input type="number" id="form-baths" class="form-input" value="2" required>
-          </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">ALAMAT / LOKASI PENUH</label>
+          <input type="text" id="form-location" class="form-input" placeholder="KLCC, Kuala Lumpur" required>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px;">
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">SQFT</label>
-            <input type="number" id="form-size" class="form-input" placeholder="1200" required>
-          </div>
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">PEGANGAN</label>
-            <select id="form-tenure" class="form-select">
-              <option value="Freehold">Freehold</option>
-              <option value="Leasehold">Leasehold</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">LOT TYPE</label>
-            <select id="form-lotType" class="form-select">
-              <option value="Non-Bumi Lot">Non-Bumi Lot</option>
-              <option value="Bumi Lot">Bumi Lot</option>
-              <option value="Open Title">Open Title</option>
-              <option value="Rezab Melayu">Rezab Melayu</option>
-            </select>
-          </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">NEGERI</label>
+          <select id="form-region" class="form-select" required>
+            <option value="Kuala Lumpur">Kuala Lumpur</option>
+            <option value="Selangor">Selangor</option>
+            <option value="Penang">Penang</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">JENIS HARTANAH</label>
+          <select id="form-type" class="form-select" required>
+            <option value="Kondominium">Kondominium</option>
+            <option value="Teres">Teres</option>
+            <option value="Banglo">Banglo</option>
+            <option value="Semi-D">Semi-D</option>
+            <option value="Studio">Studio</option>
+            <option value="Townhouse">Townhouse</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">BILIK</label>
+          <input type="number" id="form-beds" class="form-input" value="3" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">B.AIR</label>
+          <input type="number" id="form-baths" class="form-input" value="2" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">SAIZ (SQFT)</label>
+          <input type="number" id="form-size" class="form-input" placeholder="1200" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">PEGANGAN</label>
+          <select id="form-tenure" class="form-select">
+            <option value="Freehold">Freehold</option>
+            <option value="Leasehold">Leasehold</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">LOT TYPE</label>
+          <select id="form-lotType" class="form-select">
+            <option value="Non-Bumi Lot">Non-Bumi Lot</option>
+            <option value="Bumi Lot">Bumi Lot</option>
+            <option value="Open Title">Open Title</option>
+            <option value="Rezab Melayu">Rezab Melayu</option>
+          </select>
         </div>
 
         <!-- Image Upload & Drag Drop Grid -->
-        <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">GAMBAR HARTANAH (MUAT NAIK CLOUDFLARE R2)</label>
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">GAMBAR HARTANAH (MUAT NAIK CLOUDFLARE R2)</label>
           <div style="display: flex; gap: 10px; margin-bottom: 6px;">
             <input type="file" id="form-image-file" multiple accept="image/*" class="form-input" onchange="handleImageUpload(event)">
           </div>
@@ -575,9 +573,10 @@
           </p>
         </div>
 
-        <div class="form-group" style="margin-bottom: 20px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase;">DESKRIPSI HARTANAH</label>
-          <textarea id="form-description" class="form-textarea" style="min-height: 100px;" required></textarea>
+        <!-- Description with full height auto-expand -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">DESKRIPSI HARTANAH (PAPARAN PENUH)</label>
+          <textarea id="form-description" class="form-textarea" style="min-height: 180px; height: auto; overflow: hidden; resize: vertical;" oninput="autoResizeDescription(this)" required></textarea>
         </div>
 
         <div style="display: flex; gap: 10px; justify-content: flex-end;">
@@ -687,6 +686,14 @@
       }).join('');
     }
 
+    function autoResizeDescription(el) {
+      if (!el) el = document.getElementById('form-description');
+      if (el) {
+        el.style.height = 'auto';
+        el.style.height = Math.max(180, el.scrollHeight + 10) + 'px';
+      }
+    }
+
     function openModal() {
       document.getElementById('prop-form').reset();
       document.getElementById('form-id').value = '';
@@ -694,6 +701,7 @@
       uploadedImageUrls = [];
       rebuildImageThumbsGrid();
       document.getElementById('property-modal').style.display = 'flex';
+      setTimeout(autoResizeDescription, 50);
     }
 
     function closeModal() {
@@ -721,6 +729,7 @@
 
       document.getElementById('modal-title').textContent = 'Edit Hartanah';
       document.getElementById('property-modal').style.display = 'flex';
+      setTimeout(autoResizeDescription, 50);
     }
 
     function deleteProperty(idx) {
