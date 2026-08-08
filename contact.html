@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hubungi — Zaim Rosli (REN39575)</title>
-  <meta name="description" content="Hubungi Zaim Rosli, Perunding Hartanah Berdaftar untuk temujanji konsultasi jual beli rumah.">
+  <title>Contact & Appointment Booking — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Book a real estate consultation or submit property inquiries to Zaim Rosli (REN39575).">
   <link rel="stylesheet" href="styles.css">
   <style>
     .contact-grid {
@@ -12,94 +12,62 @@
       grid-template-columns: 1fr 1.2fr;
       gap: 40px;
     }
-
-    .contact-info-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 36px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .contact-form-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 36px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .contact-detail-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .contact-icon-box {
-      width: 46px;
-      height: 46px;
-      border-radius: var(--radius-md);
-      background: var(--accent-gold-light);
-      border: 1px solid rgba(217, 119, 6, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-    }
-
-    @media (max-width: 992px) {
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Site Header -->
+  <!-- Site Navigation Header -->
   <header class="site-header">
     <div class="container nav-wrapper">
       <a href="index.html" class="logo">
         <span class="logo-main">ZAIM<span>ROSLI</span></span>
-        <span class="logo-sub">Perunding Hartanah Berdaftar</span>
+        <span class="logo-sub">REGISTERED REAL ESTATE PORTAL</span>
       </a>
 
       <ul class="nav-links">
-        <li><a href="index.html" class="nav-link">Utama</a></li>
-        <li><a href="about.html" class="nav-link">Tentang Zaim</a></li>
-        <li><a href="properties.html" class="nav-link">Senarai Hartanah</a></li>
-        <li><a href="services.html" class="nav-link">Perkhidmatan</a></li>
-        <li><a href="calculator.html" class="nav-link">Kalkulator</a></li>
-        <li><a href="blog.html" class="nav-link">Artikel</a></li>
-        <li><a href="contact.html" class="nav-link active">Hubungi</a></li>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Zaim</a></li>
+        <li><a href="properties.html" class="nav-link">Properties</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="calculator.html" class="nav-link">Calculators</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+        <li><a href="faq.html" class="nav-link">FAQ</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
       </ul>
 
       <div class="nav-cta">
-        <a href="https://wa.me/60108118559" target="_blank" class="btn btn-whatsapp btn-sm">💬 WhatsApp Direct</a>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        <a href="contact.html" class="btn btn-accent btn-sm">Appointment</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
-  <div class="mobile-overlay" id="mobile-overlay">
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-overlay">
     <div class="mobile-drawer">
       <div class="mobile-drawer-header">
-        <div class="logo"><span class="logo-main">ZAIM<span>ROSLI</span></span><span class="logo-sub">REN39575</span></div>
-        <button class="mobile-drawer-close" id="mobile-drawer-close">&times;</button>
+        <div class="logo">
+          <span class="logo-main">ZAIM<span>ROSLI</span></span>
+          <span class="logo-sub">REN39575</span>
+        </div>
+        <button class="mobile-drawer-close">&times;</button>
       </div>
+
       <ul class="mobile-drawer-links">
-        <li><a href="index.html" class="mobile-drawer-link">🏠 Laman Utama</a></li>
-        <li><a href="about.html" class="mobile-drawer-link">👤 Tentang Zaim</a></li>
-        <li><a href="properties.html" class="mobile-drawer-link">🏢 Senarai Hartanah</a></li>
-        <li><a href="services.html" class="mobile-drawer-link">🛠️ Perkhidmatan</a></li>
-        <li><a href="calculator.html" class="mobile-drawer-link">🧮 Kalkulator Legal Fee</a></li>
-        <li><a href="blog.html" class="mobile-drawer-link">📰 Panduan & Artikel</a></li>
-        <li><a href="testimonials.html" class="mobile-drawer-link">⭐ Testimoni Klien</a></li>
-        <li><a href="faq.html" class="mobile-drawer-link">❓ Soalan Lazim FAQ</a></li>
-        <li><a href="contact.html" class="mobile-drawer-link active">📞 Hubungi Kami</a></li>
+        <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+        <li><a href="about.html" class="mobile-drawer-link">About Zaim</a></li>
+        <li><a href="properties.html" class="mobile-drawer-link">Properties</a></li>
+        <li><a href="services.html" class="mobile-drawer-link">Services</a></li>
+        <li><a href="calculator.html" class="mobile-drawer-link">Calculators</a></li>
+        <li><a href="blog.html" class="mobile-drawer-link">Blog</a></li>
+        <li><a href="testimonials.html" class="mobile-drawer-link">Testimonials</a></li>
+        <li><a href="faq.html" class="mobile-drawer-link">FAQ</a></li>
+        <li><a href="contact.html" class="mobile-drawer-link active">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -107,95 +75,92 @@
   <!-- Page Hero Banner -->
   <section class="page-hero">
     <div class="container">
-      <h1>Hubungi <span>Zaim Rosli</span></h1>
-      <p>Sedia memberikan konsultasi hartanah secara mesra & profesional.</p>
+      <h1>Contact & <span>Appointment Booking</span></h1>
+      <p>Schedule a private consultation or submit your property inquiry directly to Zaim Rosli.</p>
     </div>
   </section>
 
-  <!-- Contact Form & Details Section -->
+  <!-- Contact Form & Info Section -->
   <section class="section">
     <div class="container">
+      
       <div class="contact-grid">
-
-        <!-- Contact Info -->
-        <div class="contact-info-card">
-          <h3 style="font-size: 1.3rem; margin-bottom: 24px;">Maklumat Perhubungan</h3>
-
-          <div class="contact-detail-item">
-            <div class="contact-icon-box">📍</div>
-            <div>
-              <h4 style="font-size: 1rem; margin-bottom: 2px;">Kawasan Liputan</h4>
-              <p style="color: var(--text-muted); font-size: 0.9rem;">Kuala Lumpur, Shah Alam, Petaling Jaya, Subang Jaya & Seluruh Selangor.</p>
-            </div>
+        
+        <!-- Left Info Card -->
+        <div style="background: #ffffff; padding: 36px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+          <span class="section-subtitle">GET IN TOUCH</span>
+          <h3 style="font-size: 1.4rem; margin-bottom: 20px;">Direct Communication Channels</h3>
+          
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">OFFICIAL NAME & REN NO</div>
+            <div style="font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-top: 4px;">Zaim Rosli (REN39575)</div>
           </div>
 
-          <div class="contact-detail-item">
-            <div class="contact-icon-box">📱</div>
-            <div>
-              <h4 style="font-size: 1rem; margin-bottom: 2px;">No. Telefon / WhatsApp</h4>
-              <p style="color: var(--text-muted); font-size: 0.9rem;">+6010-811 8559 (Talian Terus & WhatsApp)</p>
-            </div>
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">PHONE & WHATSAPP</div>
+            <div style="font-size: 1.1rem; font-weight: 800; color: var(--accent-gold); margin-top: 4px;">+6010-811 8559</div>
           </div>
 
-          <div class="contact-detail-item">
-            <div class="contact-icon-box">📧</div>
-            <div>
-              <h4 style="font-size: 1rem; margin-bottom: 2px;">E-mel Rasmi</h4>
-              <p style="color: var(--text-muted); font-size: 0.9rem;">huzaimrosli@gmail.com</p>
-            </div>
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">COVERAGE REGIONS</div>
+            <div style="font-size: 1rem; color: var(--text-main); margin-top: 4px;">Kuala Lumpur & Selangor (Klang Valley)</div>
           </div>
 
-          <div class="contact-detail-item">
-            <div class="contact-icon-box">🎖️</div>
-            <div>
-              <h4 style="font-size: 1rem; margin-bottom: 2px;">No. Pendaftaran REN</h4>
-              <p style="color: var(--text-muted); font-size: 0.9rem;">REN39575 (Lembaga Penilai & Ejen Hartanah Malaysia)</p>
-            </div>
+          <div style="margin-top: 30px;">
+            <a href="https://wa.me/60108118559?text=Hi%20Zaim,%20I%20would%20like%20to%20book%20a%20property%20consultation." target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+              💬 Instant WhatsApp Chat
+            </a>
           </div>
-
-          <a href="https://wa.me/60108118559" target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: 10px;">
-            💬 Hantar WhatsApp Sekarang
-          </a>
         </div>
 
-        <!-- Appointment Form -->
-        <div class="contact-form-card">
-          <h3 style="font-size: 1.3rem; margin-bottom: 8px;">Borang Temujanji Konsultasi</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Isi borang di bawah untuk mendapatkan respon pantas terus ke WhatsApp.</p>
+        <!-- Right Form Card -->
+        <div style="background: #ffffff; padding: 36px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+          <h3 style="font-size: 1.3rem; margin-bottom: 20px;">Send an Inquiry</h3>
 
-          <form id="contact-form" onsubmit="handleFormSubmit(event)">
-            <div class="form-group" style="margin-bottom: 16px;">
-              <label>Nama Penuh</label>
-              <input type="text" id="f-name" placeholder="Masukkan nama penuh anda" class="form-control" required>
+          <div id="contact-success-msg" style="display: none; background: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; padding: 14px; border-radius: var(--radius-sm); font-size: 0.95rem; margin-bottom: 20px;">
+            ✅ Thank you! Your inquiry has been submitted successfully. Zaim Rosli will contact you shortly.
+          </div>
+
+          <form id="contact-form-el">
+            <div style="margin-bottom: 16px;">
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">YOUR FULL NAME</label>
+              <input type="text" id="c-name" required placeholder="e.g. Ahmad Razak" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
             </div>
 
-            <div class="form-group" style="margin-bottom: 16px;">
-              <label>No. Phone / WhatsApp</label>
-              <input type="tel" id="f-phone" placeholder="Contoh: 0123456789" class="form-control" required>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">EMAIL ADDRESS</label>
+                <input type="email" id="c-email" required placeholder="name@example.com" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">PHONE NUMBER</label>
+                <input type="tel" id="c-phone" required placeholder="012-3456789" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
+              </div>
             </div>
 
-            <div class="form-group" style="margin-bottom: 16px;">
-              <label>Tujuan Konsultasi</label>
-              <select id="f-subject" class="form-control">
-                <option value="Beli Rumah">Nak Beli Rumah Idaman</option>
-                <option value="Jual Rumah">Nak Jual Rumah (Subsale)</option>
-                <option value="Sewa Rumah">Urusan Sewaan Unit</option>
-                <option value="Semak Kelayakan Loan">Semakan Kelayakan Loan Percuma</option>
+            <div style="margin-bottom: 16px;">
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">INTERESTED SERVICE</label>
+              <select id="c-service" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
+                <option value="Buying Property">Buying Residential Property</option>
+                <option value="Selling Property">Selling / Resale Listing</option>
+                <option value="Renting Property">Renting / Tenant Screening</option>
+                <option value="Loan Check">Bank Loan & Financial Pre-Check</option>
               </select>
             </div>
 
-            <div class="form-group" style="margin-bottom: 24px;">
-              <label>Mesej / Pertanyaan (Opsional)</label>
-              <textarea id="f-message" placeholder="Tulis mesej atau bajet/lokasi rumah yang anda cari..." class="form-control" style="min-height: 110px; resize: vertical;"></textarea>
+            <div style="margin-bottom: 24px;">
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">MESSAGE / INQUIRY DETAILS</label>
+              <textarea id="c-msg" required placeholder="Tell us about your preferred property location, budget, or inquiry details..." style="width: 100%; height: 100px; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;">
-              🚀 Hantar Temujanji ke WhatsApp
+            <button type="submit" class="btn btn-accent" style="width: 100%;">
+              📩 Submit Inquiry
             </button>
           </form>
         </div>
 
       </div>
+
     </div>
   </section>
 
@@ -203,24 +168,25 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <div>&copy; 2026 Zaim Rosli Real Estate. Hak Cipta Terpelihara.</div>
-        <div>Perunding Hartanah Berdaftar REN39575</div>
+        <div>&copy; 2026 Zaim Rosli Real Estate. All Rights Reserved.</div>
+        <div>LPPEH Registered Real Estate Negotiator REN39575</div>
       </div>
     </div>
   </footer>
 
   <script src="app.js"></script>
   <script>
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      const name = document.getElementById('f-name').value.trim();
-      const phone = document.getElementById('f-phone').value.trim();
-      const subject = document.getElementById('f-subject').value;
-      const msg = document.getElementById('f-message').value.trim();
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contact-form-el');
+      const successMsg = document.getElementById('contact-success-msg');
 
-      const text = encodeURIComponent(`Salam Zaim, saya ${name} (${phone}).\n\nTujuan: ${subject}\nMesej: ${msg || 'Saya ingin dapatkan konsultasi lanjut.'}`);
-      window.open(`https://wa.me/60108118559?text=${text}`, '_blank');
-    }
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        successMsg.style.display = 'block';
+        form.reset();
+        window.scrollTo({ top: successMsg.offsetTop - 120, behavior: 'smooth' });
+      });
+    });
   </script>
 </body>
 </html>

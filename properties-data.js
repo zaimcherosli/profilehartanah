@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ZAIM ROSLI PORTAL — PROPERTY DATABASE & UTILITIES
+   ZAIM ROSLI PORTAL — PROPERTY DATABASE & UTILITIES (ENGLISH)
    ========================================================================== */
 
 const PROPERTIES_DATA = [
@@ -11,7 +11,7 @@ const PROPERTIES_DATA = [
     priceStr: "RM 1,250,000",
     location: "KLCC, Kuala Lumpur",
     region: "Kuala Lumpur",
-    type: "Kondominium",
+    type: "Condominium",
     status: "sale",
     beds: 3,
     baths: 3,
@@ -21,7 +21,7 @@ const PROPERTIES_DATA = [
     tenure: "Freehold",
     lotType: "Non-Bumi Lot",
     image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-    description: "Penthouse mewah berprestij tinggi berhadapan Menara Kembar Petronas KLCC. Rekabentuk moden kontemporari dengan kemudahan taraf 5-bintang merangkumi infinity pool, gimnasium canggih, dan kawalan keselamatan 24 jam."
+    description: "Prestigious high-rise penthouse directly facing the iconic Petronas Twin Towers in KLCC. Contemporary modern architectural design with 5-star resort amenities including an infinity lap pool, state-of-the-art gymnasium, and 24/7 multi-tier security."
   },
   {
     id: "prop-002",
@@ -31,7 +31,7 @@ const PROPERTIES_DATA = [
     priceStr: "RM 680,000",
     location: "Denai Alam, Shah Alam",
     region: "Selangor",
-    type: "Teres",
+    type: "Terrace House",
     status: "sale",
     beds: 4,
     baths: 4,
@@ -41,7 +41,7 @@ const PROPERTIES_DATA = [
     tenure: "Freehold",
     lotType: "Bumi Lot",
     image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
-    description: "Rumah teres dua tingkat moden di kawasan kejiranan tenang & berpagar (Gated & Guarded). Berdekatan Lebuhraya DASH, sekolah antarabangsa, dan taman rekreasi keluarga."
+    description: "Modern double-storey terrace home nestled in a serene gated & guarded neighborhood. Excellent connectivity via DASH Highway, close to international schools and family recreational parks."
   },
   {
     id: "prop-003",
@@ -51,7 +51,7 @@ const PROPERTIES_DATA = [
     priceStr: "RM 2,450,000",
     location: "Bukit Jelutong, Shah Alam",
     region: "Selangor",
-    type: "Banglo",
+    type: "Bungalow",
     status: "sale",
     beds: 6,
     baths: 6,
@@ -61,7 +61,7 @@ const PROPERTIES_DATA = [
     tenure: "Freehold",
     lotType: "Open Title",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-    description: "Banglo mewah di atas bukit dengan landskap eksklusif. Dilengkapi laman persendirian luas, kolam renang, bilik selesa, dan kelengkapan perabot terbina dalam (*Built-in Kitchen & Wardrobe*)."
+    description: "Exclusive hilltop luxury bungalow featuring expansive private gardens, swimming pool, spacious ensuite master bedrooms, and premium custom built-in kitchen cabinetry and wardrobes."
   },
   {
     id: "prop-004",
@@ -69,8 +69,8 @@ const PROPERTIES_DATA = [
     title: "Eco Horizon Semi-D Residence",
     price: 1150000,
     priceStr: "RM 1,150,000",
-    location: "Batu Kawan, Pulau Pinang",
-    region: "Pulau Pinang",
+    location: "Batu Kawan, Penang",
+    region: "Penang",
     type: "Semi-D",
     status: "sale",
     beds: 5,
@@ -81,17 +81,17 @@ const PROPERTIES_DATA = [
     tenure: "Freehold",
     lotType: "Non-Bumi Lot",
     image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-    description: "Kediaman Semi-D berpagar gaya resort berhampiran IKEA Batu Kawan dan Jambatan Kedua Pulau Pinang. Rekabentuk mesra alam dengan pencahayaan semula jadi yang optimum."
+    description: "Gated resort-style Semi-Detached residence situated near IKEA Batu Kawan and Penang Second Bridge. Eco-centric architectural design with optimal natural ventilation and lighting."
   },
   {
     id: "prop-005",
     slug: "urban-studio-suite-bangsar-south",
     title: "Urban Studio Suite @ Bangsar South",
     price: 2300,
-    priceStr: "RM 2,300 / bln",
+    priceStr: "RM 2,300 / mo",
     location: "Bangsar South, Kuala Lumpur",
     region: "Kuala Lumpur",
-    type: "Studio",
+    type: "Studio Suite",
     status: "rent",
     beds: 1,
     baths: 1,
@@ -101,7 +101,7 @@ const PROPERTIES_DATA = [
     tenure: "Leasehold",
     lotType: "Open Title",
     image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-    description: "Studio perabot penuh (*Fully Furnished*) berdekatan stesen LRT Kerinchi & Mid Valley Megamall. Sesuai untuk profesional muda dan pasangan berkahwin."
+    description: "Fully furnished urban studio suite within walking distance to Kerinchi LRT Station and Mid Valley Megamall. Ideal for young corporate professionals and couples."
   },
   {
     id: "prop-006",
@@ -119,13 +119,12 @@ const PROPERTIES_DATA = [
     size: 1380,
     landSize: "-",
     tenure: "Freehold",
-    lotType: "Rezab Melayu",
+    lotType: "Malay Reserve",
     image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
-    description: "Townhouse aman berlatar belakangkan pemandangan Bukit Tabur. Lokasi strategik berdekatan Melawati Mall, sekolah, dan lebuhraya MRR2 / SPE."
+    description: "Tranquil townhouse with scenic views of Bukit Tabur quartz ridge. Strategic access to Melawati Mall, reputable schools, and MRR2 / SPE highways."
   }
 ];
 
-// Helper to convert title to slug if needed dynamically
 function slugify(text) {
   return text
     .toString()
@@ -136,7 +135,7 @@ function slugify(text) {
     .replace(/\-\-+/g, '-');
 }
 
-// Legal Fees Calculation Utilities
+// Legal Fees & Stamp Duty Calculations (Malaysian Statutory Formulas)
 function calcSPALegalFee(price) {
   let fee = 0;
   if (price <= 500000) {

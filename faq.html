@@ -1,108 +1,90 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Soalan Lazim FAQ — Zaim Rosli (REN39575)</title>
-  <meta name="description" content="Jawapan lengkap soalan lazim mengenai booking deposit, pinjaman bank, guaman SPA, dan prosedur hartanah.">
+  <title>Frequently Asked Questions (FAQ) — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Common questions and answers regarding Malaysian real estate purchases, bank loans, legal fees, and REN services.">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .faq-list {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
     .faq-item {
-      background: var(--bg-surface);
+      background: #ffffff;
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
+      margin-bottom: 16px;
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
     }
-
     .faq-question {
       padding: 20px 24px;
-      font-size: 1.1rem;
       font-weight: 700;
-      color: var(--text-main);
+      font-size: 1.05rem;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-
     .faq-answer {
       padding: 0 24px 20px;
-      font-size: 0.95rem;
       color: var(--text-muted);
+      font-size: 0.98rem;
       line-height: 1.7;
-      display: none;
-      border-top: 1px solid var(--bg-alt);
-      margin-top: 10px;
-      padding-top: 16px;
-    }
-
-    .faq-item.open .faq-answer {
-      display: block;
-    }
-
-    .faq-icon {
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
-    }
-
-    .faq-item.open .faq-icon {
-      transform: rotate(180deg);
     }
   </style>
 </head>
 <body>
 
-  <!-- Site Header -->
+  <!-- Site Navigation Header -->
   <header class="site-header">
     <div class="container nav-wrapper">
       <a href="index.html" class="logo">
         <span class="logo-main">ZAIM<span>ROSLI</span></span>
-        <span class="logo-sub">Perunding Hartanah Berdaftar</span>
+        <span class="logo-sub">REGISTERED REAL ESTATE PORTAL</span>
       </a>
 
       <ul class="nav-links">
-        <li><a href="index.html" class="nav-link">Utama</a></li>
-        <li><a href="about.html" class="nav-link">Tentang Zaim</a></li>
-        <li><a href="properties.html" class="nav-link">Senarai Hartanah</a></li>
-        <li><a href="services.html" class="nav-link">Perkhidmatan</a></li>
-        <li><a href="calculator.html" class="nav-link">Kalkulator</a></li>
-        <li><a href="blog.html" class="nav-link">Artikel</a></li>
-        <li><a href="contact.html" class="nav-link">Hubungi</a></li>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Zaim</a></li>
+        <li><a href="properties.html" class="nav-link">Properties</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="calculator.html" class="nav-link">Calculators</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+        <li><a href="faq.html" class="nav-link active">FAQ</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
 
       <div class="nav-cta">
-        <a href="https://wa.me/60108118559" target="_blank" class="btn btn-whatsapp btn-sm">💬 WhatsApp Direct</a>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        <a href="contact.html" class="btn btn-accent btn-sm">Appointment</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
-  <div class="mobile-overlay" id="mobile-overlay">
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-overlay">
     <div class="mobile-drawer">
       <div class="mobile-drawer-header">
-        <div class="logo"><span class="logo-main">ZAIM<span>ROSLI</span></span><span class="logo-sub">REN39575</span></div>
-        <button class="mobile-drawer-close" id="mobile-drawer-close">&times;</button>
+        <div class="logo">
+          <span class="logo-main">ZAIM<span>ROSLI</span></span>
+          <span class="logo-sub">REN39575</span>
+        </div>
+        <button class="mobile-drawer-close">&times;</button>
       </div>
+
       <ul class="mobile-drawer-links">
-        <li><a href="index.html" class="mobile-drawer-link">🏠 Laman Utama</a></li>
-        <li><a href="about.html" class="mobile-drawer-link">👤 Tentang Zaim</a></li>
-        <li><a href="properties.html" class="mobile-drawer-link">🏢 Senarai Hartanah</a></li>
-        <li><a href="services.html" class="mobile-drawer-link">🛠️ Perkhidmatan</a></li>
-        <li><a href="calculator.html" class="mobile-drawer-link">🧮 Kalkulator Legal Fee</a></li>
-        <li><a href="blog.html" class="mobile-drawer-link">📰 Panduan & Artikel</a></li>
-        <li><a href="testimonials.html" class="mobile-drawer-link">⭐ Testimoni Klien</a></li>
-        <li><a href="faq.html" class="mobile-drawer-link active">❓ Soalan Lazim FAQ</a></li>
-        <li><a href="contact.html" class="mobile-drawer-link">📞 Hubungi Kami</a></li>
+        <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+        <li><a href="about.html" class="mobile-drawer-link">About Zaim</a></li>
+        <li><a href="properties.html" class="mobile-drawer-link">Properties</a></li>
+        <li><a href="services.html" class="mobile-drawer-link">Services</a></li>
+        <li><a href="calculator.html" class="mobile-drawer-link">Calculators</a></li>
+        <li><a href="blog.html" class="mobile-drawer-link">Blog</a></li>
+        <li><a href="testimonials.html" class="mobile-drawer-link">Testimonials</a></li>
+        <li><a href="faq.html" class="mobile-drawer-link active">FAQ</a></li>
+        <li><a href="contact.html" class="mobile-drawer-link">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -110,67 +92,65 @@
   <!-- Page Hero Banner -->
   <section class="page-hero">
     <div class="container">
-      <h1>Soalan <span>Lazim (FAQ)</span></h1>
-      <p>Jawapan telus kepada soalan-soalan yang sering ditanya oleh pembeli dan penjual rumah.</p>
+      <h1>Frequently Asked <span>Questions (FAQ)</span></h1>
+      <p>Answers to common questions regarding property purchases, legal fees, and bank loans in Malaysia.</p>
     </div>
   </section>
 
-  <!-- FAQ Accordion -->
+  <!-- FAQ Accordions -->
   <section class="section">
-    <div class="container">
-      <div class="faq-list">
-
-        <div class="faq-item open">
-          <div class="faq-question">
-            <span>1. Berapa deposit booking yang biasa dikenakan untuk beli rumah?</span>
-            <span class="faq-icon">▼</span>
-          </div>
-          <div class="faq-answer">
-            Biasanya deposit booking adalah sebanyak 3.18% daripada harga jualan rumah sebagai tanda setuju (*Earnest Deposit*). Baki 6.82% lagi dibayar semasa menandatangani Perjanjian Jual Beli (SPA) di pejabat peguam.
-          </div>
+    <div class="container" style="max-width: 840px;">
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>1. What is the standard agent commission rate for property sales in Malaysia?</span>
+          <span>+</span>
         </div>
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>2. Adakah wang deposit dipulangkan sekiranya pinjaman bank saya ditolak?</span>
-            <span class="faq-icon">▼</span>
-          </div>
-          <div class="faq-answer">
-            Ya, sekiranya permohonan pinjaman anda ditolak oleh sekurang-kurangnya 2 buah bank (*2 rejection letters*), wang deposit 3.18% akan dipulangkan sepenuhnya 100% mengikut terma borang booking rasmi agensi.
-          </div>
+        <div class="faq-answer">
+          According to LPPEH guidelines, the maximum agency fee for residential property transactions is capped at 3% of the agreed transacted price. This fee is paid by the property seller upon successful execution of the Sales and Purchase Agreement (SPA).
         </div>
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>3. Apakah perbezaan antara rumah Pegangan Bebas (Freehold) dan Leasehold?</span>
-            <span class="faq-icon">▼</span>
-          </div>
-          <div class="faq-answer">
-            Freehold bermaksud tanah dimiliki selama-lamanya tanpa had tempoh. Leasehold pula dimiliki mengikut tempoh pajakan kerajaan negeri (biasanya 99 tahun) dan memerlukan kebenaran Pihak Berkuasa Negeri (*State Consent*) untuk pindah milik.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>4. Boleh ke penjawat awam menggunakan pembiayaan LPPSA untuk beli rumah subsale?</span>
-            <span class="faq-icon">▼</span>
-          </div>
-          <div class="faq-answer">
-            Boleh! LPPSA menyediakan Skim Pembiayaan Jenis 1 (Rumah Siap/Subsale). Zaim akan bantu menguruskan semakan kelayakan jawatan & borang permohonan LPPSA anda dari awal.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>5. Berapa lama proses pembelian rumah dari tarikh booking sehingga kunci diserahkan?</span>
-            <span class="faq-icon">▼</span>
-          </div>
-          <div class="faq-answer">
-            Untuk rumah Freehold (tanpa sekatan), proses siap biasanya mengambil masa sekitar 3 hingga 4 bulan. Manakala untuk rumah Leasehold atau Master Title, ia mengambil masa sekitar 6 hingga 9 bulan disebabkan proses *State Consent*.
-          </div>
-        </div>
-
       </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>2. How much upfront cash do I need to purchase a residential home?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Typically, buyers require 10% downpayment plus approximately 3% to 5% of the purchase price to cover SPA legal fees, MOT stamp duty, loan facility agreement fees, and valuation fees. Use our online <a href="calculator.html" style="color: var(--accent-gold); font-weight:700;">Legal Fee Calculator</a> for a personalized calculation.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>3. What is the difference between SPA Legal Fee and MOT Stamp Duty?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          The SPA legal fee is paid to the appointed law firm for drafting and executing the Sale and Purchase Agreement. MOT (Memorandum of Transfer) stamp duty is a statutory tax paid directly to LHDN (Inland Revenue Board Malaysia) to officially transfer ownership of the property title.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>4. Can I withdraw from EPF Account 2 to finance my home purchase?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Yes! First-time homebuyers or buyers upgrading their primary residence can withdraw from KWSP EPF Account 2 to cover downpayment shortages or reduce existing housing loan balances.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>5. How long does a property transfer transaction take from booking to key handover?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          For Freehold properties with no restrictions, completion usually takes 3 months from the date of SPA signing. For Leasehold properties requiring State Authority consent, completion typically ranges between 4 to 6 months.
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -178,22 +158,12 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <div>&copy; 2026 Zaim Rosli Real Estate. Hak Cipta Terpelihara.</div>
-        <div>Perunding Hartanah Berdaftar REN39575</div>
+        <div>&copy; 2026 Zaim Rosli Real Estate. All Rights Reserved.</div>
+        <div>LPPEH Registered Real Estate Negotiator REN39575</div>
       </div>
     </div>
   </footer>
 
   <script src="app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-          const item = q.parentElement;
-          item.classList.toggle('open');
-        });
-      });
-    });
-  </script>
 </body>
 </html>

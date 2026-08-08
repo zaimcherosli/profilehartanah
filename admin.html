@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard — Zaim Rosli (REN39575)</title>
-  <meta name="description" content="Panel pengurusan hartanah dan muat naik gambar Zaim Rosli.">
+  <meta name="description" content="Property listing and image management portal for Zaim Rosli.">
   <link rel="stylesheet" href="styles.css">
   <style>
     .admin-wrapper {
@@ -49,7 +49,6 @@
       color: var(--text-muted);
     }
 
-    /* Modal Styling */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -88,6 +87,21 @@
       border: 2px dashed var(--border-color);
     }
 
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-color);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.12);
+    }
+
     @media (max-width: 768px) {
       .admin-header-bar {
         flex-direction: column;
@@ -107,12 +121,12 @@
     <div class="container nav-wrapper">
       <a href="index.html" class="logo">
         <span class="logo-main">ZAIM<span>ROSLI</span></span>
-        <span class="logo-sub">PANEL PENGURUSAN ADMIN</span>
+        <span class="logo-sub">ADMIN MANAGEMENT PORTAL</span>
       </a>
 
       <div style="display: flex; align-items: center; gap: 14px;">
         <span id="user-display" style="font-size: 0.9rem; font-weight: 700; color: var(--accent-gold);">huzaimrosli@gmail.com</span>
-        <button onclick="handleLogout()" class="btn btn-outline btn-sm">🚪 Log Keluar</button>
+        <button onclick="handleLogout()" class="btn btn-outline btn-sm">🚪 Sign Out</button>
       </div>
     </div>
   </header>
@@ -122,21 +136,21 @@
     
     <div class="admin-header-bar">
       <div>
-        <h2 style="font-size: 1.5rem; margin-bottom: 4px;">Pengurusan Listing Hartanah</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Tambah, edit, padam & susun gambar hartanah anda di zaimrosli.my</p>
+        <h2 style="font-size: 1.5rem; margin-bottom: 4px;">Property Listing Management</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Add, edit, delete & reorder property photos for zaimrosli.my</p>
       </div>
-      <button onclick="openModal()" class="btn btn-accent">+ Tambah Hartanah Baharu</button>
+      <button onclick="openModal()" class="btn btn-accent">+ Add New Property</button>
     </div>
 
     <!-- Listings Table -->
     <table class="admin-table">
       <thead>
         <tr>
-          <th>Hartanah</th>
-          <th>Harga</th>
-          <th>Lokasi / Negeri</th>
+          <th>Property</th>
+          <th>Price</th>
+          <th>Location / Region</th>
           <th>Status</th>
-          <th>Tindakan</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody id="admin-listings-tbody">
@@ -150,7 +164,7 @@
   <div id="property-modal" class="modal-overlay">
     <div class="modal-card">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-        <h3 id="modal-title" style="font-size: 1.3rem;">Tambah Hartanah Baharu</h3>
+        <h3 id="modal-title" style="font-size: 1.3rem;">Add New Property</h3>
         <button onclick="closeModal()" style="background: none; border: none; font-size: 1.8rem; cursor: pointer;">&times;</button>
       </div>
 
@@ -158,89 +172,89 @@
         <input type="hidden" id="form-id">
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label>Tajuk Hartanah</label>
-          <input type="text" id="form-title" class="form-control" placeholder="Contoh: The Grand Pavilion Penthouse" required>
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">PROPERTY TITLE</label>
+          <input type="text" id="form-title" class="form-input" placeholder="e.g. The Grand Pavilion Penthouse" required>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
           <div class="form-group">
-            <label>Harga (RM)</label>
-            <input type="number" id="form-price" class="form-control" placeholder="1250000" required>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">PRICE (RM)</label>
+            <input type="number" id="form-price" class="form-input" placeholder="1250000" required>
           </div>
           <div class="form-group">
-            <label>Status</label>
-            <select id="form-status" class="form-control" required>
-              <option value="sale">Untuk Dijual (FOR SALE)</option>
-              <option value="rent">Untuk Disewa (FOR RENT)</option>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">STATUS</label>
+            <select id="form-status" class="form-select" required>
+              <option value="sale">FOR SALE</option>
+              <option value="rent">FOR RENT</option>
             </select>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
           <div class="form-group">
-            <label>Lokasi (Bandar / kawasan)</label>
-            <input type="text" id="form-location" class="form-control" placeholder="KLCC, Kuala Lumpur" required>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">LOCATION (City / Area)</label>
+            <input type="text" id="form-location" class="form-input" placeholder="KLCC, Kuala Lumpur" required>
           </div>
           <div class="form-group">
-            <label>Negeri</label>
-            <select id="form-region" class="form-control" required>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">REGION</label>
+            <select id="form-region" class="form-select" required>
               <option value="Kuala Lumpur">Kuala Lumpur</option>
               <option value="Selangor">Selangor</option>
-              <option value="Pulau Pinang">Pulau Pinang</option>
+              <option value="Penang">Penang</option>
             </select>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;">
           <div class="form-group">
-            <label>Jenis</label>
-            <select id="form-type" class="form-control" required>
-              <option value="Kondominium">Kondominium</option>
-              <option value="Teres">Teres</option>
-              <option value="Banglo">Banglo</option>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">TYPE</label>
+            <select id="form-type" class="form-select" required>
+              <option value="Condominium">Condominium</option>
+              <option value="Terrace House">Terrace House</option>
+              <option value="Bungalow">Bungalow</option>
               <option value="Semi-D">Semi-D</option>
-              <option value="Studio">Studio</option>
+              <option value="Studio Suite">Studio Suite</option>
               <option value="Townhouse">Townhouse</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Bilik Tidur</label>
-            <input type="number" id="form-beds" class="form-control" value="3" required>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">BEDROOMS</label>
+            <input type="number" id="form-beds" class="form-input" value="3" required>
           </div>
           <div class="form-group">
-            <label>Bilik Air</label>
-            <input type="number" id="form-baths" class="form-control" value="2" required>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">BATHROOMS</label>
+            <input type="number" id="form-baths" class="form-input" value="2" required>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;">
           <div class="form-group">
-            <label>Keluasan (sqft)</label>
-            <input type="number" id="form-size" class="form-control" placeholder="1200" required>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">BUILT-UP (SQFT)</label>
+            <input type="number" id="form-size" class="form-input" placeholder="1200" required>
           </div>
           <div class="form-group">
-            <label>Pegangan</label>
-            <select id="form-tenure" class="form-control">
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">TENURE</label>
+            <select id="form-tenure" class="form-select">
               <option value="Freehold">Freehold</option>
               <option value="Leasehold">Leasehold</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Status Lot</label>
-            <select id="form-lotType" class="form-control">
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">LOT TYPE</label>
+            <select id="form-lotType" class="form-select">
               <option value="Non-Bumi Lot">Non-Bumi Lot</option>
               <option value="Bumi Lot">Bumi Lot</option>
               <option value="Open Title">Open Title</option>
-              <option value="Rezab Melayu">Rezab Melayu</option>
+              <option value="Malay Reserve">Malay Reserve</option>
             </select>
           </div>
         </div>
 
         <!-- Image Upload & Drag Drop Grid -->
         <div class="form-group" style="margin-bottom: 20px;">
-          <label>Gambar Hartanah</label>
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">PROPERTY PHOTOS</label>
           <div style="display: flex; gap: 10px; margin-bottom: 8px;">
-            <input type="file" id="form-image-file" multiple accept="image/*" class="form-control" onchange="handleImageUpload(event)">
+            <input type="file" id="form-image-file" multiple accept="image/*" class="form-input" onchange="handleImageUpload(event)">
           </div>
           <input type="hidden" id="form-prop-image">
 
@@ -248,18 +262,18 @@
             <!-- Rendered thumbs -->
           </div>
           <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">
-            💡 Petua: Tahan dan seret gambar untuk ubah susunan. Gambar 1 adalah "Utama".
+            💡 Tip: Hold and drag photos to reorder. Photo 1 will be the main feature photo.
           </p>
         </div>
 
         <div class="form-group" style="margin-bottom: 24px;">
-          <label>Penerangan / Deskripsi Hartanah</label>
-          <textarea id="form-description" class="form-control" style="min-height: 120px;" required></textarea>
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">DESCRIPTION</label>
+          <textarea id="form-description" class="form-textarea" style="min-height: 120px;" required></textarea>
         </div>
 
         <div style="display: flex; gap: 12px; justify-content: flex-end;">
-          <button type="button" onclick="closeModal()" class="btn btn-outline">Batal</button>
-          <button type="submit" class="btn btn-accent">Simpan Hartanah</button>
+          <button type="button" onclick="closeModal()" class="btn btn-outline">Cancel</button>
+          <button type="submit" class="btn btn-accent">Save Property</button>
         </div>
       </form>
 
@@ -327,10 +341,10 @@
           </td>
           <td><strong style="color: var(--accent-gold);">${p.priceStr}</strong></td>
           <td>${p.location}</td>
-          <td><span class="property-badge ${p.status === 'sale' ? 'badge-sale' : 'badge-rent'}" style="position:static;">${p.status.toUpperCase()}</span></td>
+          <td><span class="property-badge ${p.status === 'sale' ? 'badge-sale' : 'badge-rent'}" style="position:static;">${p.status === 'sale' ? 'FOR SALE' : 'FOR RENT'}</span></td>
           <td>
             <button onclick="editProperty(${idx})" class="btn btn-outline btn-sm">Edit</button>
-            <button onclick="deleteProperty(${idx})" class="btn btn-sm" style="background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; margin-left: 6px;">Padam</button>
+            <button onclick="deleteProperty(${idx})" class="btn btn-sm" style="background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; margin-left: 6px;">Delete</button>
           </td>
         </tr>
       `).join('');
@@ -339,7 +353,7 @@
     function openModal() {
       document.getElementById('prop-form').reset();
       document.getElementById('form-id').value = '';
-      document.getElementById('modal-title').textContent = 'Tambah Hartanah Baharu';
+      document.getElementById('modal-title').textContent = 'Add New Property';
       uploadedImageUrls = [];
       rebuildImageThumbsGrid();
       document.getElementById('property-modal').style.display = 'flex';
@@ -368,12 +382,12 @@
       uploadedImageUrls = p.image ? p.image.split(',').map(s => s.trim()) : [];
       rebuildImageThumbsGrid();
 
-      document.getElementById('modal-title').textContent = 'Edit Hartanah';
+      document.getElementById('modal-title').textContent = 'Edit Property';
       document.getElementById('property-modal').style.display = 'flex';
     }
 
     function deleteProperty(idx) {
-      if (confirm('Adakah anda pasti untuk memadam hartanah ini?')) {
+      if (confirm('Are you sure you want to delete this property?')) {
         currentProperties.splice(idx, 1);
         saveToStorage();
         renderTable();
@@ -404,7 +418,7 @@
         slug: slug,
         title: title,
         price: price,
-        priceStr: status === 'sale' ? `RM ${price.toLocaleString('en-US')}` : `RM ${price.toLocaleString('en-US')} / bln`,
+        priceStr: status === 'sale' ? `RM ${price.toLocaleString('en-US')}` : `RM ${price.toLocaleString('en-US')} / mo`,
         location: location,
         region: region,
         type: type,
@@ -435,7 +449,6 @@
       localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(currentProperties));
     }
 
-    // Image Upload & Pointer Drag Drop Grid Handler
     function handleImageUpload(e) {
       const files = Array.from(e.target.files);
       files.forEach(file => {
@@ -457,15 +470,14 @@
         thumb.dataset.index = idx;
         thumb.style.cssText = 'position:relative; width:95px; height:75px; border-radius:10px; overflow:hidden; border:2px solid #cbd5e1; flex-shrink:0; cursor:grab; background:#fff; touch-action:none;';
         
-        const isUtama = idx === 0;
+        const isMain = idx === 0;
 
         thumb.innerHTML = `
           <img src="${url}" style="width:100%;height:100%;object-fit:cover;pointer-events:none;" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80'">
-          <button type="button" onclick="removeUploadedImage(${idx})" style="position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;" title="Buang Gambar">&times;</button>
-          ${isUtama ? '<span style="position:absolute;bottom:4px;left:4px;background:#0f172a;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;z-index:2;">Utama</span>' : ''}
+          <button type="button" onclick="removeUploadedImage(${idx})" style="position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;" title="Remove Photo">&times;</button>
+          ${isMain ? '<span style="position:absolute;bottom:4px;left:4px;background:#0f172a;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;z-index:2;">Main Photo</span>' : ''}
         `;
 
-        // Pointer-based Touch + Mouse Drag Reorder
         thumb.addEventListener('pointerdown', (e) => {
           if (e.target.tagName === 'BUTTON') return;
           e.preventDefault();

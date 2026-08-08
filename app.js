@@ -1,38 +1,32 @@
 /* ==========================================================================
-   ZAIM ROSLI PORTAL — MAIN JAVASCRIPT LOGIC
+   ZAIM ROSLI PORTAL — APP JS LOGIC (ENGLISH)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initNavigation();
-  initMobileDrawer();
+  highlightActiveNavLink();
+  initMobileDrawerNav();
 });
 
-// 1. Navigation Active Link Setup
-function initNavigation() {
+// 1. Highlight Active Nav Link based on Current Page URL
+function highlightActiveNavLink() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-drawer-link');
   
-  // Set active link in desktop nav
-  document.querySelectorAll('.nav-link').forEach(link => {
+  navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (href === currentPath || (currentPath === '' && href === 'index.html')) {
       link.classList.add('active');
-    }
-  });
-
-  // Set active link in mobile drawer
-  document.querySelectorAll('.mobile-drawer-link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPath || (currentPath === '' && href === 'index.html')) {
-      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
     }
   });
 }
 
-// 2. Mobile Drawer Menu Toggle
-function initMobileDrawer() {
-  const toggleBtn = document.getElementById('mobile-nav-toggle');
-  const overlay = document.getElementById('mobile-overlay');
-  const closeBtn = document.getElementById('mobile-drawer-close');
+// 2. Mobile Drawer Navigation Toggle
+function initMobileDrawerNav() {
+  const toggleBtn = document.querySelector('.mobile-nav-toggle');
+  const overlay = document.querySelector('.mobile-overlay');
+  const closeBtn = document.querySelector('.mobile-drawer-close');
 
   if (toggleBtn && overlay) {
     toggleBtn.addEventListener('click', () => {
@@ -78,11 +72,11 @@ function createPropertyCardHTML(item) {
           ${item.location}
         </div>
         <div class="property-specs-row">
-          <span class="property-spec-item">🛏️ ${item.beds} Bilik</span>
-          <span class="property-spec-item">🚿 ${item.baths} B.Air</span>
+          <span class="property-spec-item">🛏️ ${item.beds} Beds</span>
+          <span class="property-spec-item">🚿 ${item.baths} Baths</span>
           <span class="property-spec-item">📐 ${item.size} sqft</span>
         </div>
-        <a href="property-detail.html?slug=${item.slug || item.id}" class="btn btn-outline btn-sm" style="margin-top: 16px; width: 100%;">Lihat Butiran</a>
+        <a href="property-detail.html?slug=${item.slug || item.id}" class="btn btn-outline btn-sm" style="margin-top: 16px; width: 100%;">View Details</a>
       </div>
     </div>
   `;
@@ -90,5 +84,5 @@ function createPropertyCardHTML(item) {
 
 // 4. Formatting Utilities
 function formatCurrency(val) {
-  return new Intl.NumberFormat('ms-MY', { style: 'currency', currency: 'MYR', maximumFractionDigits: 0 }).format(val);
+  return new Intl.NumberFormat('en-MY', { style: 'currency', currency: 'MYR', maximumFractionDigits: 0 }).format(val);
 }

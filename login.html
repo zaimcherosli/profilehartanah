@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log Masuk Admin — Zaim Rosli (REN39575)</title>
-  <meta name="description" content="Laman log masuk admin pengurusan hartanah Zaim Rosli.">
+  <title>Admin Portal Login — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Admin login portal for managing Zaim Rosli premium property listings.">
   <link rel="stylesheet" href="styles.css">
   <style>
     .login-wrapper {
@@ -13,38 +13,150 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
-      background: var(--bg-primary);
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      position: relative;
+      overflow: hidden;
     }
     
+    .login-wrapper::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, rgba(255,255,255,0) 70%);
+      top: -100px;
+      right: -100px;
+      pointer-events: none;
+    }
+
     .login-card {
       width: 100%;
       max-width: 440px;
-      background: var(--bg-surface);
+      background: #ffffff;
       border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 40px 32px;
-      box-shadow: var(--shadow-md);
+      border-radius: 24px;
+      padding: 44px 36px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+      position: relative;
+      z-index: 10;
+      animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .login-header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 32px;
     }
 
     .login-header .logo-main {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
       margin-bottom: 4px;
+    }
+
+    .login-header .logo-main span {
+      color: var(--accent-gold);
+    }
+
+    .login-header .logo-sub {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-top: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      background: #f8fafc;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      transition: all 0.25s ease;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-gold);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.12);
     }
 
     .error-box {
       background: #fef2f2;
       border: 1px solid #fecaca;
       color: #ef4444;
-      padding: 12px;
-      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      border-radius: 12px;
       font-size: 0.88rem;
       margin-bottom: 20px;
       display: none;
+      text-align: center;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      border-radius: 12px;
+      background: var(--accent-gold);
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 20px rgba(217, 119, 6, 0.25);
+    }
+
+    .btn-submit:hover {
+      background: var(--accent-gold-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(217, 119, 6, 0.35);
+    }
+
+    .back-home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-home-link:hover {
+      color: var(--accent-gold);
     }
   </style>
 </head>
@@ -55,31 +167,31 @@
       <div class="login-header">
         <div class="logo">
           <span class="logo-main">ZAIM<span>ROSLI</span></span>
-          <span class="logo-sub">PORTAL ADMIN HARTANAH</span>
+          <span class="logo-sub">REGISTERED REAL ESTATE PORTAL</span>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">Log masuk untuk menguruskan senarai hartanah anda</p>
+        <p>Sign in to manage your property listings</p>
       </div>
 
       <div id="error-box" class="error-box"></div>
 
       <form id="login-form-el">
-        <div class="form-group" style="margin-bottom: 20px;">
-          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">ALAMAT E-MEL</label>
-          <input type="email" id="login-email" class="form-control" value="huzaimrosli@gmail.com" placeholder="contoh@gmail.com" required>
+        <div class="form-group">
+          <label class="form-label" for="login-email">EMAIL ADDRESS</label>
+          <input type="email" id="login-email" class="form-input" value="huzaimrosli@gmail.com" placeholder="name@example.com" required>
         </div>
 
-        <div class="form-group" style="margin-bottom: 24px;">
-          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">KATA LALUAN</label>
-          <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+        <div class="form-group" style="margin-bottom: 26px;">
+          <label class="form-label" for="login-password">PASSWORD</label>
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
         </div>
 
-        <button type="submit" id="login-btn-submit" class="btn btn-accent" style="width: 100%;">
-          🔐 Log Masuk
+        <button type="submit" id="login-btn-submit" class="btn-submit">
+          🔐 Sign In
         </button>
       </form>
 
-      <div style="text-align: center; margin-top: 24px;">
-        <a href="index.html" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">← Kembali ke Laman Utama</a>
+      <div style="text-align: center; margin-top: 28px;">
+        <a href="index.html" class="back-home-link">← Back to Homepage</a>
       </div>
     </div>
   </div>
@@ -115,7 +227,7 @@
       e.preventDefault();
       
       submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Memproses...';
+      submitBtn.innerHTML = 'Processing...';
       errorBox.style.display = 'none';
 
       const email = document.getElementById('login-email').value.trim();
@@ -133,11 +245,11 @@
         window.location.href = 'admin.html';
       } catch (err) {
         console.error('Login error:', err);
-        errorBox.textContent = 'E-mel atau kata laluan tidak sah. Sila cuba lagi.';
+        errorBox.textContent = 'Invalid email address or password. Please try again.';
         errorBox.style.display = 'block';
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '🔐 Log Masuk';
+        submitBtn.innerHTML = '🔐 Sign In';
       }
     });
   </script>

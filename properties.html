@@ -1,85 +1,66 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Senarai Hartanah — Zaim Rosli (REN39575)</title>
-  <meta name="description" content="Koleksi hartanah untuk dijual dan disewa di Kuala Lumpur, Selangor dan Pulau Pinang.">
+  <title>Property Portfolio — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Search & filter premium residential properties for sale and rent in Kuala Lumpur & Selangor.">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .filter-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      margin-bottom: 40px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .filter-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr auto;
-      gap: 16px;
-      align-items: flex-end;
-    }
-
-    @media (max-width: 992px) {
-      .filter-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .filter-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
 </head>
 <body>
 
-  <!-- Site Header -->
+  <!-- Site Navigation Header -->
   <header class="site-header">
     <div class="container nav-wrapper">
       <a href="index.html" class="logo">
         <span class="logo-main">ZAIM<span>ROSLI</span></span>
-        <span class="logo-sub">Perunding Hartanah Berdaftar</span>
+        <span class="logo-sub">REGISTERED REAL ESTATE PORTAL</span>
       </a>
 
       <ul class="nav-links">
-        <li><a href="index.html" class="nav-link">Utama</a></li>
-        <li><a href="about.html" class="nav-link">Tentang Zaim</a></li>
-        <li><a href="properties.html" class="nav-link active">Senarai Hartanah</a></li>
-        <li><a href="services.html" class="nav-link">Perkhidmatan</a></li>
-        <li><a href="calculator.html" class="nav-link">Kalkulator</a></li>
-        <li><a href="blog.html" class="nav-link">Artikel</a></li>
-        <li><a href="contact.html" class="nav-link">Hubungi</a></li>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Zaim</a></li>
+        <li><a href="properties.html" class="nav-link active">Properties</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="calculator.html" class="nav-link">Calculators</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+        <li><a href="faq.html" class="nav-link">FAQ</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
 
       <div class="nav-cta">
-        <a href="https://wa.me/60108118559" target="_blank" class="btn btn-whatsapp btn-sm">💬 WhatsApp Direct</a>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        <a href="contact.html" class="btn btn-accent btn-sm">Appointment</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
-  <div class="mobile-overlay" id="mobile-overlay">
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-overlay">
     <div class="mobile-drawer">
       <div class="mobile-drawer-header">
-        <div class="logo"><span class="logo-main">ZAIM<span>ROSLI</span></span><span class="logo-sub">REN39575</span></div>
-        <button class="mobile-drawer-close" id="mobile-drawer-close">&times;</button>
+        <div class="logo">
+          <span class="logo-main">ZAIM<span>ROSLI</span></span>
+          <span class="logo-sub">REN39575</span>
+        </div>
+        <button class="mobile-drawer-close">&times;</button>
       </div>
+
       <ul class="mobile-drawer-links">
-        <li><a href="index.html" class="mobile-drawer-link">🏠 Laman Utama</a></li>
-        <li><a href="about.html" class="mobile-drawer-link">👤 Tentang Zaim</a></li>
-        <li><a href="properties.html" class="mobile-drawer-link active">🏢 Senarai Hartanah</a></li>
-        <li><a href="services.html" class="mobile-drawer-link">🛠️ Perkhidmatan</a></li>
-        <li><a href="calculator.html" class="mobile-drawer-link">🧮 Kalkulator Legal Fee</a></li>
-        <li><a href="blog.html" class="mobile-drawer-link">📰 Panduan & Artikel</a></li>
-        <li><a href="testimonials.html" class="mobile-drawer-link">⭐ Testimoni Klien</a></li>
-        <li><a href="faq.html" class="mobile-drawer-link">❓ Soalan Lazim FAQ</a></li>
-        <li><a href="contact.html" class="mobile-drawer-link">📞 Hubungi Kami</a></li>
+        <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+        <li><a href="about.html" class="mobile-drawer-link">About Zaim</a></li>
+        <li><a href="properties.html" class="mobile-drawer-link active">Properties</a></li>
+        <li><a href="services.html" class="mobile-drawer-link">Services</a></li>
+        <li><a href="calculator.html" class="mobile-drawer-link">Calculators</a></li>
+        <li><a href="blog.html" class="mobile-drawer-link">Blog</a></li>
+        <li><a href="testimonials.html" class="mobile-drawer-link">Testimonials</a></li>
+        <li><a href="faq.html" class="mobile-drawer-link">FAQ</a></li>
+        <li><a href="contact.html" class="mobile-drawer-link">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -87,65 +68,68 @@
   <!-- Page Hero Banner -->
   <section class="page-hero">
     <div class="container">
-      <h1>Katalok <span>Hartanah</span></h1>
-      <p>Cari unit kediaman idaman anda mengikut negeri, lokasi, jenis hartanah dan julat harga.</p>
+      <h1>Property Portfolio & <span>Available Homes</span></h1>
+      <p>Browse verified luxury residential listings for sale and rent across Kuala Lumpur & Selangor.</p>
     </div>
   </section>
 
-  <!-- Main Listings & Filter Section -->
-  <section class="section">
+  <!-- Search & Filter Controls -->
+  <section class="section" style="padding-top: 40px; padding-bottom: 30px;">
     <div class="container">
-      <!-- Filter Bar -->
-      <div class="filter-card">
-        <form id="filter-form" onsubmit="event.preventDefault(); applyFilter();">
-          <div class="filter-grid">
-            <div class="form-group">
-              <label>Kata Kunci / Lokasi</label>
-              <input type="text" id="filter-keyword" placeholder="Cari nama projek, lokasi atau bandar..." class="form-control">
-            </div>
-
-            <div class="form-group">
-              <label>Status</label>
-              <select id="filter-status" class="form-control">
-                <option value="">Semua Status</option>
-                <option value="sale">Untuk Dijual (FOR SALE)</option>
-                <option value="rent">Untuk Disewa (FOR RENT)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Negeri</label>
-              <select id="filter-region" class="form-control">
-                <option value="">Semua Negeri</option>
-                <option value="Kuala Lumpur">Kuala Lumpur</option>
-                <option value="Selangor">Selangor</option>
-                <option value="Pulau Pinang">Pulau Pinang</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Jenis Hartanah</label>
-              <select id="filter-type" class="form-control">
-                <option value="">Semua Jenis</option>
-                <option value="Kondominium">Kondominium</option>
-                <option value="Teres">Teres</option>
-                <option value="Banglo">Banglo</option>
-                <option value="Semi-D">Semi-D</option>
-                <option value="Studio">Studio</option>
-                <option value="Townhouse">Townhouse</option>
-              </select>
-            </div>
-
-            <div>
-              <button type="submit" class="btn btn-accent" style="width: 100%;">Tapis</button>
-            </div>
+      <div style="background: #ffffff; padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+        <div class="filter-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 14px; align-items: center;">
+          <div>
+            <label style="display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase;">SEARCH KEYWORD</label>
+            <input type="text" id="filter-search" placeholder="Search title or location..." style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
           </div>
-        </form>
+          <div>
+            <label style="display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase;">PROPERTY TYPE</label>
+            <select id="filter-type" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
+              <option value="">All Types</option>
+              <option value="Condominium">Condominium</option>
+              <option value="Terrace House">Terrace House</option>
+              <option value="Bungalow">Bungalow</option>
+              <option value="Semi-D">Semi-D</option>
+              <option value="Studio Suite">Studio Suite</option>
+              <option value="Townhouse">Townhouse</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase;">REGION</label>
+            <select id="filter-region" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
+              <option value="">All Regions</option>
+              <option value="Kuala Lumpur">Kuala Lumpur</option>
+              <option value="Selangor">Selangor</option>
+              <option value="Penang">Penang</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase;">STATUS</label>
+            <select id="filter-status" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
+              <option value="">All Status</option>
+              <option value="sale">For Sale</option>
+              <option value="rent">For Rent</option>
+            </select>
+          </div>
+          <button type="button" id="filter-reset-btn" class="btn btn-outline btn-sm" style="margin-top: 18px; height: 46px;">
+            🔄 Reset
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Properties Grid Section -->
+  <section class="section" style="padding-top: 10px;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <div style="font-size: 0.95rem; color: var(--text-muted); font-weight: 600;">
+          Showing <span id="results-count" style="color: var(--accent-gold); font-weight: 800;">0</span> properties
+        </div>
       </div>
 
-      <!-- Properties Results Grid -->
-      <div id="properties-results-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px;">
-        <!-- Dynamically rendered -->
+      <div id="properties-results-grid" class="properties-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+        <!-- Rendered by JS -->
       </div>
     </div>
   </section>
@@ -154,8 +138,8 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <div>&copy; 2026 Zaim Rosli Real Estate. Hak Cipta Terpelihara.</div>
-        <div>Perunding Hartanah Berdaftar REN39575</div>
+        <div>&copy; 2026 Zaim Rosli Real Estate. All Rights Reserved.</div>
+        <div>LPPEH Registered Real Estate Negotiator REN39575</div>
       </div>
     </div>
   </footer>
@@ -164,47 +148,61 @@
   <script src="app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Parse URL parameters if any
+      const grid = document.getElementById('properties-results-grid');
+      const countEl = document.getElementById('results-count');
+      const searchInput = document.getElementById('filter-search');
+      const typeSelect = document.getElementById('filter-type');
+      const regionSelect = document.getElementById('filter-region');
+      const statusSelect = document.getElementById('filter-status');
+      const resetBtn = document.getElementById('filter-reset-btn');
+
+      // Check URL query parameters
       const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has('region')) document.getElementById('filter-region').value = urlParams.get('region');
-      if (urlParams.has('type')) document.getElementById('filter-type').value = urlParams.get('type');
-      if (urlParams.has('status')) document.getElementById('filter-status').value = urlParams.get('status');
-      
-      applyFilter();
-    });
+      if (urlParams.get('q')) searchInput.value = urlParams.get('q');
+      if (urlParams.get('type')) typeSelect.value = urlParams.get('type');
+      if (urlParams.get('status')) statusSelect.value = urlParams.get('status');
 
-    function applyFilter() {
-      const keyword = document.getElementById('filter-keyword').value.toLowerCase().trim();
-      const status = document.getElementById('filter-status').value;
-      const region = document.getElementById('filter-region').value;
-      const type = document.getElementById('filter-type').value;
+      function filterAndRender() {
+        const q = searchInput.value.toLowerCase().trim();
+        const type = typeSelect.value;
+        const region = regionSelect.value;
+        const status = statusSelect.value;
 
-      const filtered = PROPERTIES_DATA.filter(item => {
-        if (status && item.status !== status) return false;
-        if (region && item.region !== region) return false;
-        if (type && item.type !== type) return false;
-        if (keyword) {
-          const matchTitle = item.title.toLowerCase().includes(keyword);
-          const matchLoc = item.location.toLowerCase().includes(keyword);
-          const matchDesc = item.description.toLowerCase().includes(keyword);
-          if (!matchTitle && !matchLoc && !matchDesc) return false;
+        const filtered = PROPERTIES_DATA.filter(item => {
+          const matchQ = !q || item.title.toLowerCase().includes(q) || item.location.toLowerCase().includes(q);
+          const matchType = !type || item.type === type;
+          const matchRegion = !region || item.region === region;
+          const matchStatus = !status || item.status === status;
+          return matchQ && matchType && matchRegion && matchStatus;
+        });
+
+        countEl.textContent = filtered.length;
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--text-muted);">
+            <h3>No properties found matching your search filters.</h3>
+            <p>Try resetting filters or adjusting search keywords.</p>
+          </div>`;
+        } else {
+          grid.innerHTML = filtered.map(item => createPropertyCardHTML(item)).join('');
         }
-        return true;
+      }
+
+      [searchInput, typeSelect, regionSelect, statusSelect].forEach(el => {
+        el.addEventListener('input', filterAndRender);
+        el.addEventListener('change', filterAndRender);
       });
 
-      const grid = document.getElementById('properties-results-grid');
-      if (filtered.length === 0) {
-        grid.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: #fff; border-radius: var(--radius-lg); border: 2px dashed var(--border-color);">
-            <div style="font-size: 3rem; margin-bottom: 14px;">🔍</div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 8px;">Tiada Hartanah Ditemui</h3>
-            <p style="color: var(--text-muted);">Sila ubah atau set semula kriteria carian penapis anda.</p>
-          </div>
-        `;
-      } else {
-        grid.innerHTML = filtered.map(item => createPropertyCardHTML(item)).join('');
-      }
-    }
+      resetBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        typeSelect.value = '';
+        regionSelect.value = '';
+        statusSelect.value = '';
+        filterAndRender();
+      });
+
+      filterAndRender();
+    });
   </script>
 </body>
 </html>

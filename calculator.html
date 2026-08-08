@@ -1,93 +1,87 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator Hartanah & Legal Fee — Zaim Rosli (REN39575)</title>
-  <meta name="description" content="Kalkulator pembiayaan bank, yuran peguam SPA, duti setem MOT dan kos awal pembeli hartanah Malaysia.">
+  <title>Real Estate Financial Calculator — Zaim Rosli (REN39575)</title>
+  <meta name="description" content="Calculate home loan monthly installments, SPA legal fees, MOT stamp duty, and entry costs for property purchases in Malaysia.">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .calc-container-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 36px;
-      box-shadow: var(--shadow-md);
-    }
-
     .calc-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 36px;
     }
-
-    .calc-box {
-      background: var(--bg-alt);
+    .calc-card {
+      background: #ffffff;
+      padding: 36px;
+      border-radius: var(--radius-lg);
       border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      text-align: center;
+      box-shadow: var(--shadow-sm);
     }
-
-    .calc-box-num {
-      font-family: var(--font-heading);
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--accent-gold);
-      margin-top: 4px;
-    }
-
-    @media (max-width: 992px) {
-      .calc-grid {
-        grid-template-columns: 1fr;
-      }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.95rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Site Header -->
+  <!-- Site Navigation Header -->
   <header class="site-header">
     <div class="container nav-wrapper">
       <a href="index.html" class="logo">
         <span class="logo-main">ZAIM<span>ROSLI</span></span>
-        <span class="logo-sub">Perunding Hartanah Berdaftar</span>
+        <span class="logo-sub">REGISTERED REAL ESTATE PORTAL</span>
       </a>
 
       <ul class="nav-links">
-        <li><a href="index.html" class="nav-link">Utama</a></li>
-        <li><a href="about.html" class="nav-link">Tentang Zaim</a></li>
-        <li><a href="properties.html" class="nav-link">Senarai Hartanah</a></li>
-        <li><a href="services.html" class="nav-link">Perkhidmatan</a></li>
-        <li><a href="calculator.html" class="nav-link active">Kalkulator</a></li>
-        <li><a href="blog.html" class="nav-link">Artikel</a></li>
-        <li><a href="contact.html" class="nav-link">Hubungi</a></li>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Zaim</a></li>
+        <li><a href="properties.html" class="nav-link">Properties</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="calculator.html" class="nav-link active">Calculators</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+        <li><a href="faq.html" class="nav-link">FAQ</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
 
       <div class="nav-cta">
-        <a href="https://wa.me/60108118559" target="_blank" class="btn btn-whatsapp btn-sm">💬 WhatsApp Direct</a>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        <a href="contact.html" class="btn btn-accent btn-sm">Appointment</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
-  <div class="mobile-overlay" id="mobile-overlay">
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-overlay">
     <div class="mobile-drawer">
       <div class="mobile-drawer-header">
-        <div class="logo"><span class="logo-main">ZAIM<span>ROSLI</span></span><span class="logo-sub">REN39575</span></div>
-        <button class="mobile-drawer-close" id="mobile-drawer-close">&times;</button>
+        <div class="logo">
+          <span class="logo-main">ZAIM<span>ROSLI</span></span>
+          <span class="logo-sub">REN39575</span>
+        </div>
+        <button class="mobile-drawer-close">&times;</button>
       </div>
+
       <ul class="mobile-drawer-links">
-        <li><a href="index.html" class="mobile-drawer-link">🏠 Laman Utama</a></li>
-        <li><a href="about.html" class="mobile-drawer-link">👤 Tentang Zaim</a></li>
-        <li><a href="properties.html" class="mobile-drawer-link">🏢 Senarai Hartanah</a></li>
-        <li><a href="services.html" class="mobile-drawer-link">🛠️ Perkhidmatan</a></li>
-        <li><a href="calculator.html" class="mobile-drawer-link active">🧮 Kalkulator Legal Fee</a></li>
-        <li><a href="blog.html" class="mobile-drawer-link">📰 Panduan & Artikel</a></li>
-        <li><a href="testimonials.html" class="mobile-drawer-link">⭐ Testimoni Klien</a></li>
-        <li><a href="faq.html" class="mobile-drawer-link">❓ Soalan Lazim FAQ</a></li>
-        <li><a href="contact.html" class="mobile-drawer-link">📞 Hubungi Kami</a></li>
+        <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+        <li><a href="about.html" class="mobile-drawer-link">About Zaim</a></li>
+        <li><a href="properties.html" class="mobile-drawer-link">Properties</a></li>
+        <li><a href="services.html" class="mobile-drawer-link">Services</a></li>
+        <li><a href="calculator.html" class="mobile-drawer-link active">Calculators</a></li>
+        <li><a href="blog.html" class="mobile-drawer-link">Blog</a></li>
+        <li><a href="testimonials.html" class="mobile-drawer-link">Testimonials</a></li>
+        <li><a href="faq.html" class="mobile-drawer-link">FAQ</a></li>
+        <li><a href="contact.html" class="mobile-drawer-link">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -95,84 +89,96 @@
   <!-- Page Hero Banner -->
   <section class="page-hero">
     <div class="container">
-      <h1>Kalkulator <span>Hartanah Malaysia</span></h1>
-      <p>Kira anggaran bayaran bulanan bank serta pecahan yuran guaman SPA & MOT stamp duty dengan tepat.</p>
+      <h1>Mortgage & <span>Legal Fee Calculator</span></h1>
+      <p>Calculate estimated monthly installments, SPA legal fees, MOT stamp duty, and upfront cash required.</p>
     </div>
   </section>
 
-  <!-- Calculator Tool Section -->
+  <!-- Calculator Section -->
   <section class="section">
     <div class="container">
-      <div class="calc-container-card">
-        <div class="calc-grid">
+      
+      <div class="calc-grid">
+        
+        <!-- Input Form -->
+        <div class="calc-card">
+          <h3 style="font-size: 1.3rem; margin-bottom: 20px;">Financial Inputs</h3>
+          
+          <div style="margin-bottom: 18px;">
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">PROPERTY PRICE (RM)</label>
+            <input type="number" id="calc-price" value="650000" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 1rem;">
+          </div>
 
-          <!-- Inputs -->
-          <div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 24px;">Maklumat Hartanah & Pembiayaan</h3>
-
-            <div class="form-group" style="margin-bottom: 20px;">
-              <label>Harga Hartanah (RM)</label>
-              <input type="number" id="c-price" value="500000" step="10000" class="form-control">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">DOWNPAYMENT (%)</label>
+              <input type="number" id="calc-down" value="10" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 1rem;">
             </div>
-
-            <div class="form-group" style="margin-bottom: 20px;">
-              <label>Peratus Margin Pinjaman (%)</label>
-              <select id="c-margin" class="form-control">
-                <option value="0.9">90% (Rumah Pertama / Kedua)</option>
-                <option value="0.8">80% (Rumah Ketiga)</option>
-                <option value="1.0">100% (Skim Rumah Pertama LPPSA/SJKP)</option>
-              </select>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 20px;">
-              <label>Kadar Faedah Bank (% Setahun)</label>
-              <input type="number" id="c-rate" value="4.2" step="0.1" class="form-control">
-            </div>
-
-            <div class="form-group" style="margin-bottom: 20px;">
-              <label>Tempoh Pinjaman (Tahun)</label>
-              <select id="c-tenure" class="form-control">
-                <option value="35">35 Tahun</option>
-                <option value="30">30 Tahun</option>
-                <option value="25">25 Tahun</option>
-                <option value="20">20 Tahun</option>
-              </select>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">INTEREST RATE (%)</label>
+              <input type="number" step="0.1" id="calc-rate" value="4.2" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 1rem;">
             </div>
           </div>
 
-          <!-- Outputs -->
-          <div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 24px;">Keputusan Pengiraan</h3>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
-              <div class="calc-box">
-                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">ANGGARAN ANGSURAN BULANAN</div>
-                <div id="res-monthly" class="calc-box-num">RM 0</div>
-              </div>
-              <div class="calc-box">
-                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">JUMLAH KOS MASUK (ENTRY)</div>
-                <div id="res-entry-total" class="calc-box-num">RM 0</div>
-              </div>
-            </div>
-
-            <div style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px;">
-              <h4 style="font-size: 0.95rem; margin-bottom: 14px;">Pecahan Yuran Guaman & Duti Setem:</h4>
-              <div style="font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px;">
-                <div style="display:flex;justify-content:space-between;"><span>SPA Legal Fee:</span><strong id="res-spa">RM 0</strong></div>
-                <div style="display:flex;justify-content:space-between;"><span>MOT Stamp Duty:</span><strong id="res-mot">RM 0</strong></div>
-                <div style="display:flex;justify-content:space-between;"><span>Loan Legal Fee:</span><strong id="res-loan-legal">RM 0</strong></div>
-                <div style="display:flex;justify-content:space-between;"><span>Loan Stamp Duty:</span><strong id="res-loan-stamp">RM 0</strong></div>
-                <div style="display:flex;justify-content:space-between;"><span>Valuation Fee:</span><strong id="res-valuation">RM 0</strong></div>
-              </div>
-            </div>
-
-            <a id="btn-share-calc" href="#" target="_blank" class="btn btn-whatsapp" style="width: 100%; margin-top: 20px;">
-              📲 Hantar Hasil Pengiraan ke WhatsApp Zaim
-            </a>
+          <div style="margin-bottom: 24px;">
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">LOAN TENURE (YEARS)</label>
+            <select id="calc-tenure" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 1rem;">
+              <option value="35" selected>35 Years</option>
+              <option value="30">30 Years</option>
+              <option value="25">25 Years</option>
+              <option value="20">20 Years</option>
+            </select>
           </div>
 
+          <button type="button" id="calc-run-btn" class="btn btn-accent" style="width: 100%;">
+            🧮 Calculate Financial Breakdown
+          </button>
         </div>
+
+        <!-- Output Results Card -->
+        <div class="calc-card" style="background: var(--bg-alt);">
+          <h3 style="font-size: 1.3rem; margin-bottom: 20px;">Estimated Cost Breakdown</h3>
+          
+          <div style="background: #ffffff; padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 20px; text-align: center;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">ESTIMATED MONTHLY INSTALLMENT</div>
+            <div id="res-monthly" style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: var(--accent-gold); margin-top: 4px;">
+              RM 0 / mo
+            </div>
+          </div>
+
+          <div class="result-row">
+            <span>Loan Financing Amount (90%):</span>
+            <strong id="res-loan">RM 0</strong>
+          </div>
+          <div class="result-row">
+            <span>SPA Legal Fees:</span>
+            <strong id="res-spa">RM 0</strong>
+          </div>
+          <div class="result-row">
+            <span>MOT Stamp Duty:</span>
+            <strong id="res-mot">RM 0</strong>
+          </div>
+          <div class="result-row">
+            <span>Loan Facility Legal Fees:</span>
+            <strong id="res-loan-fee">RM 0</strong>
+          </div>
+          <div class="result-row">
+            <span>Loan Facility Stamp Duty:</span>
+            <strong id="res-loan-duty">RM 0</strong>
+          </div>
+          <div class="result-row">
+            <span>Est. Property Valuation Fee:</span>
+            <strong id="res-valuation">RM 0</strong>
+          </div>
+
+          <div style="margin-top: 20px; padding-top: 14px; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; font-size: 1.05rem; font-weight: 800; color: var(--text-main);">
+            <span>TOTAL ESTIMATED CASH REQUIRED:</span>
+            <span id="res-total-cash" style="color: var(--accent-gold);">RM 0</span>
+          </div>
+        </div>
+
       </div>
+
     </div>
   </section>
 
@@ -180,8 +186,8 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom">
-        <div>&copy; 2026 Zaim Rosli Real Estate. Hak Cipta Terpelihara.</div>
-        <div>Perunding Hartanah Berdaftar REN39575</div>
+        <div>&copy; 2026 Zaim Rosli Real Estate. All Rights Reserved.</div>
+        <div>LPPEH Registered Real Estate Negotiator REN39575</div>
       </div>
     </div>
   </footer>
@@ -190,51 +196,52 @@
   <script src="app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const inputs = ['c-price', 'c-margin', 'c-rate', 'c-tenure'];
-      inputs.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('input', runCalculation);
-      });
+      const priceIn = document.getElementById('calc-price');
+      const downIn = document.getElementById('calc-down');
+      const rateIn = document.getElementById('calc-rate');
+      const tenureIn = document.getElementById('calc-tenure');
+      const runBtn = document.getElementById('calc-run-btn');
 
-      runCalculation();
-    });
+      function calculate() {
+        const price = parseFloat(priceIn.value) || 0;
+        const downPct = parseFloat(downIn.value) || 0;
+        const annualRate = parseFloat(rateIn.value) || 0;
+        const tenureYears = parseInt(tenureIn.value) || 35;
 
-    function runCalculation() {
-      const price = parseFloat(document.getElementById('c-price').value) || 0;
-      const margin = parseFloat(document.getElementById('c-margin').value) || 0.9;
-      const rate = parseFloat(document.getElementById('c-rate').value) || 4.2;
-      const years = parseInt(document.getElementById('c-tenure').value) || 35;
+        const downpayment = price * (downPct / 100);
+        const loanAmount = price - downpayment;
 
-      const loanAmt = price * margin;
-      const r = (rate / 100) / 12;
-      const n = years * 12;
+        // Monthly installment formula PMT
+        const monthlyRate = (annualRate / 100) / 12;
+        const totalPayments = tenureYears * 12;
+        let monthlyPMT = 0;
+        if (monthlyRate > 0) {
+          monthlyPMT = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalPayments)) / (Math.pow(1 + monthlyRate, totalPayments) - 1);
+        } else {
+          monthlyPMT = loanAmount / totalPayments;
+        }
 
-      // Monthly Repayment formula
-      let monthly = 0;
-      if (r > 0 && n > 0 && loanAmt > 0) {
-        monthly = (loanAmt * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+        const spaFee = calcSPALegalFee(price);
+        const motDuty = calcMOTStampDuty(price);
+        const loanFee = calcLoanLegalFee(loanAmount);
+        const loanDuty = calcLoanStampDuty(loanAmount);
+        const valuation = calcValuationFee(price);
+
+        const totalUpfrontCash = downpayment + spaFee + motDuty + loanFee + loanDuty + valuation;
+
+        document.getElementById('res-monthly').textContent = `RM ${Math.round(monthlyPMT).toLocaleString()} / mo`;
+        document.getElementById('res-loan').textContent = `RM ${Math.round(loanAmount).toLocaleString()}`;
+        document.getElementById('res-spa').textContent = `RM ${spaFee.toLocaleString()}`;
+        document.getElementById('res-mot').textContent = `RM ${motDuty.toLocaleString()}`;
+        document.getElementById('res-loan-fee').textContent = `RM ${loanFee.toLocaleString()}`;
+        document.getElementById('res-loan-duty').textContent = `RM ${loanDuty.toLocaleString()}`;
+        document.getElementById('res-valuation').textContent = `RM ${valuation.toLocaleString()}`;
+        document.getElementById('res-total-cash').textContent = `RM ${Math.round(totalUpfrontCash).toLocaleString()}`;
       }
 
-      const spa = calcSPALegalFee(price);
-      const mot = calcMOTStampDuty(price);
-      const loanLegal = calcLoanLegalFee(loanAmt);
-      const loanStamp = calcLoanStampDuty(loanAmt);
-      const valuation = calcValuationFee(price);
-
-      const totalEntry = spa + mot + loanLegal + loanStamp + valuation;
-
-      document.getElementById('res-monthly').textContent = formatCurrency(Math.round(monthly));
-      document.getElementById('res-entry-total').textContent = formatCurrency(totalEntry);
-
-      document.getElementById('res-spa').textContent = formatCurrency(spa);
-      document.getElementById('res-mot').textContent = formatCurrency(mot);
-      document.getElementById('res-loan-legal').textContent = formatCurrency(loanLegal);
-      document.getElementById('res-loan-stamp').textContent = formatCurrency(loanStamp);
-      document.getElementById('res-valuation').textContent = formatCurrency(valuation);
-
-      const msg = encodeURIComponent(`Salam Zaim, saya nak khidmat nasihat untuk pengiraan hartanah harga ${formatCurrency(price)}.\n- Anggaran Bayaran Bulanan: ${formatCurrency(Math.round(monthly))}\n- Anggaran Yuran Masuk SPA & MOT: ${formatCurrency(totalEntry)}\n\nBoleh bantu nasihat lanjut?`);
-      document.getElementById('btn-share-calc').href = `https://wa.me/60108118559?text=${msg}`;
-    }
+      runBtn.addEventListener('click', calculate);
+      calculate();
+    });
   </script>
 </body>
 </html>
