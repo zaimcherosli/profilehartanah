@@ -192,3 +192,17 @@ try {
     }
   }
 } catch (e) {}
+
+// Async sync with Cloudflare KV Server-side API
+(async function initCloudflareKVSync() {
+  try {
+    const res = await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/properties');
+    const remoteList = await res.json();
+    if (Array.isArray(remoteList) && remoteList.length > 0) {
+      PROPERTIES_DATA.length = 0;
+      PROPERTIES_DATA.push(...remoteList);
+      localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(remoteList));
+      window.dispatchEvent(new Event('properties-updated'));
+    }
+  } catch(e) {}
+})();

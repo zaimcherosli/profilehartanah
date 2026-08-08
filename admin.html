@@ -311,7 +311,18 @@
       window.location.href = 'login.html?logout=true';
     }
 
-    function loadPropertiesList() {
+    async function loadPropertiesList() {
+      try {
+        const res = await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/properties');
+        const remoteData = await res.json();
+        if (Array.isArray(remoteData) && remoteData.length > 0) {
+          currentProperties = remoteData;
+          localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(remoteData));
+          renderTable();
+          return;
+        }
+      } catch(e) {}
+
       const stored = localStorage.getItem('ZAIM_ROSLI_PROPERTIES');
       if (stored) {
         try {
@@ -445,20 +456,49 @@
       closeModal();
     }
 
-    function saveToStorage() {
+    async function saveToStorage() {
       localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(currentProperties));
+      try {
+        await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/properties', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(currentProperties)
+        });
+      } catch (e) {
+        console.error('KV save error:', e);
+      }
     }
 
-    function handleImageUpload(e) {
+    async function handleImageUpload(e) {
       const files = Array.from(e.target.files);
-      files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          uploadedImageUrls.push(ev.target.result);
-          rebuildImageThumbsGrid();
-        };
-        reader.readAsDataURL(file);
-      });
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append('file', file);
+        try {
+          const res = await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/upload', {
+            method: 'POST',
+            body: formData
+          });
+          const data = await res.json();
+          if (data.url) {
+            uploadedImageUrls.push(data.url);
+          } else {
+            throw new Error('No URL returned');
+          }
+        } catch (err) {
+          console.error('Cloudflare R2 Upload error:', err);
+          // Fallback to FileReader DataURL
+          await new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+              uploadedImageUrls.push(ev.target.result);
+              resolve();
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+      }
+      rebuildImageThumbsGrid();
     }
 
     function rebuildImageThumbsGrid() {
