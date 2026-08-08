@@ -231,7 +231,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     list.forEach(item => {
-      const waText = encodeURIComponent(`Hi ${globalAgentName}, saya berminat dengan ${item.title} (${item.priceStr}) di ${item.location}. Boleh berikan butiran lanjut?`);
+      const propSlug = item.slug || item.id || '';
+      const itemUrl = `https://zaimrosli.my/property-detail/${propSlug}`;
+      const waText = encodeURIComponent(`Hi ${globalAgentName}, saya berminat dengan ${item.title} (${item.priceStr}) di ${item.location}.\n\nLink Listing: ${itemUrl}\n\nBoleh berikan butiran lanjut?`);
       
       // Support multiple images separated by comma
       const images = item.image.split(',').map(img => img.trim()).filter(img => img);
