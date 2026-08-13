@@ -16,6 +16,7 @@ const PROPERTIES_DATA = [
     "landSize": "2.1157 Acres",
     "tenure": "Freehold",
     "lotType": "Non-Bumi Lot",
+    "refUrl": "https://propmall.co/share/eezmfo1hta",
     "image": "https://cdn.propmall.net/media/img-property/list-146291/list-146291-01-69eb366f39d399.50503260.jpg",
     "images": [
       "https://cdn.propmall.net/media/img-property/list-146291/list-146291-01-69eb366f39d399.50503260.jpg"

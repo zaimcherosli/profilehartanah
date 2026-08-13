@@ -1139,6 +1139,11 @@
         </div>
 
         <div class="form-group">
+          <label for="form-ref-url">Pautan Rujukan / Referral Link (e.g. PropMall)</label>
+          <input type="url" id="form-ref-url" placeholder="https://propmall.co/share/eezmfo1hta">
+        </div>
+
+        <div class="form-group">
           <label>Gambar Hartanah</label>
           <div id="image-upload-area" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 16px; background: #f8fafc; margin-bottom: 10px;">
             <div id="image-thumbs-grid" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;"></div>
@@ -1427,7 +1432,7 @@
     }
 
     function convertToCSV(array) {
-      const headers = ['id', 'title', 'price', 'priceStr', 'location', 'region', 'type', 'status', 'beds', 'baths', 'parking', 'size', 'landSize', 'tenure', 'lotType', 'image', 'description'];
+      const headers = ['id', 'title', 'price', 'priceStr', 'location', 'region', 'type', 'status', 'beds', 'baths', 'parking', 'size', 'landSize', 'tenure', 'lotType', 'refUrl', 'image', 'description'];
       const rows = [headers.join(',')];
       
       array.forEach(item => {
@@ -1512,6 +1517,7 @@
         
         // Simple preview of the first image
         const imgUrl = item.image.split(',')[0].trim() || 'images/hero_bg.png';
+        const refLinkHtml = item.refUrl ? `<a href="${item.refUrl}" target="_blank" class="btn-ref-link" style="display:inline-flex; align-items:center; gap:4px; background:#f1f5f9; color:#0f172a; padding:4px 10px; border-radius:6px; font-size:0.75rem; text-decoration:none; font-weight:600; border:1px solid #cbd5e1; margin-top:6px;">🔗 Pautan Rujukan (PropMall)</a>` : '';
 
         div.innerHTML = `
           <img src="${imgUrl}" class="listing-thumb" alt="${item.title}" onerror="this.src='images/hero_bg.png'">
@@ -1529,6 +1535,7 @@
               <span>•</span>
               <span>${item.beds} Bilik / ${item.baths} B.Air / ${item.size} sqft</span>
             </div>
+            ${refLinkHtml}
           </div>
           <div class="listing-actions">
             <button class="btn-action edit" onclick="openEditModal(${index})" title="Edit Hartanah">
@@ -1593,6 +1600,7 @@
       document.getElementById('form-prop-landSize').value = item.landSize || '';
       document.getElementById('form-prop-tenure').value = item.tenure || 'Freehold';
       document.getElementById('form-prop-lotType').value = item.lotType || 'Bumi Lot';
+      document.getElementById('form-ref-url').value = item.refUrl || '';
       document.getElementById('form-prop-image').value = item.image || '';
       document.getElementById('form-prop-description').value = item.description || '';
       autoResizeTextarea();
@@ -1622,6 +1630,7 @@
       // Reset images for new property
       uploadedImageUrls = [];
       rebuildImageThumbsGrid();
+      document.getElementById('form-ref-url').value = '';
       document.getElementById('form-prop-image').value = '';
       document.getElementById('form-prop-description').value = '';
       autoResizeTextarea();
@@ -1664,6 +1673,7 @@
         landSize: document.getElementById('form-prop-landSize').value.trim(),
         tenure: document.getElementById('form-prop-tenure').value,
         lotType: document.getElementById('form-prop-lotType').value,
+        refUrl: document.getElementById('form-ref-url').value.trim(),
         image: imageValue,
         description: document.getElementById('form-prop-description').value.trim()
       };
