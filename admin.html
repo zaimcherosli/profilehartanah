@@ -524,11 +524,11 @@
   <header class="site-header">
     <div class="container nav-wrapper" style="display: flex; justify-content: space-between; align-items: center; height: 80px;">
       <a href="index.html" class="logo" style="display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; gap:2px;">
-        <span class="logo-main">ZAIM<span>ROSLI</span></span>
-        <div style="display:flex; align-items:center; gap:8px; margin-top:2px; flex-wrap:wrap;">
-          <span class="logo-sub" style="margin:0;">PORTAL EJEN (ADMIN)</span>
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <span class="logo-main">ZAIM<span>ROSLI</span></span>
           <span class="badge-version" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; padding: 2px 8px; border-radius: 8px; font-size: 0.65rem; font-weight: 800; border: 1px solid #b45309; box-shadow: 0 1px 4px rgba(217, 119, 6, 0.25);">v2.5.0 • Live KV</span>
         </div>
+        <span class="logo-sub" style="margin-top:2px;">PORTAL EJEN (ADMIN)</span>
       </a>
 
       <div class="user-badge">
@@ -810,8 +810,8 @@
                 <span class="badge-status ${badgeClass}">${badgeText}</span>
                 ${categoryBadge}
                 ${typeBadge}
-                <span class="listing-price-tag">${priceDisplay}</span>
               </div>
+              <div style="font-size:1.1rem; font-weight:800; color:#d97706; margin-top:2px;">${priceDisplay}</div>
               <h3 class="listing-title">${p.title}</h3>
               <div class="listing-meta-row">
                 <span class="meta-chip">📍 ${p.location}</span>
@@ -826,7 +826,6 @@
             <div class="listing-actions-row">
               <button onclick="editProperty(${idx})" class="action-btn" title="Edit Hartanah">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                <span>Edit</span>
               </button>
               <button onclick="deleteProperty(${idx})" class="action-btn delete" title="Padam Hartanah">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
