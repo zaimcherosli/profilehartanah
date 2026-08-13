@@ -142,11 +142,11 @@
                 <div class="spec-label">PROPERTY TYPE</div>
                 <div id="d-type" class="spec-val">-</div>
               </div>
-              <div class="spec-box">
+              <div id="box-beds" class="spec-box">
                 <div class="spec-label">BEDROOMS</div>
                 <div id="d-beds" class="spec-val">-</div>
               </div>
-              <div class="spec-box">
+              <div id="box-baths" class="spec-box">
                 <div class="spec-label">BATHROOMS</div>
                 <div id="d-baths" class="spec-val">-</div>
               </div>
@@ -196,7 +196,7 @@
 
               <hr style="margin: 24px 0; border: none; border-top: 1px solid var(--border-color);">
 
-              <h4 style="font-size: 0.95rem; margin-bottom: 12px;">Estimated Entry Costs (SPA & Stamp Duty)</h4>
+              <h4 id="d-summary-header" style="font-size: 0.95rem; margin-bottom: 12px;">Estimated Entry Costs</h4>
               <div id="d-legal-summary" style="font-size: 0.85rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px;">
                 <!-- Populated dynamically -->
               </div>
@@ -289,8 +289,30 @@
         badge.className = `property-badge ${prop.status === 'sale' ? 'badge-sale' : 'badge-rent'}`;
 
         document.getElementById('d-type').textContent = prop.type;
-        document.getElementById('d-beds').textContent = `${prop.beds} Beds`;
-        document.getElementById('d-baths').textContent = `${prop.baths} Baths`;
+
+        // Hide Bedrooms for Commercial/Industrial properties or if 0
+        const isCommercial = ['Kilang', 'Tanah Industri', 'Kedai / Pejabat', 'Ruang Komersial'].includes(prop.type);
+        const bedsBox = document.getElementById('box-beds');
+        if (bedsBox) {
+          if (isCommercial || !prop.beds || prop.beds === 0) {
+            bedsBox.style.display = 'none';
+          } else {
+            bedsBox.style.display = 'block';
+            document.getElementById('d-beds').textContent = `${prop.beds} Beds`;
+          }
+        }
+
+        // Hide Bathrooms if 0 or missing
+        const bathsBox = document.getElementById('box-baths');
+        if (bathsBox) {
+          if (!prop.baths || prop.baths === 0) {
+            bathsBox.style.display = 'none';
+          } else {
+            bathsBox.style.display = 'block';
+            document.getElementById('d-baths').textContent = `${prop.baths} Baths`;
+          }
+        }
+
         document.getElementById('d-size').textContent = `${prop.size} sqft`;
 
         // Hide Tenure and Lot Type for FOR RENT listings

@@ -804,6 +804,10 @@
         const typeBadge = p.type ? `<span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:6px; font-size:0.72rem; font-weight:700; border:1px solid #bae6fd;">${p.type}</span>` : '';
         const refLinkHtml = p.refUrl ? `<a href="${p.refUrl}" target="_blank" class="btn-ref-link" style="display:inline-flex; align-items:center; gap:5px; background:#f8fafc; color:#0f172a; padding:4px 10px; border-radius:6px; font-size:0.75rem; text-decoration:none; font-weight:600; border:1px solid #cbd5e1; margin-top:4px; width:fit-content;">🔗 Pautan Rujukan (PropMall)</a>` : '';
 
+        const isCommercial = ['Kilang', 'Tanah Industri', 'Kedai / Pejabat', 'Ruang Komersial'].includes(p.type);
+        const bedsChip = (!isCommercial && p.beds > 0) ? `<span class="meta-chip">🛏️ ${p.beds} Bilik</span>` : '';
+        const bathsChip = (p.baths > 0) ? `<span class="meta-chip">🚿 ${p.baths} B.Air</span>` : '';
+
         return `
           <div class="listing-item">
             <img src="${mainImg}" class="listing-thumb" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80'">
@@ -817,8 +821,8 @@
               <h3 class="listing-title">${p.title}</h3>
               <div class="listing-meta-row">
                 <span class="meta-chip">📍 ${p.location}</span>
-                <span class="meta-chip">🛏️ ${p.beds} Bilik</span>
-                <span class="meta-chip">🚿 ${p.baths} B.Air</span>
+                ${bedsChip}
+                ${bathsChip}
                 <span class="meta-chip">📐 Built-up ${p.size} sqft</span>
                 ${p.landSize && p.landSize !== '-' ? `<span class="meta-chip">🌳 Tanah ${p.landSize}</span>` : ''}
               </div>
