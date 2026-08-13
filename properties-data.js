@@ -111,7 +111,7 @@ const PROPERTIES_DATA = [
     "images": [
       "https://cdn.propmall.net/media/img-property/list-146291/list-146291-01-69eb366f39d399.50503260.jpg"
     ],
-    "description": "Factory With Office In Taman Industri Sijangkang Utama, Teluk Panglima Garang For Rent:\n\nFactory/Warehouse Information:\n\nLocation / address : Taman Industri Sijangkang Utama, 42500 Telok Panglima Garang, Daerah Kuala Langat\n\nLand Area : 2.1157 Acres\n\nBuilt Up : 4,683 m2 / 50,407 sqft\n\nDimension : 174.87m x 25.45m / 574 ft x 83.5 ft\n\nOffice Area : 478 m2 / 5,145 sqft\n\nFactory Area: 4,205 m2 / 45,262 sqft\n\nRear Road : 30 ft wide\n\nOpen Space for Front : 50 ft\n\nHeight : 12.2 m / 40 ft\n\nFloor Loading : 4 ton/m2\n\nPower Supply : 1000 amp\n\nLoading Dock : No\n\nFactory Category : Light Industrial\n\nCF/CCC : Obtained\n\nAutomatic Sprinkler System : Yes\n\nNumber of MS. Sliding Door : 8 Nos\n\nCurrent Status: Tenanted\n\nFeatures & Access:\n• Well connected to Port Klang\n• Well kept factory\n• Easy access to Shah Alam Highway (KESAS) and SKVE"
+    "description": "Factory With Office In Taman Industri Sijangkang Utama, Teluk Panglima Garang For Rent"
   }
 ];
 
@@ -120,13 +120,19 @@ const PROPERTIES_DATA = [
   try {
     const res = await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/properties?t=' + Date.now());
     if (res.ok) {
-      const data = await res.json();
+      let data = await res.json();
+      if (typeof data === 'string') {
+        try { data = JSON.parse(data); } catch(e) {}
+      }
       if (Array.isArray(data) && data.length > 0) {
         window.PROPERTIES_DATA = data;
         if (typeof PROPERTIES_DATA !== 'undefined' && Array.isArray(PROPERTIES_DATA)) {
           PROPERTIES_DATA.length = 0;
           PROPERTIES_DATA.push(...data);
         }
+        try {
+          localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(data));
+        } catch(e) {}
         window.dispatchEvent(new CustomEvent('properties-updated', { detail: data }));
       }
     }
