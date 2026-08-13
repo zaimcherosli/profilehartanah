@@ -671,17 +671,19 @@
           <input type="number" id="form-size" class="form-input" placeholder="Contoh: 50407" required>
         </div>
 
-        <div class="form-group" style="margin-bottom: 16px;">
+        <div id="group-tenure" class="form-group" style="margin-bottom: 16px;">
           <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">PEGANGAN</label>
           <select id="form-tenure" class="form-select">
+            <option value="-">- (TIDAK PERLU / FOR RENT)</option>
             <option value="Freehold">Freehold</option>
             <option value="Leasehold">Leasehold</option>
           </select>
         </div>
 
-        <div class="form-group" style="margin-bottom: 16px;">
+        <div id="group-lotType" class="form-group" style="margin-bottom: 16px;">
           <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">LOT TYPE</label>
           <select id="form-lotType" class="form-select">
+            <option value="-">- (TIDAK PERLU / FOR RENT)</option>
             <option value="Non-Bumi Lot">Non-Bumi Lot</option>
             <option value="Bumi Lot">Bumi Lot</option>
             <option value="Open Title">Open Title</option>
@@ -844,6 +846,19 @@
       }
     }
 
+    function toggleTenureLotFields() {
+      const status = document.getElementById('form-status').value;
+      const tenureGroup = document.getElementById('group-tenure');
+      const lotTypeGroup = document.getElementById('group-lotType');
+      if (status === 'rent') {
+        if (tenureGroup) tenureGroup.style.display = 'none';
+        if (lotTypeGroup) lotTypeGroup.style.display = 'none';
+      } else {
+        if (tenureGroup) tenureGroup.style.display = 'block';
+        if (lotTypeGroup) lotTypeGroup.style.display = 'block';
+      }
+    }
+
     function openModal() {
       document.getElementById('prop-form').reset();
       document.getElementById('form-id').value = '';
@@ -853,6 +868,7 @@
       document.getElementById('modal-title').textContent = 'Tambah Hartanah';
       uploadedImageUrls = [];
       rebuildImageThumbsGrid();
+      toggleTenureLotFields();
       document.getElementById('property-modal').style.display = 'flex';
       const saveBar = document.querySelector('.save-bar');
       if (saveBar) saveBar.style.display = 'none';
@@ -879,13 +895,14 @@
       document.getElementById('form-baths').value = p.baths;
       document.getElementById('form-landSize').value = p.landSize || '';
       document.getElementById('form-size').value = p.size;
-      document.getElementById('form-tenure').value = p.tenure;
-      document.getElementById('form-lotType').value = p.lotType;
+      document.getElementById('form-tenure').value = p.tenure || '-';
+      document.getElementById('form-lotType').value = p.lotType || '-';
       document.getElementById('form-ref-url').value = p.refUrl || '';
       document.getElementById('form-description').value = p.description;
 
       uploadedImageUrls = p.image ? p.image.split(',').map(s => s.trim()) : [];
       rebuildImageThumbsGrid();
+      toggleTenureLotFields();
 
       document.getElementById('modal-title').textContent = 'Edit Hartanah';
       document.getElementById('property-modal').style.display = 'flex';
@@ -1164,6 +1181,8 @@
       uploadedImageUrls.splice(idx, 1);
       rebuildImageThumbsGrid();
     }
+
+    document.getElementById('form-status').addEventListener('change', toggleTenureLotFields);
   </script>
   <script src="/pwa.js"></script>
 </body>

@@ -32,6 +32,14 @@
       margin-top: 4px;
     }
   </style>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Zaim Rosli">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>
 
@@ -116,7 +124,7 @@
             </div>
 
             <!-- Photo Gallery Thumbnails Container -->
-            <div id="d-gallery-thumbs" style="display: flex; gap: 10px; overflow-x: auto; margin-bottom: 24px; padding-bottom: 6px;"></div>
+            <div id="d-gallery-thumbs" style="display: flex; gap: 8px; overflow-x: auto; margin-bottom: 20px; padding-bottom: 4px; width: 100%; max-width: 100%; box-sizing: border-box;"></div>
 
             <div class="detail-header-row">
               <div class="detail-title-box">
@@ -146,20 +154,20 @@
                 <div class="spec-label">BUILT-UP SIZE</div>
                 <div id="d-size" class="spec-val">- sqft</div>
               </div>
-              <div class="spec-box">
+              <div id="box-tenure" class="spec-box">
                 <div class="spec-label">TENURE</div>
                 <div id="d-tenure" class="spec-val">-</div>
               </div>
-              <div class="spec-box">
+              <div id="box-lotType" class="spec-box">
                 <div class="spec-label">LOT TYPE</div>
                 <div id="d-lotType" class="spec-val">-</div>
               </div>
             </div>
 
             <!-- Property Description -->
-            <div style="background: #ffffff; padding: 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-top: 24px;">
-              <h3 style="font-size: 1.2rem; margin-bottom: 14px;">Property Description & Highlights</h3>
-              <p id="d-desc" style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; white-space: pre-line;">
+            <div style="background: #ffffff; padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-top: 20px;">
+              <h3 style="font-size: 1.15rem; margin-bottom: 12px;">Property Description & Highlights</h3>
+              <p id="d-desc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; white-space: pre-line;">
                 Description content...
               </p>
             </div>
@@ -167,7 +175,7 @@
 
           <!-- Right Sidebar Contact & Calculation -->
           <div>
-            <div style="background: #ffffff; padding: 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); position: sticky; top: 100px;">
+            <div class="detail-sidebar" style="background: #ffffff; padding: 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); position: sticky; top: 100px;">
               
               <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
                 <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--accent-gold-light); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; color: var(--accent-gold);">
@@ -284,35 +292,71 @@
         document.getElementById('d-beds').textContent = `${prop.beds} Beds`;
         document.getElementById('d-baths').textContent = `${prop.baths} Baths`;
         document.getElementById('d-size').textContent = `${prop.size} sqft`;
-        document.getElementById('d-tenure').textContent = prop.tenure;
-        document.getElementById('d-lotType').textContent = prop.lotType;
+
+        // Hide Tenure and Lot Type for FOR RENT listings
+        const tenureBox = document.getElementById('box-tenure');
+        const lotTypeBox = document.getElementById('box-lotType');
+        if (prop.status === 'rent' || prop.tenure === '-' || !prop.tenure) {
+          if (tenureBox) tenureBox.style.display = 'none';
+        } else {
+          if (tenureBox) tenureBox.style.display = 'block';
+          document.getElementById('d-tenure').textContent = prop.tenure;
+        }
+
+        if (prop.status === 'rent' || prop.lotType === '-' || !prop.lotType) {
+          if (lotTypeBox) lotTypeBox.style.display = 'none';
+        } else {
+          if (lotTypeBox) lotTypeBox.style.display = 'block';
+          document.getElementById('d-lotType').textContent = prop.lotType;
+        }
+
         document.getElementById('d-desc').textContent = prop.description;
 
-        // WhatsApp link
-        const waMsg = encodeURIComponent(`Hi Zaim, I am interested in inquiring about "${prop.title}" (${prop.priceStr}) located in ${prop.location}.`);
+        // WhatsApp link with live page URL included
+        const currentUrl = window.location.href;
+        const waMsg = encodeURIComponent(`Hi Zaim, I am interested in inquiring about "${prop.title}" (${prop.priceStr}) located in ${prop.location}.\n\nListing Link: ${currentUrl}`);
         document.getElementById('d-whatsapp-btn').href = `https://wa.me/60108118559?text=${waMsg}`;
 
-        // Calculate Statutory Legal Fees Breakdown
-        const spaFee = calcSPALegalFee(prop.price);
-        const motDuty = calcMOTStampDuty(prop.price);
-        const loanFee = calcLoanLegalFee(prop.price * 0.9);
-        const loanDuty = calcLoanStampDuty(prop.price * 0.9);
+        // Dynamic Fee Breakdown (Rental vs Subsales)
+        const summaryHeader = document.getElementById('d-summary-header');
+        if (prop.status === 'rent') {
+          if (summaryHeader) summaryHeader.textContent = 'Estimated Rental Deposit Summary';
+          const secDep = prop.price * 2;
+          const utilDep = prop.price * 0.5;
+          const firstMonth = prop.price;
+          document.getElementById('d-legal-summary').innerHTML = `
+            <div style="display:flex; justify-content:space-between;"><span>1st Month Advance Rent:</span> <strong>RM ${firstMonth.toLocaleString()}</strong></div>
+            <div style="display:flex; justify-content:space-between;"><span>2 Months Security Deposit:</span> <strong>RM ${secDep.toLocaleString()}</strong></div>
+            <div style="display:flex; justify-content:space-between;"><span>0.5 Month Utility Deposit:</span> <strong>RM ${utilDep.toLocaleString()}</strong></div>
+            <hr style="margin: 4px 0; border-top: 1px dashed var(--border-color);">
+            <div style="display:flex; justify-content:space-between; font-size: 0.95rem; color: var(--text-main);">
+              <span>Est. Total Move-In Deposit:</span> <strong style="color: var(--accent-gold);">RM ${(firstMonth + secDep + utilDep).toLocaleString()}</strong>
+            </div>
+          `;
+        } else {
+          if (summaryHeader) summaryHeader.textContent = 'Estimated Entry Costs (SPA & Stamp Duty)';
+          const spaFee = calcSPALegalFee(prop.price);
+          const motDuty = calcMOTStampDuty(prop.price);
+          const loanFee = calcLoanLegalFee(prop.price * 0.9);
+          const loanDuty = calcLoanStampDuty(prop.price * 0.9);
 
-        document.getElementById('d-legal-summary').innerHTML = `
-          <div style="display:flex; justify-content:space-between;"><span>SPA Legal Fee:</span> <strong>RM ${spaFee.toLocaleString()}</strong></div>
-          <div style="display:flex; justify-content:space-between;"><span>MOT Stamp Duty:</span> <strong>RM ${motDuty.toLocaleString()}</strong></div>
-          <div style="display:flex; justify-content:space-between;"><span>Loan Legal Fee (90%):</span> <strong>RM ${loanFee.toLocaleString()}</strong></div>
-          <div style="display:flex; justify-content:space-between;"><span>Loan Stamp Duty:</span> <strong>RM ${loanDuty.toLocaleString()}</strong></div>
-          <hr style="margin: 4px 0; border-top: 1px dashed var(--border-color);">
-          <div style="display:flex; justify-content:space-between; font-size: 0.95rem; color: var(--text-main);">
-            <span>Est. Initial Entry Cost:</span> <strong style="color: var(--accent-gold);">RM ${(spaFee + motDuty + loanFee + loanDuty).toLocaleString()}</strong>
-          </div>
-        `;
+          document.getElementById('d-legal-summary').innerHTML = `
+            <div style="display:flex; justify-content:space-between;"><span>SPA Legal Fee:</span> <strong>RM ${spaFee.toLocaleString()}</strong></div>
+            <div style="display:flex; justify-content:space-between;"><span>MOT Stamp Duty:</span> <strong>RM ${motDuty.toLocaleString()}</strong></div>
+            <div style="display:flex; justify-content:space-between;"><span>Loan Legal Fee (90%):</span> <strong>RM ${loanFee.toLocaleString()}</strong></div>
+            <div style="display:flex; justify-content:space-between;"><span>Loan Stamp Duty:</span> <strong>RM ${loanDuty.toLocaleString()}</strong></div>
+            <hr style="margin: 4px 0; border-top: 1px dashed var(--border-color);">
+            <div style="display:flex; justify-content:space-between; font-size: 0.95rem; color: var(--text-main);">
+              <span>Est. Initial Entry Cost:</span> <strong style="color: var(--accent-gold);">RM ${(spaFee + motDuty + loanFee + loanDuty).toLocaleString()}</strong>
+            </div>
+          `;
+        }
       }
 
       renderDetail();
       window.addEventListener('properties-updated', renderDetail);
     });
   </script>
+  <script src="/pwa.js"></script>
 </body>
 </html>
