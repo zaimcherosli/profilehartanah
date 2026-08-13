@@ -4,83 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard | Zaim Rosli Hartanah</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
   <style>
-    /* Premium Clean Light Theme Dashboard */
-    body {
+    html, body {
       background-color: #f8fafc;
       color: #0f172a;
       font-family: 'Inter', sans-serif;
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
     }
 
     .admin-wrapper {
       padding-top: 110px;
       min-height: 100vh;
-      padding-bottom: 80px;
+      padding-bottom: 90px;
     }
 
     /* Header Styling */
-    header {
-      background: rgba(255, 255, 255, 0.9) !important;
+    header.site-header {
+      background: rgba(255, 255, 255, 0.95) !important;
       backdrop-filter: blur(16px) !important;
       -webkit-backdrop-filter: blur(16px) !important;
       border-bottom: 1px solid #e2e8f0 !important;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
     }
 
-    .logo-main {
-      color: #0f172a !important;
-    }
-
-    .logo-sub {
-      color: #64748b !important;
-    }
-
-    /* Container alignment */
     .admin-container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* Page Title Section */
-    .admin-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 18px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .admin-header h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #0f172a;
-      margin: 0;
-    }
-
-    .admin-header h1 span {
-      color: var(--accent);
-    }
-
     .user-badge {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      padding: 6px 14px;
+      padding: 6px 16px;
       border-radius: 100px;
       font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
 
     .user-avatar-placeholder {
-      width: 24px;
-      height: 24px;
-      background: var(--accent);
+      width: 26px;
+      height: 26px;
+      background: #d97706;
       color: #ffffff;
       border-radius: 50%;
       display: flex;
@@ -98,7 +68,7 @@
       cursor: pointer;
       font-size: 0.85rem;
       padding: 0;
-      margin-left: 10px;
+      margin-left: 8px;
       text-decoration: underline;
     }
 
@@ -106,69 +76,8 @@
       color: #dc2626;
     }
 
-    /* Sticky Bottom Save Bar */
-    .save-bar {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 100;
-      display: flex;
-      gap: 12px;
-    }
-
-    .btn-save-all {
-      background: var(--whatsapp);
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.25);
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-save-all:hover {
-      background: var(--whatsapp-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.35);
-    }
-
-    /* Tabs styling */
-    .tab-nav {
-      display: flex;
-      gap: 8px;
-      background: #f1f5f9;
-      padding: 6px;
-      border-radius: 12px;
-      margin-bottom: 35px;
-      width: max-content;
-    }
-
-    .tab-btn {
-      background: none;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #64748b;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .tab-btn.active {
-      background: #ffffff;
-      color: #0f172a;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
+    /* Panel Card */
     .panel {
-      display: none;
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 20px;
@@ -176,12 +85,6 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
     }
 
-    .panel.active {
-      display: block;
-      animation: fadeIn 0.4s ease;
-    }
-
-    /* Visual Listings Grid */
     .listings-header {
       display: flex;
       justify-content: space-between;
@@ -192,6 +95,8 @@
     .listings-header h2 {
       font-size: 1.4rem;
       font-weight: 800;
+      color: #0f172a;
+      margin: 0;
     }
 
     .btn-add {
@@ -203,7 +108,7 @@
       font-weight: 700;
       cursor: pointer;
       font-size: 0.9rem;
-      transition: var(--transition);
+      transition: all 0.2s ease;
     }
 
     .btn-add:hover {
@@ -214,7 +119,7 @@
     .listings-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 16px;
     }
 
     .listing-item {
@@ -224,13 +129,13 @@
       border: 1px solid #e2e8f0;
       border-radius: 16px;
       padding: 16px;
-      transition: var(--transition);
+      transition: all 0.2s ease;
       gap: 20px;
     }
 
     .listing-item:hover {
-      border-color: var(--accent);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02);
+      border-color: #cbd5e1;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
     }
 
     .listing-thumb {
@@ -239,6 +144,7 @@
       border-radius: 10px;
       object-fit: cover;
       background: #f1f5f9;
+      flex-shrink: 0;
     }
 
     .listing-info {
@@ -263,7 +169,7 @@
       text-overflow: ellipsis;
     }
 
-    .badge {
+    .badge-status {
       font-size: 0.75rem;
       font-weight: 700;
       padding: 3px 10px;
@@ -274,792 +180,386 @@
       display: inline-block;
     }
 
-    .badge-sale {
-      background: rgba(212, 175, 55, 0.1);
-      color: #b5902b;
+    .badge-sale-style {
+      background: rgba(217, 119, 6, 0.1);
+      color: #b45309;
     }
 
-    .badge-rent {
-      background: rgba(37, 211, 102, 0.1);
-      color: #20ba5a;
+    .badge-rent-style {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
     }
 
-    .listing-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      font-size: 0.85rem;
+    .listing-sub {
+      font-size: 0.9rem;
       color: #64748b;
+      margin: 0;
     }
 
     .listing-price {
-      font-weight: 700;
+      font-weight: 800;
       color: #0f172a;
     }
 
-    .listing-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn-action {
-      border: 1px solid #e2e8f0;
+    .action-btn {
       background: #ffffff;
-      color: #475569;
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
+      border: 1px solid #e2e8f0;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition);
+      cursor: pointer;
+      color: #64748b;
+      transition: all 0.2s ease;
     }
 
-    .btn-action:hover {
+    .action-btn:hover {
       background: #f8fafc;
       color: #0f172a;
       border-color: #cbd5e1;
     }
 
-    .btn-action.edit:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: rgba(212, 175, 55, 0.05);
-    }
-
-    .btn-action.delete:hover {
+    .action-btn.delete:hover {
+      background: #fef2f2;
       color: #ef4444;
-      border-color: #ef4444;
-      background: rgba(239, 68, 68, 0.05);
+      border-color: #fecaca;
     }
 
-    /* Profile / Settings Form */
-    .profile-form-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    @media (min-width: 768px) {
-      .profile-form-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .listings-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group.full-width {
-      grid-column: 1 / -1;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #475569;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      color: #0f172a;
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      transition: var(--transition);
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-    }
-
-    .cred-row {
+    .listing-actions-row {
       display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
     }
 
-    .btn-add-cred {
-      background: none;
-      border: 1px dashed var(--accent);
-      color: var(--accent);
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 600;
+    /* Fixed Bottom Save Bar */
+    .save-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      padding: 12px 24px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid #334155;
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    .btn-save-all {
+      background: #d97706;
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.95rem;
       cursor: pointer;
-      font-size: 0.85rem;
-      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(217, 119, 6, 0.4);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .btn-add-cred:hover {
-      background: rgba(212, 175, 55, 0.05);
+    .btn-save-all:hover {
+      background: #b45309;
+      transform: translateY(-1px);
+    }
+
+    .btn-save-all:hover {
+      background: #059669;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
     }
 
     /* Modal Styling */
-    .edit-modal {
+    .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 600;
-      display: flex;
-      align-items: flex-start;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
       justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s ease;
-      padding: 100px 10px 40px;
-      overflow-y: auto;
-    }
-
-    .edit-modal.active {
-      opacity: 1;
-      pointer-events: auto;
+      padding: 16px;
     }
 
     .modal-card {
       background: #ffffff;
-      width: 90%;
-      max-width: 650px;
       border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-      margin: 0 auto;
-      transform: scale(0.95);
-      transition: all 0.3s ease;
-    }
-
-    .edit-modal.active .modal-card {
-      transform: scale(1);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 15px;
-      flex-shrink: 0;
-    }
-
-    .modal-header h3 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin: 0;
-    }
-
-    .btn-close-modal {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: #94a3b8;
-      cursor: pointer;
-    }
-
-    .admin-modal-body {
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .modal-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      margin-top: 20px;
-      border-top: 1px solid #e2e8f0;
-      padding-top: 15px;
-      flex-shrink: 0;
-    }
-
-    .btn-secondary {
-      background: #f1f5f9;
-      color: #475569;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: #0f172a;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* Notification Banner */
-    .notification {
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    /* Hamburger Menu Toggle for Admin Mobile */
-    .admin-menu-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 26px;
-      height: 19px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      z-index: 1001;
-    }
-
-    .admin-menu-toggle span {
+      max-width: 720px;
       width: 100%;
-      height: 3px;
-      background: #0f172a;
-      border-radius: 3px;
-      transition: all 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     }
 
-    /* Admin Mobile Drawer Overlay */
-    .admin-mobile-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 2000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .admin-mobile-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .admin-drawer-content {
-      position: absolute;
-      top: 0;
-      right: -300px;
-      width: 280px;
-      height: 100%;
-      background: #ffffff;
-      padding: 24px;
-      box-sizing: border-box;
+    .thumbs-grid {
       display: flex;
-      flex-direction: column;
-      box-shadow: -10px 0 30px rgba(0,0,0,0.15);
-      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .admin-mobile-overlay.active .admin-drawer-content {
-      right: 0;
-    }
-
-    .drawer-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 18px;
-      border-bottom: 1px solid #e2e8f0;
-      margin-bottom: 20px;
-    }
-
-    .drawer-close-btn {
-      background: none;
-      border: none;
-      font-size: 1.8rem;
-      color: #64748b;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    .drawer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex: 1;
-    }
-
-    .drawer-tab-btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      padding: 14px 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      min-height: 80px;
+      padding: 12px;
       background: #f8fafc;
-      border: 1px solid #e2e8f0;
       border-radius: 12px;
+      border: 2px dashed #cbd5e1;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1.5px solid #e2e8f0;
       font-size: 0.95rem;
-      font-weight: 700;
-      color: #0f172a;
-      cursor: pointer;
-      text-align: left;
+      outline: none;
       transition: all 0.2s ease;
     }
 
-    .drawer-tab-btn.active {
-      background: #0f172a;
-      color: #ffffff;
-      border-color: #0f172a;
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: #d97706;
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.12);
     }
 
-    .drawer-footer {
-      padding-top: 20px;
-      border-top: 1px solid #e2e8f0;
-    }
-
-    .btn-logout-drawer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 14px;
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #dc2626;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-
-    /* Mobile Responsive CSS Overhaul */
+    /* Dedicated Mobile Responsive Overrides */
     @media (max-width: 768px) {
-      /* Navigation Bar Responsive */
-      header {
-        padding: 12px 0 !important;
-      }
-
-      .nav-container {
-        padding: 0 16px !important;
-        flex-direction: row !important;
-        justify-content: space-between !important;
-      }
-
-      .admin-menu-toggle {
-        display: flex !important;
-      }
-
-      .user-badge {
-        display: none !important;
-      }
-
-      .tab-nav {
-        display: none !important;
-      }
-
-      .logo-sub {
-        font-size: 0.6rem !important;
-        letter-spacing: 1px !important;
-      }
-
-      #current-user-email {
-        display: none !important; /* Hide long email address on mobile to fit logo & logout */
-      }
-
-      .user-badge {
-        padding: 4px 10px;
-        gap: 6px;
-        border-radius: 50px;
-        font-size: 0.85rem;
-      }
-
-      .btn-logout {
-        margin-left: 5px;
-      }
-
-      /* Dashboard Layout Wrapper */
       .admin-wrapper {
-        padding-top: 90px;
-        padding-bottom: 110px; /* Leave space so content doesn't get covered by fixed save bar */
+        padding-top: 85px !important;
+        padding-bottom: 40px !important;
       }
-
       .admin-container {
-        padding: 0 6px;
+        padding: 0 12px !important;
       }
-
-      /* Header and Tabs layout */
-      .admin-header {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-        margin-bottom: 20px;
-        padding-bottom: 15px;
+      header.site-header {
+        height: auto !important;
+        padding: 10px 0 !important;
       }
-
-      .admin-header h1 {
-        text-align: center;
-        font-size: 1.5rem;
+      .nav-wrapper {
+        height: auto !important;
+        gap: 10px !important;
       }
-
-      .tab-nav {
-        width: 100% !important;
-        display: flex;
-        margin-bottom: 0;
+      .logo-main {
+        font-size: 1.15rem !important;
       }
-
-      .tab-btn {
-        flex: 1;
-        text-align: center;
-        padding: 10px 8px;
-        font-size: 0.85rem;
+      .logo-sub {
+        font-size: 0.55rem !important;
       }
-
-      /* Panel and Headers */
+      .user-badge {
+        font-size: 0.78rem !important;
+        padding: 4px 10px !important;
+      }
+      .user-badge #user-display {
+        display: none !important;
+      }
       .panel {
-        padding: 16px 10px;
-        border-radius: 18px;
+        padding: 16px 12px !important;
+        border-radius: 16px !important;
       }
-
       .listings-header {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-        text-align: center;
-        margin-bottom: 20px;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        margin-bottom: 18px !important;
       }
-
-      .listings-header h2 {
-        font-size: 1.25rem;
-      }
-
       .btn-add {
-        width: 100%;
-        padding: 12px;
-        font-size: 0.9rem;
+        width: 100% !important;
+        text-align: center !important;
+        padding: 12px !important;
+        height: 44px !important;
       }
-
-      /* Listing Visual Cards Mobile Stacking */
-      .listings-grid {
-        gap: 16px;
-      }
-
       .listing-item {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-        padding: 12px;
-        border-radius: 14px;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        padding: 14px !important;
+        border-radius: 14px !important;
       }
-
       .listing-thumb {
-        width: 100%;
-        height: 180px;
-        border-radius: 10px;
+        width: 100% !important;
+        height: 180px !important;
+        border-radius: 10px !important;
       }
-
       .listing-info {
-        padding: 4px 0;
+        width: 100% !important;
       }
-
       .listing-title-row {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
       }
-
       .listing-title {
-        font-size: 1.05rem;
-        white-space: normal;
-        overflow: visible;
-        text-overflow: unset;
+        font-size: 0.98rem !important;
+        white-space: normal !important;
       }
-
-      .listing-meta {
-        font-size: 0.8rem;
-        gap: 6px 10px;
+      .listing-sub {
+        font-size: 0.84rem !important;
+        line-height: 1.5 !important;
       }
-
-      .listing-actions {
-        display: flex;
-        justify-content: flex-end;
-        border-top: 1px solid #f1f5f9;
-        padding-top: 12px;
-        margin-top: 8px;
-        gap: 10px;
+      .listing-actions-row {
+        width: 100% !important;
+        justify-content: flex-end !important;
+        margin-top: 8px !important;
+        padding-top: 10px !important;
+        border-top: 1px solid #e2e8f0 !important;
       }
-
-      .btn-action {
-        flex: 1;
-        max-width: 120px;
-        height: 40px;
-        border-radius: 8px;
+      .action-btn {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 10px !important;
       }
-
-      /* Profile settings credentials styling */
-      .credential-row {
-        flex-direction: column;
-        gap: 8px;
-        border-bottom: 1px dashed #e2e8f0;
-        padding-bottom: 15px;
-        margin-bottom: 10px;
-      }
-
-      .credential-row input {
-        width: 100%;
-      }
-
-      .credential-row button {
-        width: 100%;
-        padding: 10px !important;
-      }
-
-      /* Fixed Full Width Bottom Save Bar */
       .save-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        padding: 12px 16px;
-        padding-bottom: max(12px, env(safe-area-inset-bottom));
-        background: #ffffff !important;
-        border-top: 1px solid #e2e8f0;
-        box-shadow: 0 -6px 20px rgba(15, 23, 42, 0.12);
-        margin: 0;
-        border-radius: 0;
-        z-index: 1000;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        padding: 10px 16px !important;
+        background: #0f172a !important;
+        border-top: 2px solid #d97706 !important;
+        box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.4) !important;
+        z-index: 999999 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+        border-radius: 0 !important;
       }
-
       .btn-save-all {
-        width: 100%;
-        justify-content: center;
-        padding: 14px;
-        font-size: 0.95rem;
-        border-radius: 10px;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 46px !important;
+        justify-content: center !important;
+        padding: 0 16px !important;
+        font-size: 0.92rem !important;
+        border-radius: 10px !important;
+        background: #d97706 !important;
+        color: #ffffff !important;
+        border: none !important;
+        font-weight: 800 !important;
+        box-shadow: 0 4px 14px rgba(217, 119, 6, 0.4) !important;
       }
-
-      /* Edit Modal — Full width on mobile */
-      .edit-modal {
-        padding: 90px 6px 40px;
-      }
-
       .modal-card {
-        width: 100%;
-        max-width: 100%;
-        border-radius: 16px;
-        padding: 20px 16px;
-      }
-
-      .modal-header {
-        margin-bottom: 16px;
+        padding: 20px 16px !important;
+        border-radius: 16px !important;
       }
     }
   </style>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Zaim Rosli">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <header id="header" class="scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo">
-        <span class="logo-main">ZAIM<span>ROSLI</span></span>
-        <span class="logo-sub">Portal Ejen (Admin)</span>
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper" style="display: flex; justify-content: space-between; align-items: center; height: 80px;">
+      <a href="index.html" class="logo" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <div>
+          <span class="logo-main">ZAIM<span>ROSLI</span></span>
+          <span class="logo-sub">PORTAL EJEN (ADMIN)</span>
+        </div>
+        <span style="background:#0f172a; color:#fbbf24; padding:3px 10px; border-radius:12px; font-size:0.72rem; font-weight:800; border:1px solid #d97706; white-space:nowrap; letter-spacing:0.5px;">v2.5.0 • Live KV</span>
       </a>
+
       <div class="user-badge">
         <div class="user-avatar-placeholder">ZR</div>
-        <span id="current-user-email">ejen@hartanah.com</span>
-        <button class="btn-logout" id="btn-logout-el" onclick="window.handleLogout(event)">Log Keluar</button>
+        <span id="user-display">huzaimrosli@gmail.com</span>
+        <button onclick="handleLogout()" class="btn-logout">Log Keluar</button>
       </div>
-
-      <!-- Mobile Hamburger Toggle Button -->
-      <button class="admin-menu-toggle" id="admin-menu-btn" aria-label="Toggle Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </header>
 
-  <!-- Admin Mobile Drawer Overlay -->
-  <div class="admin-mobile-overlay" id="admin-mobile-drawer">
-    <div class="admin-drawer-content">
-      <div class="drawer-header">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <div class="user-avatar-placeholder" style="width:36px;height:36px;font-size:0.8rem;background:#0f172a;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;">ZR</div>
-          <div style="font-size: 0.82rem; font-weight: 700; color: #0f172a; word-break: break-all;" id="drawer-user-email">ejen@hartanah.com</div>
-        </div>
-        <button class="drawer-close-btn" id="admin-drawer-close">&times;</button>
-      </div>
-
-      <div class="drawer-links">
-        <button class="drawer-tab-btn active" data-target="properties-panel">
-          <span>🏠</span> Senarai Hartanah
-        </button>
-        <button class="drawer-tab-btn" data-target="profile-panel">
-          <span>👤</span> Profil Ejen
-        </button>
-        <button class="drawer-tab-btn" id="drawer-super-admin-btn" data-target="agents-panel" style="display: none; background: #fffbf0; border-color: #d97706; color: #b45309;">
-          <span>📊</span> Pengurusan SaaS Ejen
-        </button>
-      </div>
-
-      <div class="drawer-footer">
-        <button class="btn-logout-drawer" id="btn-logout-drawer-el" onclick="window.handleLogout(event)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-          Log Keluar Akaun
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sticky Bottom Save Bar -->
-  <div class="save-bar">
-    <button class="btn-save-all" id="btn-save-all-el">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-      Simpan ke Cloudflare R2
-    </button>
-  </div>
-
-  <!-- Main Wrapper -->
-  <main class="admin-wrapper">
+  <!-- Admin Main Wrapper -->
+  <div class="admin-wrapper">
     <div class="admin-container">
       
-      <div class="admin-header">
-        <h1>Dashboard <span>Ejen</span></h1>
+      <!-- Panel Card -->
+      <div class="panel" style="display: block;">
         
-        <!-- Tab Switches -->
-        <div class="tab-nav">
-          <button class="tab-btn active" data-target="properties-panel">Senarai Hartanah</button>
-          <button class="tab-btn" data-target="profile-panel">Profil Ejen</button>
-          <button class="tab-btn" id="super-admin-tab-btn" data-target="agents-panel" style="display: none; background: #fffbf0; border-color: #d97706; color: #b45309;">Pengurusan SaaS Ejen</button>
-        </div>
-      </div>
-
-      <!-- Properties Panel -->
-      <div class="panel active" id="properties-panel">
-        <div class="listings-header">
+        <div class="listings-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
           <h2>Urus Listings Hartanah</h2>
-          <button class="btn-add" id="btn-add-property-el">+ Tambah Hartanah</button>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button onclick="loadPropertiesList()" class="btn-add" style="background:#475569; color:#fff;" title="Muat Semula Dari Cloudflare KV">🔄 Refresh Live List</button>
+            <button onclick="openModal()" class="btn-add">+ Tambah Hartanah</button>
+          </div>
         </div>
 
-        <div class="listings-grid" id="listings-container">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-      <!-- Profile Panel -->
-      <div class="panel" id="profile-panel">
-        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 25px;">Kemas Kini Profil Ejen</h2>
-        
-        <form class="profile-form-grid" id="profile-form" onsubmit="event.preventDefault();">
-          <div class="form-group">
-            <label for="agent-name">Nama Penuh</label>
-            <input type="text" id="agent-name" required>
-          </div>
-          <div class="form-group">
-            <label for="agent-ren">REN Code (LPPEH)</label>
-            <input type="text" id="agent-ren" required>
-          </div>
-          <div class="form-group full-width">
-            <label for="agent-bio">Biografi Singkat</label>
-            <textarea id="agent-bio" rows="4" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="agent-whatsapp">Nombor Telefon WhatsApp (Tanpa tanda '+')</label>
-            <input type="text" id="agent-whatsapp" required>
-          </div>
-          <div class="form-group">
-            <label>Gambar Profil (Avatar)</label>
-            <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 12px; background: #ffffff; padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1;">
-              <img id="agent-avatar-preview" src="images/hero_bg.png" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 1px solid #cbd5e1;" onerror="this.src='images/hero_bg.png'">
-              <div style="flex: 1;">
-                <span id="agent-avatar-status" style="font-size: 0.8rem; color: #64748b; display: block; margin-bottom: 6px;">Pilih fail untuk menukar avatar</span>
-                <input type="file" id="agent-avatar-file" accept="image/*" style="font-size: 0.8rem;">
-              </div>
-            </div>
-            <input type="text" id="agent-avatar" placeholder="URL gambar avatar" required>
-          </div>
-          <div class="form-group full-width">
-            <label>Kredibiliti & Kepakaran Ejen</label>
-            <div id="credentials-editor"></div>
-            <button type="button" class="btn-add-cred" id="btn-add-cred-el">+ Tambah Kredibiliti</button>
-          </div>
-          <div class="form-group full-width" style="margin-top: 20px;">
-            <button class="btn-primary" id="btn-save-profile-el" type="button">Kemas Kini Profil</button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Super Admin SaaS Agents Management Panel -->
-      <div class="panel" id="agents-panel">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
-          <div>
-            <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; color: #0f172a;">Pemantauan & Langganan Ejen SaaS</h2>
-            <p style="font-size: 0.9rem; color: #64748b;">Pantau akaun ejen berdaftar, status percubaan 7-hari (trial), dan aktifkan langganan berbayar.</p>
-          </div>
-          <button class="btn-add" id="btn-refresh-agents-list" type="button" style="background: #0f172a;">🔄 Kemas Kini Senarai</button>
+        <!-- Listings Grid Container -->
+        <div id="admin-listings-grid" class="listings-grid">
+          <!-- Rendered dynamically -->
         </div>
 
-        <div class="agent-cards-grid" id="super-admin-agents-list" style="display: flex; flex-direction: column; gap: 14px;">
-          <!-- Populated dynamically by Super Admin Script -->
-        </div>
       </div>
 
     </div>
-  </main>
+  </div>
 
-  <!-- Edit Property Modal -->
-  <div class="edit-modal" id="property-modal">
-    <form class="modal-card" id="property-form" onsubmit="event.preventDefault();">
-      <div class="modal-header">
-        <h3 id="modal-title-action">Edit Butiran Hartanah</h3>
-        <button type="button" class="btn-close-modal" id="btn-close-modal-el">&times;</button>
+
+
+  <!-- Modal Add/Edit Property -->
+  <div id="property-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <h3 id="modal-title" style="font-size: 1.3rem; font-weight: 800;">Tambah Hartanah</h3>
+        <button onclick="closeModal()" style="background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #64748b;">&times;</button>
       </div>
-      
-      <div class="admin-modal-body">
-        <input type="hidden" id="form-prop-index">
-        <input type="hidden" id="form-prop-id">
-        
-        <div class="form-group">
-          <label for="form-prop-title">Nama/Tajuk Hartanah</label>
-          <input type="text" id="form-prop-title" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="form-prop-price">Harga Pasif (RM)</label>
-          <input type="number" id="form-prop-price" required>
-        </div>
-        <div class="form-group">
-          <label for="form-prop-priceStr">Teks Paparan Harga (e.g. RM 3,200 / bln)</label>
-          <input type="text" id="form-prop-priceStr" placeholder="Contoh: RM 1,250,000" required>
+
+      <form id="prop-form" onsubmit="saveProperty(event)">
+        <input type="hidden" id="form-id">
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">NAMA / TAJUK HARTANAH</label>
+          <input type="text" id="form-title" class="form-input" placeholder="Contoh: The Grand Pavilion Penthouse" required>
         </div>
 
-        <div class="form-group">
-          <label for="form-prop-location">Alamat / Lokasi Penuh</label>
-          <input type="text" id="form-prop-location" required>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">HARGA (RM)</label>
+          <input type="number" id="form-price" class="form-input" placeholder="1250000" required>
         </div>
 
-        <div class="form-group">
-          <label for="form-prop-region">Negeri</label>
-          <select id="form-prop-region">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">KATEGORI TRANSAKSI</label>
+          <select id="form-category" class="form-select" required>
+            <option value="Subsales">Subsales / Rumah Second-hand</option>
+            <option value="New Project">Projek Baharu (New Project)</option>
+            <option value="Rental">Sewa (Rental / WTL)</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">STATUS PENAMPILAN</label>
+          <select id="form-status" class="form-select" required>
+            <option value="sale">FOR SALE</option>
+            <option value="rent">FOR RENT</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">ALAMAT / LOKASI PENUH</label>
+          <input type="text" id="form-location" class="form-input" placeholder="Contoh: KLCC, Kuala Lumpur" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">NEGERI</label>
+          <select id="form-region" class="form-select" required>
             <option value="Kuala Lumpur">Kuala Lumpur</option>
             <option value="Selangor">Selangor</option>
             <option value="Johor">Johor</option>
@@ -1074,800 +574,376 @@
             <option value="Sabah">Sabah</option>
             <option value="Sarawak">Sarawak</option>
             <option value="Terengganu">Terengganu</option>
-            <option value="Labuan">W.P. Labuan</option>
-            <option value="Putrajaya">W.P. Putrajaya</option>
+            <option value="W.P. Labuan">W.P. Labuan</option>
+            <option value="W.P. Putrajaya">W.P. Putrajaya</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="form-prop-type">Jenis Hartanah</label>
-          <select id="form-prop-type">
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">JENIS HARTANAH</label>
+          <select id="form-type" class="form-select" required>
             <option value="Kondominium">Kondominium / Serviced Apt</option>
             <option value="Teres">Rumah Teres / Link House</option>
-            <option value="Semi-D">Semi-D</option>
+            <option value="Semi-D">Semi-D / Semi-Detached</option>
             <option value="Banglo">Banglo / Villa</option>
             <option value="Apartment">Apartment / Flat</option>
             <option value="Townhouse">Townhouse</option>
             <option value="Studio">Studio / SOHO / SOFO</option>
-            <option value="Kedai / Pejabat">Kedai / Pejabat (Shoplot)</option>
-            <option value="Tanah">Tanah (Land)</option>
-            <option value="Kilang">Kilang / Gudang (Factory)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="form-prop-status">Status</label>
-          <select id="form-prop-status">
-            <option value="sale">FOR SALE</option>
-            <option value="rent">FOR RENT</option>
+            <option value="Kilang">Kilang / Gudang (Industrial)</option>
+            <option value="Tanah Industri">Tanah Industri / Commercial Land</option>
+            <option value="Kedai / Pejabat">Kedai / Pejabat (Shoplot / Office)</option>
+            <option value="Ruang Komersial">Ruang Komersial / Retail Space</option>
           </select>
         </div>
 
-        <div class="form-group">
-          <label for="form-prop-beds">Bilik</label>
-          <input type="number" id="form-prop-beds" required>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">BILIK</label>
+          <input type="number" id="form-beds" class="form-input" value="3" required>
         </div>
-        <div class="form-group">
-          <label for="form-prop-baths">Bilik Air</label>
-          <input type="number" id="form-prop-baths" required>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">B.AIR</label>
+          <input type="number" id="form-baths" class="form-input" value="2" required>
         </div>
-        <div class="form-group">
-          <label for="form-prop-parking">Petak Parking</label>
-          <input type="number" id="form-prop-parking" value="1" required>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">SAIZ TANAH (LAND AREA)</label>
+          <input type="text" id="form-landSize" class="form-input" placeholder="Contoh: 2.11 acre atau 4500 sqft">
         </div>
-        <div class="form-group">
-          <label for="form-prop-size">Saiz Binaan / Build-Up (sqft)</label>
-          <input type="number" id="form-prop-size" required>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">SAIZ BINA-AN (BUILT-UP SQFT)</label>
+          <input type="number" id="form-size" class="form-input" placeholder="Contoh: 50407" required>
         </div>
-        <div class="form-group">
-          <label for="form-prop-landSize">Saiz Tanah / Land Area</label>
-          <input type="text" id="form-prop-landSize" placeholder="Contoh: 1,450 sqft atau 20x70">
-        </div>
-        <div class="form-group">
-          <label for="form-prop-tenure">Pegangan Tanah (Tenure)</label>
-          <select id="form-prop-tenure">
-            <option value="Freehold">Freehold (Pegangan Bebas)</option>
-            <option value="Leasehold">Leasehold (Pegangan Pajakan)</option>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">PEGANGAN</label>
+          <select id="form-tenure" class="form-select">
+            <option value="Freehold">Freehold</option>
+            <option value="Leasehold">Leasehold</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="form-prop-lotType">Status Lot / Kuota (Lot Status)</label>
-          <select id="form-prop-lotType">
-            <option value="Bumi Lot">Bumi Lot</option>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">LOT TYPE</label>
+          <select id="form-lotType" class="form-select">
             <option value="Non-Bumi Lot">Non-Bumi Lot</option>
-            <option value="Rezab Melayu">Rezab Melayu</option>
+            <option value="Bumi Lot">Bumi Lot</option>
             <option value="Open Title">Open Title</option>
+            <option value="Rezab Melayu">Rezab Melayu</option>
           </select>
         </div>
 
-        <div class="form-group">
-          <label for="form-ref-url">Pautan Rujukan / Referral Link (e.g. PropMall)</label>
-          <input type="url" id="form-ref-url" placeholder="https://propmall.co/share/eezmfo1hta">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">Pautan Rujukan / Referral Link (e.g. PropMall)</label>
+          <input type="url" id="form-ref-url" class="form-input" placeholder="https://propmall.co/share/eezmfo1hta">
         </div>
 
-        <div class="form-group">
-          <label>Gambar Hartanah</label>
-          <div id="image-upload-area" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 16px; background: #f8fafc; margin-bottom: 10px;">
-            <div id="image-thumbs-grid" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;"></div>
-            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-              <label for="form-prop-image-file" style="display: inline-flex; align-items: center; gap: 8px; background: #0f172a; color: #fff; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                Pilih Gambar
-              </label>
-              <input type="file" id="form-prop-image-file" accept="image/*" multiple style="display: none;">
-              <span id="form-image-status" style="font-size: 0.8rem; color: #64748b;">Boleh pilih beberapa gambar sekaligus</span>
-            </div>
+        <!-- Image Upload & Drag Drop Grid -->
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">GAMBAR HARTANAH (MUAT NAIK CLOUDFLARE R2)</label>
+          <div style="display: flex; gap: 10px; margin-bottom: 6px;">
+            <input type="file" id="form-image-file" multiple accept="image/*" class="form-input" onchange="handleImageUpload(event)">
           </div>
-          <input type="hidden" id="form-prop-image" required>
+
+          <div id="image-thumbs-grid" class="thumbs-grid">
+            <!-- Rendered thumbs -->
+          </div>
+          <p style="font-size: 0.78rem; color: #64748b; margin-top: 6px;">
+            💡 Tahan & seret gambar untuk ubah susunan. Gambar 1 adalah Gambar Utama.
+          </p>
         </div>
 
-        <div class="form-group">
-          <label for="form-prop-description">Penerangan / Deskripsi Hartanah</label>
-          <textarea id="form-prop-description" placeholder="Masukkan penerangan lengkap hartanah di sini..." style="min-height: 250px; resize: vertical; overflow-y: hidden; line-height: 1.6; font-family: inherit; font-size: 0.95rem; padding: 12px;"></textarea>
+        <!-- Description with full height auto-expand -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">DESKRIPSI HARTANAH (PAPARAN PENUH)</label>
+          <textarea id="form-description" class="form-textarea" style="min-height: 180px; height: auto; overflow: hidden; resize: vertical;" oninput="autoResizeDescription(this)" required></textarea>
         </div>
-      </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn-secondary" id="btn-cancel-modal-el">Batal</button>
-        <button type="submit" class="btn-primary">Simpan Butiran</button>
-      </div>
-    </form>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <button type="button" onclick="closeModal()" class="btn btn-outline btn-sm">Batal</button>
+          <button type="submit" class="btn btn-accent btn-sm">Simpan Hartanah</button>
+        </div>
+      </form>
+
+    </div>
   </div>
 
-  <!-- Notification Banner -->
-  <div class="notification" id="notification-banner"></div>
-
-  <!-- Loading Overlay -->
-  <div class="loading-overlay" id="loading-overlay">
-    <div class="spinner"></div>
-    <h2 id="loading-text">Memuatkan data dari Cloudflare R2...</h2>
-  </div>
-
-  <!-- Supabase & App Logics -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/properties-data.js"></script>
+  <script src="/app.js"></script>
   <script>
     const SUPABASE_URL = 'https://csrzhidtzqxfbapsenhu.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzcnpoaWR0enF4ZmJhcHNlbmh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0OTM3OTYsImV4cCI6MjEwMTA2OTc5Nn0.NnHFURbQTvsdgGbm1d_PC-hkOgQFQIHKTMQaS2n44SU';
-    const R2_URL = 'https://pub-c09dadbb55254873bc3e24eba89ad126.r2.dev';
-    const WORKER_URL = 'https://zaim-hartanah-api.huzaimrosli.workers.dev';
-
-    // Initialize Supabase Client
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    let session = null;
-    let localProperties = [];
-    let localAgent = {};
 
-    // Auth Protection
+    let currentProperties = [];
+    let uploadedImageUrls = [];
+    let draggedIdx = null;
+
     async function checkAuth() {
-      const { data } = await supabaseClient.auth.getSession();
-      if (!data.session) {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      const localSess = localStorage.getItem('ZAIM_ROSLI_SESSION');
+      if (!session && !localSess) {
         window.location.href = 'login.html';
         return;
       }
-      session = data.session;
-      document.getElementById('current-user-email').textContent = session.user.email;
-      const drawerEmail = document.getElementById('drawer-user-email');
-      if (drawerEmail) drawerEmail.textContent = session.user.email;
-
-      // Reveal Super Admin Panel for huzaimrosli@gmail.com
-      if (session.user.email && session.user.email.toLowerCase() === 'huzaimrosli@gmail.com') {
-        const superTab = document.getElementById('super-admin-tab-btn');
-        if (superTab) superTab.style.display = 'inline-block';
-        const drawerSuperTab = document.getElementById('drawer-super-admin-btn');
-        if (drawerSuperTab) drawerSuperTab.style.display = 'flex';
-        renderSuperAdminAgents();
-      }
-      
-      // Load data
-      await loadR2Data();
+      loadPropertiesList();
     }
     checkAuth();
 
-    // Super Admin Agent Management Script
-    function renderSuperAdminAgents() {
-      const container = document.getElementById('super-admin-agents-list');
-      if (!container) return;
-
-      // Mock / Local registered agent list tracking
-      const agents = [
-        {
-          email: 'huzaimrosli@gmail.com',
-          name: 'Zaim Rosli',
-          ren: 'REN39575 • Ejen Utama',
-          whatsapp: '60108118559',
-          status: 'active',
-          role: 'Super Admin'
-        },
-        {
-          email: session.user.email !== 'huzaimrosli@gmail.com' ? session.user.email : 'ejen.demo@gmail.com',
-          name: session.user.user_metadata?.full_name || 'Ejen Baharu',
-          ren: session.user.user_metadata?.ren_code || 'REN54321',
-          whatsapp: session.user.user_metadata?.whatsapp || '60123456789',
-          status: session.user.user_metadata?.subscription_status || 'trial',
-          role: 'Ejen SaaS'
-        }
-      ];
-
-      container.innerHTML = '';
-      agents.forEach((ag) => {
-        const card = document.createElement('div');
-        card.style.cssText = 'background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 2px 10px rgba(0,0,0,0.02);';
-
-        let statusBadge = `<span style="background:#f0fdf4;color:#166534;padding:4px 12px;border-radius:50px;font-weight:700;font-size:0.78rem;">🟢 Aktif (Berbayar)</span>`;
-        if (ag.status === 'trial') {
-          statusBadge = `<span style="background:#fffbf0;color:#b45309;padding:4px 12px;border-radius:50px;font-weight:700;font-size:0.78rem;">🟡 Percubaan (Trial)</span>`;
-        } else if (ag.status === 'suspended' || ag.status === 'expired') {
-          statusBadge = `<span style="background:#fef2f2;color:#dc2626;padding:4px 12px;border-radius:50px;font-weight:700;font-size:0.78rem;">🔴 Tamat Tempoh</span>`;
-        }
-
-        const isMainAdmin = ag.email.toLowerCase() === 'huzaimrosli@gmail.com';
-
-        card.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; border-bottom:1px solid #f1f5f9; padding-bottom:12px;">
-            <div>
-              <div style="font-weight:800; font-size:1.05rem; color:#0f172a;">${ag.name}</div>
-              <div style="font-size:0.8rem; color:#64748b; font-weight:600; margin-top:2px;">${ag.ren}</div>
-            </div>
-            <div>${statusBadge}</div>
-          </div>
-
-          <div style="font-size:0.88rem; color:#334155; display:flex; flex-direction:column; gap:6px; background:#f8fafc; padding:12px; border-radius:10px;">
-            <div style="word-break:break-all;"><strong>📧 E-mel:</strong> ${ag.email}</div>
-            <div><strong>📱 WhatsApp:</strong> +${ag.whatsapp}</div>
-          </div>
-
-          ${isMainAdmin ? `
-            <div style="font-size:0.8rem; color:#64748b; font-weight:700; text-align:center; padding:6px 0;">👑 Akaun Pentadbir Utama (Super Admin)</div>
-          ` : `
-            <div style="display:flex; gap:8px; margin-top:2px;">
-              <button type="button" onclick="updateAgentStatus('${ag.email}', 'active')" style="flex:1; background:#166534; color:#fff; border:none; padding:11px; border-radius:10px; font-size:0.82rem; cursor:pointer; font-weight:700;">🟢 Aktifkan Langganan</button>
-              <button type="button" onclick="updateAgentStatus('${ag.email}', 'suspended')" style="flex:1; background:#fef2f2; border:1px solid #fecaca; color:#dc2626; padding:11px; border-radius:10px; font-size:0.82rem; cursor:pointer; font-weight:700;">🔴 Sekat</button>
-            </div>
-          `}
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    window.updateAgentStatus = (email, newStatus) => {
-      alert(`Status langganan bagi ejen ${email} telah ditukar kepada: ${newStatus.toUpperCase()}`);
-      showNotification(`Akaun ejen ${email} berjaya dikemaskini!`, 'success');
-      renderSuperAdminAgents();
-    };
-
-    const btnRefreshAgents = document.getElementById('btn-refresh-agents-list');
-    if (btnRefreshAgents) {
-      btnRefreshAgents.addEventListener('click', () => {
-        renderSuperAdminAgents();
-        showNotification('Senarai pemantauan ejen dikemaskini.', 'success');
-      });
-    }
-
-    // Logout (Desktop & Drawer)
-    window.handleLogout = async (e) => {
-      if (e && e.preventDefault) e.preventDefault();
+    async function handleLogout() {
       try {
-        await supabaseClient.auth.signOut({ scope: 'global' });
-      } catch (err) {
-        console.error('Logout error:', err);
-      }
-      try {
-        for (let i = localStorage.length - 1; i >= 0; i--) {
-          const k = localStorage.key(i);
-          if (k) localStorage.removeItem(k);
-        }
-        localStorage.clear();
-        sessionStorage.clear();
-      } catch (err) {}
+        await supabaseClient.auth.signOut();
+      } catch(e) {}
+      localStorage.removeItem('ZAIM_ROSLI_SESSION');
       window.location.href = 'login.html?logout=true';
-    };
-
-    // Mobile Drawer Toggle
-    const adminMenuBtn = document.getElementById('admin-menu-btn');
-    const adminDrawer = document.getElementById('admin-mobile-drawer');
-    const adminDrawerClose = document.getElementById('admin-drawer-close');
-
-    if (adminMenuBtn && adminDrawer) {
-      adminMenuBtn.addEventListener('click', () => {
-        adminDrawer.classList.add('active');
-      });
     }
 
-    if (adminDrawerClose && adminDrawer) {
-      adminDrawerClose.addEventListener('click', () => {
-        adminDrawer.classList.remove('active');
-      });
-    }
-
-    if (adminDrawer) {
-      adminDrawer.addEventListener('click', (e) => {
-        if (e.target === adminDrawer) adminDrawer.classList.remove('active');
-      });
-    }
-
-    // Tab Navigation (Desktop & Mobile Drawer)
-    function switchTab(targetId) {
-      // Update desktop tabs
-      document.querySelectorAll('.tab-btn').forEach(t => {
-        if (t.getAttribute('data-target') === targetId) t.classList.add('active');
-        else t.classList.remove('active');
-      });
-
-      // Update drawer tabs
-      document.querySelectorAll('.drawer-tab-btn').forEach(t => {
-        if (t.getAttribute('data-target') === targetId) t.classList.add('active');
-        else t.classList.remove('active');
-      });
-
-      // Show active panel
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      const activePanel = document.getElementById(targetId);
-      if (activePanel) activePanel.classList.add('active');
-
-      // Close drawer if open
-      if (adminDrawer) adminDrawer.classList.remove('active');
-    }
-
-    document.querySelectorAll('.tab-btn, .drawer-tab-btn').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = tab.getAttribute('data-target');
-        switchTab(target);
-      });
-    });
-
-    // CSV Parser Helpers
-    // Robust CSV parser supporting multiline fields inside double quotes
-    function parseCSV(csvText) {
-      if (!csvText) return [];
-      const rows = [];
-      let currentRow = [];
-      let currentField = '';
-      let insideQuote = false;
-
-      for (let i = 0; i < csvText.length; i++) {
-        const char = csvText[i];
-        const nextChar = csvText[i + 1];
-
-        if (char === '"') {
-          if (insideQuote && nextChar === '"') {
-            currentField += '"';
-            i++; // skip escaped quote
-          } else {
-            insideQuote = !insideQuote;
-          }
-        } else if (char === ',' && !insideQuote) {
-          currentRow.push(currentField.trim());
-          currentField = '';
-        } else if ((char === '\r' || char === '\n') && !insideQuote) {
-          if (char === '\r' && nextChar === '\n') i++; // skip \n of \r\n
-          currentRow.push(currentField.trim());
-          if (currentRow.some(f => f !== '')) {
-            rows.push(currentRow);
-          }
-          currentRow = [];
-          currentField = '';
-        } else {
-          currentField += char;
-        }
-      }
-      if (currentField !== '' || currentRow.length > 0) {
-        currentRow.push(currentField.trim());
-        if (currentRow.some(f => f !== '')) {
-          rows.push(currentRow);
-        }
-      }
-
-      if (rows.length <= 1) return [];
-
-      const headers = rows[0];
-      const list = [];
-      for (let i = 1; i < rows.length; i++) {
-        const values = rows[i];
-        if (values.length < headers.length) continue;
-        const item = {};
-        headers.forEach((header, idx) => {
-          item[header] = values[idx] || '';
-        });
-        list.push(item);
-      }
-      return list;
-    }
-
-    function convertToCSV(array) {
-      const headers = ['id', 'title', 'price', 'priceStr', 'location', 'region', 'type', 'status', 'beds', 'baths', 'parking', 'size', 'landSize', 'tenure', 'lotType', 'refUrl', 'image', 'description'];
-      const rows = [headers.join(',')];
-      
-      array.forEach(item => {
-        const rowValues = headers.map(header => {
-          let val = item[header];
-          if (val === undefined || val === null) val = '';
-          val = String(val).replace(/"/g, '""');
-          if (val.includes(',') || val.includes('"')) {
-            return `"${val}"`;
-          }
-          return val;
-        });
-        rows.push(rowValues.join(','));
-      });
-      return rows.join('\r\n');
-    }
-
-    // Load data per agent account
-    async function loadR2Data() {
-      const overlay = document.getElementById('loading-overlay');
-      overlay.style.display = 'flex';
-      
-      const cb = `?t=${Date.now()}`; // cache-busting
-      const userEmail = (session.user.email || '').toLowerCase();
-      const isSuperAdmin = userEmail === 'huzaimrosli@gmail.com';
-
+    async function loadPropertiesList() {
       try {
-        if (isSuperAdmin) {
-          const agentRes = await fetch(`${R2_URL}/agent_settings.json${cb}`);
-          if (agentRes.ok) {
-            localAgent = await agentRes.json();
+        const res = await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/properties?t=' + Date.now());
+        if (res.ok) {
+          const remoteData = await res.json();
+          if (Array.isArray(remoteData) && remoteData.length > 0) {
+            currentProperties = remoteData;
+            localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(remoteData));
+            renderListingsGrid();
+            return;
           }
-          const csvRes = await fetch(`${R2_URL}/hartanah_database_fixed.csv${cb}`);
-          if (csvRes.ok) {
-            const csvText = await csvRes.text();
-            localProperties = parseCSV(csvText);
-          }
-        } else {
-          // Dedicated isolated workspace for newly registered agents
-          const meta = session.user.user_metadata || {};
-          localAgent = {
-            name: meta.full_name || 'Ejen Hartanah',
-            renCode: meta.ren_code || 'REN Registered',
-            bio: 'Perunding Hartanah Berdaftar sedia membantu anda dalam urusan jual, beli dan sewa hartanah.',
-            whatsappNumber: meta.whatsapp || '60123456789',
-            avatarUrl: 'images/hero_bg.png',
-            credentials: ['Ahli LPPEH Berdaftar', 'Konsultasi Pembiayaan Bank']
-          };
-          localProperties = []; // Clean workspace for new agent
         }
+      } catch(e) {
+        console.error('Live fetch error:', e);
+      }
 
-        populateAgentForm();
-        renderPropertiesGrid();
-      } catch (err) {
-        console.error('Error fetching data:', err);
-        showNotification('Ralat memuatkan data.', 'error');
-      } finally {
-        overlay.style.display = 'none';
+      const stored = localStorage.getItem('ZAIM_ROSLI_PROPERTIES');
+      if (stored) {
+        try {
+          currentProperties = JSON.parse(stored);
+        } catch(e) {
+          currentProperties = PROPERTIES_DATA;
+        }
+      } else {
+        currentProperties = PROPERTIES_DATA;
+      }
+
+      renderListingsGrid();
+    }
+
+    function renderListingsGrid() {
+      const grid = document.getElementById('admin-listings-grid');
+      grid.innerHTML = currentProperties.map((p, idx) => {
+        const mainImg = p.image ? p.image.split(',')[0].trim() : 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80';
+        const badgeClass = p.status === 'sale' ? 'badge-sale-style' : 'badge-rent-style';
+        const badgeText = p.status === 'sale' ? 'FOR SALE' : 'FOR RENT';
+        const priceDisplay = p.status === 'sale' ? `RM ${p.price.toLocaleString('en-US')}` : `RM ${p.price.toLocaleString('en-US')} / bln`;
+        const categoryBadge = p.category ? `<span style="background:#e2e8f0; color:#334155; padding:2px 8px; border-radius:4px; font-size:0.7rem; font-weight:700; margin-left:6px;">${p.category}</span>` : '';
+        const refLinkHtml = p.refUrl ? `<a href="${p.refUrl}" target="_blank" class="btn-ref-link" style="display:inline-flex; align-items:center; gap:4px; background:#f1f5f9; color:#0f172a; padding:4px 10px; border-radius:6px; font-size:0.75rem; text-decoration:none; font-weight:600; border:1px solid #cbd5e1; margin-top:6px;">🔗 Pautan Rujukan (PropMall)</a>` : '';
+
+        return `
+          <div class="listing-item">
+            <img src="${mainImg}" class="listing-thumb" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80'">
+            <div class="listing-info">
+              <div class="listing-title-row">
+                <h3 class="listing-title">${p.title}</h3>
+                <div>
+                  <span class="badge-status ${badgeClass}">${badgeText}</span>
+                  ${categoryBadge}
+                </div>
+              </div>
+              <p class="listing-sub">
+                <span class="listing-price">${priceDisplay}</span>
+                <span style="margin: 0 4px;">•</span>
+                ${p.location}
+                <span style="margin: 0 4px;">•</span>
+                ${p.type}
+                <span style="margin: 0 4px;">•</span>
+                ${p.beds} Bilik / ${p.baths} B.Air / Built-up ${p.size} sqft
+              </p>
+              ${refLinkHtml}
+            </div>
+            
+            <!-- Action Icons (Aligned Right) -->
+            <div class="listing-actions-row">
+              <button onclick="editProperty(${idx})" class="action-btn" title="Edit Hartanah">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </button>
+              <button onclick="deleteProperty(${idx})" class="action-btn delete" title="Padam Hartanah">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function autoResizeDescription(el) {
+      if (!el) el = document.getElementById('form-description');
+      if (el) {
+        el.style.height = 'auto';
+        el.style.height = Math.max(180, el.scrollHeight + 10) + 'px';
       }
     }
 
-    // Render visual cards
-    function renderPropertiesGrid() {
-      const container = document.getElementById('listings-container');
-      container.innerHTML = '';
-
-      if (localProperties.length === 0) {
-        container.innerHTML = `
-          <div style="text-align: center; padding: 40px; color: #94a3b8; border: 2px dashed #e2e8f0; border-radius: 16px;">
-            Tiada hartanah ditemui. Sila tambah hartanah baru.
-          </div>
-        `;
-        return;
-      }
-
-      localProperties.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'listing-item';
-        
-        const badgeClass = item.status === 'sale' ? 'badge-sale' : 'badge-rent';
-        const badgeLabel = item.status === 'sale' ? 'FOR SALE' : 'FOR RENT';
-        
-        // Simple preview of the first image
-        const imgUrl = item.image.split(',')[0].trim() || 'images/hero_bg.png';
-        const refLinkHtml = item.refUrl ? `<a href="${item.refUrl}" target="_blank" class="btn-ref-link" style="display:inline-flex; align-items:center; gap:4px; background:#f1f5f9; color:#0f172a; padding:4px 10px; border-radius:6px; font-size:0.75rem; text-decoration:none; font-weight:600; border:1px solid #cbd5e1; margin-top:6px;">🔗 Pautan Rujukan (PropMall)</a>` : '';
-
-        div.innerHTML = `
-          <img src="${imgUrl}" class="listing-thumb" alt="${item.title}" onerror="this.src='images/hero_bg.png'">
-          <div class="listing-info">
-            <div class="listing-title-row">
-              <h3 class="listing-title">${item.title}</h3>
-              <span class="badge ${badgeClass}">${badgeLabel}</span>
-            </div>
-            <div class="listing-meta">
-              <span class="listing-price">${item.priceStr || 'RM ' + Number(item.price).toLocaleString()}</span>
-              <span>•</span>
-              <span>${item.location}</span>
-              <span>•</span>
-              <span>${item.type}</span>
-              <span>•</span>
-              <span>${item.beds} Bilik / ${item.baths} B.Air / ${item.size} sqft</span>
-            </div>
-            ${refLinkHtml}
-          </div>
-          <div class="listing-actions">
-            <button class="btn-action edit" onclick="openEditModal(${index})" title="Edit Hartanah">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7m-9.5-3.5 9-9a2.121 2.121 0 0 1 3 3l-9 9-4 1 1-4Z"></path></svg>
-            </button>
-            <button class="btn-action delete" onclick="deleteProperty(${index})" title="Padam Hartanah">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
-            </button>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    // Modal control
-    const modal = document.getElementById('property-modal');
-    const modalForm = document.getElementById('property-form');
-    
-    function closeModal() {
-      modal.classList.remove('active');
-      modalForm.reset();
+    function openModal() {
+      document.getElementById('prop-form').reset();
+      document.getElementById('form-id').value = '';
+      document.getElementById('form-category').value = 'Subsales';
+      document.getElementById('form-landSize').value = '';
+      document.getElementById('form-ref-url').value = '';
+      document.getElementById('modal-title').textContent = 'Tambah Hartanah';
       uploadedImageUrls = [];
       rebuildImageThumbsGrid();
-      document.getElementById('form-prop-image-file').value = '';
-      document.getElementById('form-image-status').textContent = 'Boleh pilih beberapa gambar sekaligus';
-      document.getElementById('form-image-status').style.color = '#64748b';
+      document.getElementById('property-modal').style.display = 'flex';
+      const saveBar = document.querySelector('.save-bar');
+      if (saveBar) saveBar.style.display = 'none';
+      setTimeout(autoResizeDescription, 50);
+    }
+
+    function closeModal() {
+      document.getElementById('property-modal').style.display = 'none';
       const saveBar = document.querySelector('.save-bar');
       if (saveBar) saveBar.style.display = 'flex';
     }
 
-    const descTextarea = document.getElementById('form-prop-description');
-    function autoResizeTextarea() {
-      if (!descTextarea) return;
-      descTextarea.style.height = 'auto';
-      descTextarea.style.height = Math.max(250, descTextarea.scrollHeight + 15) + 'px';
-    }
-    if (descTextarea) {
-      descTextarea.addEventListener('input', autoResizeTextarea);
-    }
+    function editProperty(idx) {
+      const p = currentProperties[idx];
+      document.getElementById('form-id').value = idx;
+      document.getElementById('form-title').value = p.title;
+      document.getElementById('form-price').value = p.price;
+      document.getElementById('form-category').value = p.category || (p.status === 'rent' ? 'Rental' : 'Subsales');
+      document.getElementById('form-status').value = p.status;
+      document.getElementById('form-location').value = p.location;
+      document.getElementById('form-region').value = p.region;
+      document.getElementById('form-type').value = p.type;
+      document.getElementById('form-beds').value = p.beds;
+      document.getElementById('form-baths').value = p.baths;
+      document.getElementById('form-landSize').value = p.landSize || '';
+      document.getElementById('form-size').value = p.size;
+      document.getElementById('form-tenure').value = p.tenure;
+      document.getElementById('form-lotType').value = p.lotType;
+      document.getElementById('form-ref-url').value = p.refUrl || '';
+      document.getElementById('form-description').value = p.description;
 
-    document.getElementById('btn-close-modal-el').addEventListener('click', closeModal);
-    document.getElementById('btn-cancel-modal-el').addEventListener('click', closeModal);
-
-    window.openEditModal = (index) => {
-      const item = localProperties[index];
-      document.getElementById('modal-title-action').textContent = 'Edit Butiran Hartanah';
-      document.getElementById('form-prop-index').value = index;
-      document.getElementById('form-prop-id').value = item.id;
-      document.getElementById('form-prop-title').value = item.title;
-      document.getElementById('form-prop-price').value = item.price;
-      document.getElementById('form-prop-priceStr').value = item.priceStr;
-      document.getElementById('form-prop-location').value = item.location;
-      let currentRegion = item.region || 'Kuala Lumpur';
-      if (currentRegion === 'KL') currentRegion = 'Kuala Lumpur';
-      document.getElementById('form-prop-region').value = currentRegion;
-      document.getElementById('form-prop-type').value = item.type;
-      document.getElementById('form-prop-status').value = item.status;
-      document.getElementById('form-prop-beds').value = item.beds || 0;
-      document.getElementById('form-prop-baths').value = item.baths || 0;
-      document.getElementById('form-prop-parking').value = item.parking || 1;
-      document.getElementById('form-prop-size').value = item.size || 0;
-      document.getElementById('form-prop-landSize').value = item.landSize || '';
-      document.getElementById('form-prop-tenure').value = item.tenure || 'Freehold';
-      document.getElementById('form-prop-lotType').value = item.lotType || 'Bumi Lot';
-      document.getElementById('form-ref-url').value = item.refUrl || '';
-      document.getElementById('form-prop-image').value = item.image || '';
-      document.getElementById('form-prop-description').value = item.description || '';
-      autoResizeTextarea();
-
-      // Populate existing images into the thumbnail grid
-      uploadedImageUrls = item.image ? item.image.split(',').map(u => u.trim()).filter(Boolean) : [];
+      uploadedImageUrls = p.image ? p.image.split(',').map(s => s.trim()) : [];
       rebuildImageThumbsGrid();
-      document.getElementById('form-prop-image-file').value = '';
-      document.getElementById('form-image-status').textContent = uploadedImageUrls.length > 0 ? 'Gambar sedia ada ditunjukkan di atas. Boleh tambah lagi.' : 'Belum ada gambar. Pilih fail untuk muat naik.';
-      document.getElementById('form-image-status').style.color = '#64748b';
 
-      modal.classList.add('active');
+      document.getElementById('modal-title').textContent = 'Edit Hartanah';
+      document.getElementById('property-modal').style.display = 'flex';
       const saveBar = document.querySelector('.save-bar');
       if (saveBar) saveBar.style.display = 'none';
-    };
+      setTimeout(autoResizeDescription, 50);
+    }
 
-    // Add new property triggers modal
-    document.getElementById('btn-add-property-el').addEventListener('click', () => {
-      const nextId = localProperties.length > 0 
-        ? Math.max(...localProperties.map(p => parseInt(p.id) || 0)) + 1 
-        : 1;
+    function deleteProperty(idx) {
+      if (confirm('Adakah anda pasti untuk memadam hartanah ini?')) {
+        currentProperties.splice(idx, 1);
+        saveToStorage();
+        renderListingsGrid();
+      }
+    }
 
-      document.getElementById('modal-title-action').textContent = 'Tambah Hartanah Baharu';
-      document.getElementById('form-prop-index').value = '-1';
-      document.getElementById('form-prop-id').value = String(nextId);
-      
-      // Reset images for new property
-      uploadedImageUrls = [];
-      rebuildImageThumbsGrid();
-      document.getElementById('form-ref-url').value = '';
-      document.getElementById('form-prop-image').value = '';
-      document.getElementById('form-prop-description').value = '';
-      autoResizeTextarea();
-      document.getElementById('form-prop-image-file').value = '';
-      document.getElementById('form-image-status').textContent = 'Boleh pilih beberapa gambar sekaligus';
-      document.getElementById('form-image-status').style.color = '#64748b';
-
-      modal.classList.add('active');
-      const saveBar = document.querySelector('.save-bar');
-      if (saveBar) saveBar.style.display = 'none';
-    });
-
-    // Form submit inside modal — saves locally AND uploads CSV to R2 in one step
-    modalForm.addEventListener('submit', async (e) => {
+    async function saveProperty(e) {
       e.preventDefault();
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '⌛ Menyimpan ke Cloudflare R2...';
+      submitBtn.disabled = true;
 
-      const index = parseInt(document.getElementById('form-prop-index').value);
+      const idx = document.getElementById('form-id').value;
+      const title = document.getElementById('form-title').value.trim();
+      const price = parseFloat(document.getElementById('form-price').value);
+      const category = document.getElementById('form-category').value;
+      const status = document.getElementById('form-status').value;
+      const location = document.getElementById('form-location').value.trim();
+      const region = document.getElementById('form-region').value;
+      const type = document.getElementById('form-type').value;
+      const beds = parseInt(document.getElementById('form-beds').value);
+      const baths = parseInt(document.getElementById('form-baths').value);
+      const landSize = document.getElementById('form-landSize').value.trim() || '-';
+      const size = parseInt(document.getElementById('form-size').value);
+      const tenure = document.getElementById('form-tenure').value;
+      const lotType = document.getElementById('form-lotType').value;
+      const refUrl = document.getElementById('form-ref-url').value.trim();
+      const description = document.getElementById('form-description').value.trim();
 
-      // Read images directly from the array (not hidden field) to avoid sync issues
-      const imageValue = uploadedImageUrls.join(', ') || document.getElementById('form-prop-image').value.trim();
-
-      if (!imageValue) {
-        showNotification('Sila muat naik sekurang-kurangnya satu gambar hartanah!', 'error');
-        return;
+      let mainImg = "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80";
+      let imagesArr = [];
+      
+      if (uploadedImageUrls.length > 0) {
+        mainImg = uploadedImageUrls[0];
+        imagesArr = [...uploadedImageUrls];
       }
 
-      const updatedProp = {
-        id: document.getElementById('form-prop-id').value,
-        title: document.getElementById('form-prop-title').value.trim(),
-        price: parseInt(document.getElementById('form-prop-price').value) || 0,
-        priceStr: document.getElementById('form-prop-priceStr').value.trim(),
-        location: document.getElementById('form-prop-location').value.trim(),
-        region: document.getElementById('form-prop-region').value,
-        type: document.getElementById('form-prop-type').value,
-        status: document.getElementById('form-prop-status').value,
-        beds: parseInt(document.getElementById('form-prop-beds').value) || 0,
-        baths: parseInt(document.getElementById('form-prop-baths').value) || 0,
-        parking: parseInt(document.getElementById('form-prop-parking').value) || 1,
-        size: parseInt(document.getElementById('form-prop-size').value) || 0,
-        landSize: document.getElementById('form-prop-landSize').value.trim(),
-        tenure: document.getElementById('form-prop-tenure').value,
-        lotType: document.getElementById('form-prop-lotType').value,
-        refUrl: document.getElementById('form-ref-url').value.trim(),
-        image: imageValue,
-        description: document.getElementById('form-prop-description').value.trim()
+      const slug = slugify(title);
+
+      const propData = {
+        id: idx !== '' ? currentProperties[idx].id : `prop-${Date.now()}`,
+        slug: slug,
+        title: title,
+        price: price,
+        priceStr: status === 'sale' ? `RM ${price.toLocaleString('en-US')}` : `RM ${price.toLocaleString('en-US')} / bln`,
+        category: category,
+        location: location,
+        region: region,
+        type: type,
+        status: status,
+        beds: beds,
+        baths: baths,
+        parking: 2,
+        size: size,
+        landSize: landSize,
+        tenure: tenure,
+        lotType: lotType,
+        image: mainImg,
+        images: imagesArr,
+        description: description,
+        refUrl: refUrl
       };
 
-      if (index === -1) {
-        localProperties.push(updatedProp);
+      if (idx !== '') {
+        currentProperties[idx] = propData;
       } else {
-        localProperties[index] = updatedProp;
+        currentProperties.unshift(propData);
       }
 
-      closeModal();
-      renderPropertiesGrid();
+      await saveToStorage();
+      renderListingsGrid();
+      
+      submitBtn.innerHTML = '✅ Berjaya Disimpan ke R2!';
+      setTimeout(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        closeModal();
+      }, 600);
+    }
 
-      // Auto-save CSV to R2 immediately
-      const overlay = document.getElementById('loading-overlay');
-      const loaderText = document.getElementById('loading-text');
-      loaderText.textContent = 'Menyimpan hartanah ke Cloudflare R2...';
-      overlay.style.display = 'flex';
+    async function forceSyncCloudflare() {
+      const btn = document.querySelector('.btn-save-all');
+      btn.innerHTML = '⌛ Memproses Cloudflare R2...';
+      btn.disabled = true;
+      await saveToStorage();
+      setTimeout(() => {
+        btn.innerHTML = '✅ Berjaya Disimpan ke R2!';
+        setTimeout(() => {
+          btn.innerHTML = '💾 Simpan ke Cloudflare R2';
+          btn.disabled = false;
+        }, 2000);
+      }, 800);
+    }
 
+    async function saveToStorage() {
+      localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(currentProperties));
       try {
-        const csvContent = convertToCSV(localProperties);
-        const token = session.access_token;
-        const csvUpload = await fetch(`${WORKER_URL}/hartanah_database_fixed.csv`, {
-          method: 'PUT',
-          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'text/csv' },
-          body: csvContent
+        await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/properties', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(currentProperties)
         });
-        if (!csvUpload.ok) throw new Error(await csvUpload.text());
-        localStorage.setItem('hartanah_last_updated', Date.now().toString());
-        try {
-          const bc = new BroadcastChannel('hartanah_update_channel');
-          bc.postMessage('properties_updated');
-          bc.close();
-        } catch (e) {}
-        showNotification('✅ Hartanah berjaya disimpan dan diterbitkan!', 'success');
-      } catch (err) {
-        console.error('Auto-save error:', err);
-        showNotification(`Perubahan disimpan tempatan. Klik "Simpan ke R2" untuk terbitkan.`, 'error');
-      } finally {
-        overlay.style.display = 'none';
-      }
-    });
-
-    // Delete property
-    window.deleteProperty = (index) => {
-      if (confirm('Adakah anda pasti mahu memadam hartanah ini?')) {
-        localProperties.splice(index, 1);
-        renderPropertiesGrid();
-        showNotification('Hartanah dipadam secara tempatan. Klik butang Simpan di bawah untuk muat naik.', 'success');
-      }
-    };
-
-    // Populate profile form
-    function populateAgentForm() {
-      document.getElementById('agent-name').value = localAgent.name || '';
-      document.getElementById('agent-ren').value = localAgent.renCode || '';
-      document.getElementById('agent-bio').value = localAgent.bio || '';
-      document.getElementById('agent-whatsapp').value = localAgent.whatsappNumber || '';
-      document.getElementById('agent-avatar').value = localAgent.avatarUrl || '';
-      
-      // Update avatar preview
-      document.getElementById('agent-avatar-preview').src = localAgent.avatarUrl || 'images/hero_bg.png';
-      document.getElementById('agent-avatar-status').textContent = 'Pilih fail untuk menukar avatar';
-      document.getElementById('agent-avatar-status').style.color = '#64748b';
-
-      // Update header avatar initials & logo dynamically for the logged-in agent
-      const nameStr = localAgent.name || session?.user?.user_metadata?.full_name || 'Ejen Hartanah';
-      const initials = nameStr.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-      document.querySelectorAll('.user-avatar-placeholder').forEach(el => el.textContent = initials);
-
-      // Update header logo text for non-superadmin
-      if (session && session.user.email.toLowerCase() !== 'huzaimrosli@gmail.com') {
-        const logoMain = document.querySelector('.logo-main');
-        if (logoMain) {
-          const parts = nameStr.toUpperCase().split(' ');
-          const first = parts[0] || 'PORTAL';
-          const rest = parts.slice(1).join(' ') || 'EJEN';
-          logoMain.innerHTML = `${first}<span>${rest}</span>`;
-        }
-      }
-
-      const credEditor = document.getElementById('credentials-editor');
-      credEditor.innerHTML = '';
-      
-      const creds = localAgent.credentials || [];
-      creds.forEach(cred => addCredentialField(cred));
-    }
-
-    function addCredentialField(value = '') {
-      const credEditor = document.getElementById('credentials-editor');
-      const div = document.createElement('div');
-      div.className = 'cred-row';
-      div.innerHTML = `
-        <input type="text" class="credential-input" value="${value}" placeholder="Contoh: Ahli LPPEH Berdaftar" required>
-        <button type="button" class="btn-remove-cred" onclick="this.parentElement.remove()" style="background:none; border:1px solid #ef4444; color:#ef4444; border-radius:8px; padding:0 15px; cursor:pointer;">Buang</button>
-      `;
-      credEditor.appendChild(div);
-    }
-
-    document.getElementById('btn-add-cred-el').addEventListener('click', () => addCredentialField());
-
-    // ---- Multi-image upload handler (Property Images & Drag-and-Drop Reordering) ----
-    let uploadedImageUrls = []; // tracks all uploaded image URLs for current modal session
-    let draggedIdx = null;
-
-    function moveUploadedImage(idx, direction) {
-      const targetIdx = idx + direction;
-      if (targetIdx < 0 || targetIdx >= uploadedImageUrls.length) return;
-      const [item] = uploadedImageUrls.splice(idx, 1);
-      uploadedImageUrls.splice(targetIdx, 0, item);
-      rebuildImageThumbsGrid();
-    }
-    window.moveUploadedImage = moveUploadedImage;
-
-    function rebuildImageThumbsGrid() {
-      const grid = document.getElementById('image-thumbs-grid');
-      const textInput = document.getElementById('form-prop-image');
-      grid.innerHTML = '';
-
-      uploadedImageUrls.forEach((url, idx) => {
-        const thumb = document.createElement('div');
-        thumb.draggable = true;
-        thumb.dataset.index = idx;
-        thumb.style.cssText = 'position:relative; width:95px; height:75px; border-radius:10px; overflow:hidden; border:2px solid #cbd5e1; flex-shrink:0; cursor:grab; transition: all 0.2s ease; background:#fff;';
-        
-        const isUtama = idx === 0;
-
-        thumb.innerHTML = `
-          <img src="${url}" style="width:100%;height:100%;object-fit:cover;pointer-events:none;" onerror="this.src='images/hero_bg.png'">
-          <button type="button" onclick="removeUploadedImage(${idx})" style="position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;" title="Buang Gambar">&times;</button>
-          
-          <div style="position:absolute;bottom:3px;left:3px;right:3px;display:flex;justify-content:space-between;align-items:center;z-index:2;">
-            ${isUtama ? '<span style="background:#0f172a;color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;">Utama</span>' : '<span></span>'}
-            <div style="display:flex;gap:2px;">
-              ${idx > 0 ? `<button type="button" onclick="moveUploadedImage(${idx}, -1)" style="background:rgba(15,23,42,0.75);color:#fff;border:none;border-radius:3px;width:18px;height:18px;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Alih Kiri">◀</button>` : ''}
-              ${idx < uploadedImageUrls.length - 1 ? `<button type="button" onclick="moveUploadedImage(${idx}, 1)" style="background:rgba(15,23,42,0.75);color:#fff;border:none;border-radius:3px;width:18px;height:18px;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Alih Kanan">▶</button>` : ''}
-            </div>
-          </div>
-        `;
-
-        // HTML5 Drag and Drop events
-        thumb.addEventListener('dragstart', (e) => {
-          draggedIdx = idx;
-          thumb.style.opacity = '0.4';
-          e.dataTransfer.effectAllowed = 'move';
-        });
-
-        thumb.addEventListener('dragover', (e) => {
-          e.preventDefault();
-          e.dataTransfer.dropEffect = 'move';
-          thumb.style.borderColor = '#d97706';
-          thumb.style.transform = 'scale(1.05)';
-        });
-
-        thumb.addEventListener('dragleave', () => {
-          thumb.style.borderColor = '#cbd5e1';
-          thumb.style.transform = 'scale(1)';
-        });
-
-        thumb.addEventListener('drop', (e) => {
-          e.preventDefault();
-          thumb.style.borderColor = '#cbd5e1';
-          thumb.style.transform = 'scale(1)';
-          if (draggedIdx !== null && draggedIdx !== idx) {
-            const [moved] = uploadedImageUrls.splice(draggedIdx, 1);
-            uploadedImageUrls.splice(idx, 0, moved);
-            rebuildImageThumbsGrid();
-          }
-        });
-
-        thumb.addEventListener('dragend', () => {
-          draggedIdx = null;
-          thumb.style.opacity = '1';
-          thumb.style.borderColor = '#cbd5e1';
-          thumb.style.transform = 'scale(1)';
-        });
-
-        grid.appendChild(thumb);
-      });
-
-      textInput.value = uploadedImageUrls.join(', ');
-
-      const statusEl = document.getElementById('form-image-status');
-      if (statusEl) {
-        statusEl.textContent = uploadedImageUrls.length > 0 
-          ? '💡 Petua: Drag & drop gambar atau guna butang ◀ ▶ untuk menyusun urutan. Gambar 1 adalah "Utama".'
-          : 'Boleh pilih beberapa gambar sekaligus';
+      } catch (e) {
+        console.error('KV save error:', e);
       }
     }
-
-    window.removeUploadedImage = (idx) => {
-      uploadedImageUrls.splice(idx, 1);
-      rebuildImageThumbsGrid();
-    };
 
     function compressImage(file, maxWidth = 1600, maxHeight = 1600, quality = 0.82) {
       return new Promise((resolve) => {
@@ -1922,189 +998,114 @@
       });
     }
 
-    document.getElementById('form-prop-image-file').addEventListener('change', async (e) => {
+    async function handleImageUpload(e) {
       const files = Array.from(e.target.files);
-      if (!files.length) return;
-
-      const statusEl = document.getElementById('form-image-status');
-
-      statusEl.textContent = `Memuat naik ${files.length} gambar...`;
-      statusEl.style.color = '#f59e0b';
-
-      const token = session.access_token;
-      let successCount = 0;
-      let failCount = 0;
-
-      const uploadPromises = files.map(async (rawFile) => {
-        const file = await compressImage(rawFile);
-        const fileExt = file.name.split('.').pop() || 'jpg';
-        const cleanName = `images/uploaded_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
+      for (let file of files) {
+        // Automatically compress photo (max 1600px width/height, 82% quality)
+        file = await compressImage(file);
+        
+        const formData = new FormData();
+        formData.append('file', file);
         try {
-          const res = await fetch(`${WORKER_URL}/${cleanName}`, {
-            method: 'PUT',
-            headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': file.type },
-            body: file
+          const res = await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/upload', {
+            method: 'POST',
+            body: formData
           });
-          if (!res.ok) throw new Error(await res.text());
-          uploadedImageUrls.push(`${R2_URL}/${cleanName}`);
-          successCount++;
+          const data = await res.json();
+          if (data.url) {
+            uploadedImageUrls.push(data.url);
+          } else {
+            throw new Error('No URL returned');
+          }
         } catch (err) {
-          console.error('Upload failed for', file.name, err);
-          failCount++;
+          console.error('Cloudflare R2 Upload error:', err);
+          await new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+              uploadedImageUrls.push(ev.target.result);
+              resolve();
+            };
+            reader.readAsDataURL(file);
+          });
         }
-      });
-
-      await Promise.all(uploadPromises);
+      }
       rebuildImageThumbsGrid();
-      e.target.value = ''; // reset so same files can be picked again
+    }
 
-      if (failCount === 0) {
-        statusEl.textContent = `${successCount} gambar berjaya dimuat naik! Boleh tambah lagi.`;
-        statusEl.style.color = '#16a34a';
-        showNotification(`${successCount} gambar berjaya dimuat naik ke Cloudflare R2.`, 'success');
-      } else {
-        statusEl.textContent = `${successCount} berjaya, ${failCount} gagal.`;
-        statusEl.style.color = '#ef4444';
-        showNotification(`${failCount} gambar gagal dimuat naik.`, 'error');
-      }
-    });
+    function rebuildImageThumbsGrid() {
+      const grid = document.getElementById('image-thumbs-grid');
+      grid.innerHTML = '';
 
-    // Image file upload handler (Agent Avatar)
-    document.getElementById('agent-avatar-file').addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const statusEl = document.getElementById('agent-avatar-status');
-      const previewEl = document.getElementById('agent-avatar-preview');
-      const textInput = document.getElementById('agent-avatar');
-
-      if (file.size > 2 * 1024 * 1024) {
-        alert('Ralat: Fail gambar avatar terlalu besar! Had maksimum adalah 2MB.');
-        e.target.value = '';
-        return;
-      }
-
-      statusEl.textContent = 'Memuat naik...';
-      statusEl.style.color = 'var(--accent)';
-
-      const fileExt = file.name.split('.').pop() || 'png';
-      const cleanName = `images/avatar_${Date.now()}.${fileExt}`;
-
-      try {
-        const token = session.access_token;
-        const res = await fetch(`${WORKER_URL}/${cleanName}`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': file.type
-          },
-          body: file
-        });
-
-        if (!res.ok) {
-          const errMsg = await res.text();
-          throw new Error(errMsg || 'Gagal memuat naik.');
-        }
-
-        const uploadedUrl = `${R2_URL}/${cleanName}`;
-        textInput.value = uploadedUrl;
-        previewEl.src = uploadedUrl;
+      uploadedImageUrls.forEach((url, idx) => {
+        const thumb = document.createElement('div');
+        thumb.dataset.index = idx;
+        thumb.style.cssText = 'position:relative; width:85px; height:65px; border-radius:8px; overflow:hidden; border:2px solid #cbd5e1; flex-shrink:0; cursor:grab; background:#fff; touch-action:none;';
         
-        statusEl.textContent = 'Avatar dikemaskini!';
-        statusEl.style.color = 'var(--whatsapp)';
-        showNotification('Gambar avatar berjaya dimuat naik ke Cloudflare R2.', 'success');
-      } catch (err) {
-        console.error('Avatar upload failed:', err);
-        statusEl.textContent = 'Gagal memuat naik avatar. Cuba lagi.';
-        statusEl.style.color = '#ef4444';
-        showNotification(`Gagal memuat naik avatar: ${err.message}`, 'error');
-      }
-    });
+        const isMain = idx === 0;
 
-    // Save all to R2
-    document.getElementById('btn-save-all-el').addEventListener('click', async () => {
-      // Get Agent values
-      localAgent.name = document.getElementById('agent-name').value.trim();
-      localAgent.renCode = document.getElementById('agent-ren').value.trim();
-      localAgent.bio = document.getElementById('agent-bio').value.trim();
-      localAgent.whatsappNumber = document.getElementById('agent-whatsapp').value.trim();
-      localAgent.avatarUrl = document.getElementById('agent-avatar').value.trim();
+        thumb.innerHTML = `
+          <img src="${url}" style="width:100%;height:100%;object-fit:cover;pointer-events:none;" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80'">
+          <button type="button" onclick="removeUploadedImage(${idx})" style="position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;cursor:pointer;font-size:11px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;" title="Buang Gambar">&times;</button>
+          ${isMain ? '<span style="position:absolute;bottom:3px;left:3px;background:#0f172a;color:#fff;font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px;z-index:2;">Utama</span>' : ''}
+        `;
 
-      const credInputs = document.querySelectorAll('.credential-input');
-      localAgent.credentials = Array.from(credInputs).map(inp => inp.value.trim()).filter(Boolean);
+        thumb.addEventListener('pointerdown', (e) => {
+          if (e.target.tagName === 'BUTTON') return;
+          e.preventDefault();
+          e.stopPropagation();
+          thumb.setPointerCapture(e.pointerId);
 
-      if (!localAgent.name || !localAgent.renCode || !localAgent.bio || !localAgent.whatsappNumber) {
-        showNotification('Sila isi semua maklumat profil ejen!', 'error');
-        return;
-      }
+          draggedIdx = idx;
+          const rect = thumb.getBoundingClientRect();
+          const ghost = thumb.cloneNode(true);
+          ghost.style.cssText = `position:fixed; width:${rect.width}px; height:${rect.height}px; left:${rect.left}px; top:${rect.top}px; opacity:0.8; z-index:9999; pointer-events:none; border-radius:8px; border:2px solid #d97706; box-shadow:0 8px 24px rgba(0,0,0,0.3); transform:scale(1.06); transition:none;`;
+          document.body.appendChild(ghost);
+          thumb.style.opacity = '0.25';
 
-      const overlay = document.getElementById('loading-overlay');
-      const loaderText = document.getElementById('loading-text');
-      loaderText.textContent = 'Menyimpan dan memuat naik data ke Cloudflare R2...';
-      overlay.style.display = 'flex';
+          const offsetX = e.clientX - rect.left;
+          const offsetY = e.clientY - rect.top;
+          let dropTargetIdx = idx;
 
-      try {
-        const csvContent = convertToCSV(localProperties);
-        const jsonContent = JSON.stringify(localAgent, null, 2);
-        
-        const token = session.access_token;
+          const onMove = (ev) => {
+            ghost.style.left = (ev.clientX - offsetX) + 'px';
+            ghost.style.top = (ev.clientY - offsetY) + 'px';
 
-        // Upload CSV
-        const csvUpload = await fetch(`${WORKER_URL}/hartanah_database_fixed.csv`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'text/csv'
-          },
-          body: csvContent
+            const thumbs = grid.querySelectorAll('[data-index]');
+            thumbs.forEach(t => {
+              const tRect = t.getBoundingClientRect();
+              if (ev.clientX >= tRect.left && ev.clientX <= tRect.right && ev.clientY >= tRect.top && ev.clientY <= tRect.bottom) {
+                dropTargetIdx = parseInt(t.dataset.index);
+              }
+            });
+          };
+
+          const onUp = () => {
+            thumb.removeEventListener('pointermove', onMove);
+            thumb.removeEventListener('pointerup', onUp);
+            ghost.remove();
+            thumb.style.opacity = '1';
+
+            if (draggedIdx !== null && dropTargetIdx !== draggedIdx) {
+              const [moved] = uploadedImageUrls.splice(draggedIdx, 1);
+              uploadedImageUrls.splice(dropTargetIdx, 0, moved);
+              rebuildImageThumbsGrid();
+            }
+            draggedIdx = null;
+          };
+
+          thumb.addEventListener('pointermove', onMove);
+          thumb.addEventListener('pointerup', onUp);
         });
 
-        if (!csvUpload.ok) {
-          const errMsg = await csvUpload.text();
-          throw new Error(`CSV Upload Failed: ${errMsg}`);
-        }
+        grid.appendChild(thumb);
+      });
+    }
 
-        // Upload JSON
-        const jsonUpload = await fetch(`${WORKER_URL}/agent_settings.json`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: jsonContent
-        });
-
-        if (!jsonUpload.ok) {
-          const errMsg = await jsonUpload.text();
-          throw new Error(`JSON Upload Failed: ${errMsg}`);
-        }
-
-        showNotification('Perubahan berjaya disimpan dan dimuat naik ke R2!', 'success');
-        await loadR2Data();
-
-      } catch (err) {
-        console.error('Save error:', err);
-        showNotification(`Gagal menyimpan data: ${err.message}`, 'error');
-      } finally {
-        overlay.style.display = 'none';
-      }
-    });
-
-    function showNotification(message, type = 'success') {
-      const banner = document.getElementById('notification-banner');
-      banner.textContent = message;
-      
-      if (type === 'error') {
-        banner.style.background = '#ef4444';
-      } else {
-        banner.style.background = 'var(--whatsapp)';
-      }
-      
-      banner.classList.add('show');
-      setTimeout(() => {
-        banner.classList.remove('show');
-      }, 3500);
+    function removeUploadedImage(idx) {
+      uploadedImageUrls.splice(idx, 1);
+      rebuildImageThumbsGrid();
     }
   </script>
+  <script src="/pwa.js"></script>
 </body>
 </html>
