@@ -68,7 +68,7 @@ function createPropertyCardHTML(item) {
   return `
     <div class="property-card">
       <div class="property-thumb-wrap">
-        <img src="${cardImg}" class="property-thumb" alt="${item.title}" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'">
+        <img src="${cardImg}" class="property-thumb" alt="${item.title}" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'">
         <span class="property-badge ${badgeClass}">${badgeLabel}</span>
         <span class="property-region-badge">${item.region}</span>
       </div>
