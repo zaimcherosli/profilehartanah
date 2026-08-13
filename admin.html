@@ -338,48 +338,62 @@
     /* Dedicated Mobile Responsive Overrides */
     @media (max-width: 768px) {
       .admin-wrapper {
-        padding-top: 85px !important;
+        padding-top: 70px !important;
         padding-bottom: 40px !important;
       }
       .admin-container {
-        padding: 0 12px !important;
+        padding: 0 10px !important;
       }
       header.site-header {
         height: auto !important;
-        padding: 10px 0 !important;
+        padding: 8px 0 !important;
       }
       .nav-wrapper {
         height: auto !important;
-        gap: 10px !important;
+        gap: 8px !important;
       }
       .logo-main {
-        font-size: 1.15rem !important;
+        font-size: 1.05rem !important;
       }
       .logo-sub {
-        font-size: 0.55rem !important;
+        font-size: 0.52rem !important;
+      }
+      .badge-version {
+        font-size: 0.62rem !important;
+        padding: 2px 7px !important;
+        margin-left: 0 !important;
       }
       .user-badge {
-        font-size: 0.78rem !important;
-        padding: 4px 10px !important;
+        font-size: 0.75rem !important;
+        padding: 4px 8px !important;
       }
       .user-badge #user-display {
         display: none !important;
       }
       .panel {
-        padding: 16px 12px !important;
-        border-radius: 16px !important;
+        padding: 14px 10px !important;
+        border-radius: 14px !important;
       }
       .listings-header {
         flex-direction: column !important;
         align-items: stretch !important;
-        gap: 12px !important;
-        margin-bottom: 18px !important;
+        gap: 10px !important;
+        margin-bottom: 16px !important;
       }
-      .btn-add {
+      .admin-btn-group {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
         width: 100% !important;
+      }
+      .admin-btn-group .btn-add {
+        width: 100% !important;
+        font-size: 0.76rem !important;
+        padding: 10px 4px !important;
+        height: 42px !important;
+        justify-content: center !important;
         text-align: center !important;
-        padding: 12px !important;
-        height: 44px !important;
+        white-space: nowrap !important;
       }
       .listing-item {
         flex-direction: column !important;
@@ -476,7 +490,7 @@
           <span class="logo-main">ZAIM<span>ROSLI</span></span>
           <span class="logo-sub">PORTAL EJEN (ADMIN)</span>
         </div>
-        <span style="background:#0f172a; color:#fbbf24; padding:3px 10px; border-radius:12px; font-size:0.72rem; font-weight:800; border:1px solid #d97706; white-space:nowrap; letter-spacing:0.5px;">v2.5.0 • Live KV</span>
+        <span class="badge-version" style="background:#0f172a; color:#fbbf24; padding:3px 10px; border-radius:12px; font-size:0.72rem; font-weight:800; border:1px solid #d97706; white-space:nowrap; letter-spacing:0.5px;">v2.5.0 • Live KV</span>
       </a>
 
       <div class="user-badge">
@@ -496,8 +510,8 @@
         
         <div class="listings-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
           <h2>Urus Listings Hartanah</h2>
-          <div style="display:flex; gap:10px; align-items:center;">
-            <button onclick="loadPropertiesList()" class="btn-add" style="background:#475569; color:#fff;" title="Muat Semula Dari Cloudflare KV">🔄 Refresh Live List</button>
+          <div class="admin-btn-group" style="display:flex; gap:10px; align-items:center;">
+            <button onclick="loadPropertiesList()" class="btn-add" style="background:#475569; color:#fff;" title="Muat Semula Dari Cloudflare KV">🔄 Refresh List</button>
             <button onclick="openModal()" class="btn-add">+ Tambah Hartanah</button>
           </div>
         </div>
