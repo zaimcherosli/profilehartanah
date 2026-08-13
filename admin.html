@@ -124,94 +124,117 @@
 
     .listing-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 16px;
-      padding: 16px;
+      padding: 18px;
       transition: all 0.2s ease;
-      gap: 20px;
+      gap: 18px;
     }
 
     .listing-item:hover {
       border-color: #cbd5e1;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
     }
 
     .listing-thumb {
-      width: 100px;
-      height: 75px;
-      border-radius: 10px;
+      width: 140px;
+      height: 100px;
+      border-radius: 12px;
       object-fit: cover;
       background: #f1f5f9;
       flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
 
     .listing-info {
       flex: 1;
       min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
-    .listing-title-row {
+    .listing-badges-row {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .listing-title {
       font-size: 1.05rem;
       font-weight: 700;
       color: #0f172a;
-      margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      margin: 2px 0;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .listing-price-tag {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #d97706;
+      margin-left: auto;
+    }
+
+    .listing-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      font-size: 0.82rem;
+      color: #64748b;
+      align-items: center;
+      margin-top: 2px;
+    }
+
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #f8fafc;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid #f1f5f9;
+      font-weight: 500;
     }
 
     .badge-status {
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 9px;
       border-radius: 6px;
       text-transform: uppercase;
       white-space: nowrap;
-      flex-shrink: 0;
       display: inline-block;
+      letter-spacing: 0.3px;
     }
 
     .badge-sale-style {
-      background: rgba(217, 119, 6, 0.1);
+      background: #fef3c7;
       color: #b45309;
+      border: 1px solid #fde68a;
     }
 
     .badge-rent-style {
-      background: rgba(16, 185, 129, 0.1);
-      color: #059669;
-    }
-
-    .listing-sub {
-      font-size: 0.9rem;
-      color: #64748b;
-      margin: 0;
-    }
-
-    .listing-price {
-      font-weight: 800;
-      color: #0f172a;
+      background: #d1fae5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
     }
 
     .action-btn {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      width: 36px;
-      height: 36px;
+      padding: 7px 12px;
       border-radius: 8px;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
       cursor: pointer;
-      color: #64748b;
+      color: #334155;
       transition: all 0.2s ease;
     }
 
@@ -221,17 +244,25 @@
       border-color: #cbd5e1;
     }
 
-    .action-btn.delete:hover {
+    .action-btn.delete {
       background: #fef2f2;
-      color: #ef4444;
+      color: #dc2626;
       border-color: #fecaca;
+      padding: 7px 9px;
+    }
+
+    .action-btn.delete:hover {
+      background: #fee2e2;
+      color: #b91c1c;
+      border-color: #fca5a5;
     }
 
     .listing-actions-row {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
       justify-content: flex-end;
+      flex-shrink: 0;
     }
 
     /* Fixed Bottom Save Bar */
@@ -494,8 +525,10 @@
     <div class="container nav-wrapper" style="display: flex; justify-content: space-between; align-items: center; height: 80px;">
       <a href="index.html" class="logo" style="display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; gap:2px;">
         <span class="logo-main">ZAIM<span>ROSLI</span></span>
-        <span class="logo-sub" style="display:block; margin-top:2px;">PORTAL EJEN (ADMIN)</span>
-        <span class="badge-version" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; padding: 3px 9px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; border: 1px solid #b45309; margin-top: 4px; display: inline-block; box-shadow: 0 2px 5px rgba(217, 119, 6, 0.3); letter-spacing: 0.3px;">v2.5.0 • Live KV</span>
+        <div style="display:flex; align-items:center; gap:8px; margin-top:2px; flex-wrap:wrap;">
+          <span class="logo-sub" style="margin:0;">PORTAL EJEN (ADMIN)</span>
+          <span class="badge-version" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; padding: 2px 8px; border-radius: 8px; font-size: 0.65rem; font-weight: 800; border: 1px solid #b45309; box-shadow: 0 1px 4px rgba(217, 119, 6, 0.25);">v2.5.0 • Live KV</span>
+        </div>
       </a>
 
       <div class="user-badge">
@@ -765,39 +798,38 @@
         const badgeClass = p.status === 'sale' ? 'badge-sale-style' : 'badge-rent-style';
         const badgeText = p.status === 'sale' ? 'FOR SALE' : 'FOR RENT';
         const priceDisplay = p.status === 'sale' ? `RM ${p.price.toLocaleString('en-US')}` : `RM ${p.price.toLocaleString('en-US')} / bln`;
-        const categoryBadge = p.category ? `<span style="background:#e2e8f0; color:#334155; padding:2px 8px; border-radius:4px; font-size:0.7rem; font-weight:700; margin-left:6px;">${p.category}</span>` : '';
-        const refLinkHtml = p.refUrl ? `<a href="${p.refUrl}" target="_blank" class="btn-ref-link" style="display:inline-flex; align-items:center; gap:4px; background:#f1f5f9; color:#0f172a; padding:4px 10px; border-radius:6px; font-size:0.75rem; text-decoration:none; font-weight:600; border:1px solid #cbd5e1; margin-top:6px;">🔗 Pautan Rujukan (PropMall)</a>` : '';
+        const categoryBadge = p.category ? `<span style="background:#f1f5f9; color:#334155; padding:3px 8px; border-radius:6px; font-size:0.72rem; font-weight:700; border:1px solid #e2e8f0;">${p.category}</span>` : '';
+        const typeBadge = p.type ? `<span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:6px; font-size:0.72rem; font-weight:700; border:1px solid #bae6fd;">${p.type}</span>` : '';
+        const refLinkHtml = p.refUrl ? `<a href="${p.refUrl}" target="_blank" class="btn-ref-link" style="display:inline-flex; align-items:center; gap:5px; background:#f8fafc; color:#0f172a; padding:4px 10px; border-radius:6px; font-size:0.75rem; text-decoration:none; font-weight:600; border:1px solid #cbd5e1; margin-top:4px; width:fit-content;">🔗 Pautan Rujukan (PropMall)</a>` : '';
 
         return `
           <div class="listing-item">
             <img src="${mainImg}" class="listing-thumb" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80'">
             <div class="listing-info">
-              <div class="listing-title-row">
-                <h3 class="listing-title">${p.title}</h3>
-                <div>
-                  <span class="badge-status ${badgeClass}">${badgeText}</span>
-                  ${categoryBadge}
-                </div>
+              <div class="listing-badges-row">
+                <span class="badge-status ${badgeClass}">${badgeText}</span>
+                ${categoryBadge}
+                ${typeBadge}
+                <span class="listing-price-tag">${priceDisplay}</span>
               </div>
-              <p class="listing-sub">
-                <span class="listing-price">${priceDisplay}</span>
-                <span style="margin: 0 4px;">•</span>
-                ${p.location}
-                <span style="margin: 0 4px;">•</span>
-                ${p.type}
-                <span style="margin: 0 4px;">•</span>
-                ${p.beds} Bilik / ${p.baths} B.Air / Built-up ${p.size} sqft
-              </p>
+              <h3 class="listing-title">${p.title}</h3>
+              <div class="listing-meta-row">
+                <span class="meta-chip">📍 ${p.location}</span>
+                <span class="meta-chip">🛏️ ${p.beds} Bilik</span>
+                <span class="meta-chip">🚿 ${p.baths} B.Air</span>
+                <span class="meta-chip">📐 Built-up ${p.size} sqft</span>
+                ${p.landSize && p.landSize !== '-' ? `<span class="meta-chip">🌳 Tanah ${p.landSize}</span>` : ''}
+              </div>
               ${refLinkHtml}
             </div>
             
-            <!-- Action Icons (Aligned Right) -->
             <div class="listing-actions-row">
               <button onclick="editProperty(${idx})" class="action-btn" title="Edit Hartanah">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <span>Edit</span>
               </button>
               <button onclick="deleteProperty(${idx})" class="action-btn delete" title="Padam Hartanah">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
               </button>
             </div>
           </div>
