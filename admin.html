@@ -370,6 +370,13 @@
       .user-badge #user-display {
         display: none !important;
       }
+      .btn-logout .logout-text {
+        display: none !important;
+      }
+      .btn-logout {
+        padding: 6px 10px !important;
+        border-radius: 8px !important;
+      }
       .panel {
         padding: 14px 10px !important;
         border-radius: 14px !important;
@@ -485,18 +492,19 @@
   <!-- Site Navigation Header -->
   <header class="site-header">
     <div class="container nav-wrapper" style="display: flex; justify-content: space-between; align-items: center; height: 80px;">
-      <a href="index.html" class="logo" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <div>
-          <span class="logo-main">ZAIM<span>ROSLI</span></span>
-          <span class="logo-sub">PORTAL EJEN (ADMIN)</span>
-        </div>
-        <span class="badge-version" style="background:#0f172a; color:#fbbf24; padding:3px 10px; border-radius:12px; font-size:0.72rem; font-weight:800; border:1px solid #d97706; white-space:nowrap; letter-spacing:0.5px;">v2.5.0 • Live KV</span>
+      <a href="index.html" class="logo" style="display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; gap:2px;">
+        <span class="logo-main">ZAIM<span>ROSLI</span></span>
+        <span class="logo-sub" style="display:block; margin-top:2px;">PORTAL EJEN (ADMIN)</span>
+        <span class="badge-version" style="background:#0f172a; color:#fbbf24; padding:2px 8px; border-radius:10px; font-size:0.65rem; font-weight:800; border:1px solid #d97706; margin-top:3px; display:inline-block;">v2.5.0 • Live KV</span>
       </a>
 
       <div class="user-badge">
         <div class="user-avatar-placeholder">ZR</div>
         <span id="user-display">huzaimrosli@gmail.com</span>
-        <button onclick="handleLogout()" class="btn-logout">Log Keluar</button>
+        <button onclick="handleLogout()" class="btn-logout" title="Log Keluar">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span class="logout-text">Log Keluar</span>
+        </button>
       </div>
     </div>
   </header>
@@ -718,7 +726,13 @@
       try {
         const res = await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/properties?t=' + Date.now());
         if (res.ok) {
-          const remoteData = await res.json();
+          let remoteData = await res.json();
+          if (typeof remoteData === 'string') {
+            try { remoteData = JSON.parse(remoteData); } catch(e) {}
+          }
+          if (remoteData && !Array.isArray(remoteData) && typeof remoteData === 'object') {
+            remoteData = [remoteData];
+          }
           if (Array.isArray(remoteData) && remoteData.length > 0) {
             currentProperties = remoteData;
             localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(remoteData));
