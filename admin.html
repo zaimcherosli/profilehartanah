@@ -526,7 +526,7 @@
       <a href="index.html" class="logo" style="display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; gap:2px;">
         <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
           <span class="logo-main">ZAIM<span>ROSLI</span></span>
-          <span class="badge-version" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; padding: 2px 8px; border-radius: 8px; font-size: 0.65rem; font-weight: 800; border: 1px solid #b45309; box-shadow: 0 1px 4px rgba(217, 119, 6, 0.25);">v2.5.0 • Live KV</span>
+          <span class="badge-version" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; padding: 2px 8px; border-radius: 8px; font-size: 0.65rem; font-weight: 800; border: 1px solid #b45309; box-shadow: 0 1px 4px rgba(217, 119, 6, 0.25);">v2.6.0 • Live KV</span>
         </div>
         <span class="logo-sub" style="margin-top:2px;">PORTAL EJEN (ADMIN)</span>
       </a>
@@ -580,27 +580,70 @@
       <form id="prop-form" onsubmit="saveProperty(event)">
         <input type="hidden" id="form-id">
 
-        <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">NAMA / TAJUK HARTANAH</label>
-          <input type="text" id="form-title" class="form-input" placeholder="Contoh: The Grand Pavilion Penthouse" required>
+        <!-- === RENHUB SOURCE CATEGORY SELECTION === -->
+        <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 14px; margin-bottom: 18px;">
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 6px;">
+            <div style="width: 100%;">
+              <label style="display: block; font-size: 0.76rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px;">LISTING SOURCE CATEGORY *</label>
+              <select id="form-source" class="form-select" onchange="toggleRenhubFormFields()" style="width: 100%; padding: 11px 12px; border-radius: 8px; border: 1.5px solid #94a3b8; font-weight: 800; background: #ffffff; color: #0f172a; font-size: 0.88rem;">
+                <option value="my_listing" selected>My Listing (Direct Owner / Listing Sendiri)</option>
+                <option value="coa">COA Listing (Rakan Agensi / Co-Agency)</option>
+                <option value="undercon">Undercon (Projek Baru Pemaju)</option>
+              </select>
+            </div>
+            <div style="width: 100%;" id="group-exclusive-expiry">
+              <label style="display: block; font-size: 0.76rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px;">EXCLUSIVE EXPIRY DATE</label>
+              <input type="date" id="form-exclusive-expiry" class="form-input" style="width: 100%; padding: 10px 12px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 0.88rem;">
+            </div>
+          </div>
+
+          <!-- Extra COA Details -->
+          <div id="row-coa-fields" style="display: none; flex-direction: column; gap: 10px; margin-top: 12px; padding: 12px; border: 1px solid #86efac; background: #f0fdf4; border-radius: 8px;">
+            <div style="width: 100%;">
+              <label style="display: block; font-size: 0.72rem; font-weight: 800; color: #166534; margin-bottom: 4px; text-transform: uppercase;">COA AGENT NAME & AGENCY</label>
+              <input type="text" id="form-coa-agent" class="form-input" placeholder="e.g. Sarah Property (IQI Realty)" style="width: 100%; padding: 9px 12px; border-radius: 6px; border: 1.5px solid #86efac; font-size: 0.85rem;">
+            </div>
+            <div style="width: 100%;">
+              <label style="display: block; font-size: 0.72rem; font-weight: 800; color: #166534; margin-bottom: 4px; text-transform: uppercase;">COA AGENT PHONE NUMBER</label>
+              <input type="text" id="form-coa-phone" class="form-input" placeholder="e.g. 012-3456789" style="width: 100%; padding: 9px 12px; border-radius: 6px; border: 1.5px solid #86efac; font-size: 0.85rem;">
+            </div>
+          </div>
+
+          <!-- Extra Undercon Details -->
+          <div id="row-undercon-fields" style="display: none; flex-direction: column; gap: 10px; margin-top: 12px; padding: 12px; border: 1px solid #fdba74; background: #fff7ed; border-radius: 8px;">
+            <div style="width: 100%;">
+              <label style="display: block; font-size: 0.72rem; font-weight: 800; color: #9a3412; margin-bottom: 4px; text-transform: uppercase;">TARGET COMPLETION DATE / YEAR</label>
+              <input type="text" id="form-completion" class="form-input" placeholder="e.g. Q4 2026 / 2027" style="width: 100%; padding: 9px 12px; border-radius: 6px; border: 1.5px solid #fdba74; font-size: 0.85rem;">
+            </div>
+            <div style="width: 100%;">
+              <label style="display: block; font-size: 0.72rem; font-weight: 800; color: #9a3412; margin-bottom: 4px; text-transform: uppercase;">DEVELOPER PACKAGE HIGHLIGHTS</label>
+              <input type="text" id="form-developer-package" class="form-input" placeholder="e.g. Free SPA Legal, Zero Downpayment" style="width: 100%; padding: 9px 12px; border-radius: 6px; border: 1.5px solid #fdba74; font-size: 0.85rem;">
+            </div>
+          </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">HARGA (RM)</label>
-          <input type="number" id="form-price" class="form-input" placeholder="1250000" required>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">PROPERTY TITLE *</label>
+          <input type="text" id="form-title" class="form-input" placeholder="e.g. Banglo 2 Tingkat Seksyen 7 Bangi" required>
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">KATEGORI TRANSAKSI</label>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">PRICE (RM) *</label>
+          <input type="number" id="form-price" class="form-input" placeholder="e.g. 850000" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">TRANSACTION CATEGORY</label>
           <select id="form-category" class="form-select" required>
-            <option value="Subsales">Subsales / Rumah Second-hand</option>
-            <option value="New Project">Projek Baharu (New Project)</option>
-            <option value="Rental">Sewa (Rental / WTL)</option>
+            <option value="Subsales">Subsales (FOR SALE / WTS)</option>
+            <option value="Rental">Rental (FOR RENT / WTL)</option>
+            <option value="Undercon">Undercon (Projek Baru)</option>
+            <option value="Lelong">Lelong (Auction)</option>
           </select>
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">STATUS PENAMPILAN</label>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">TRANSACTION STATUS</label>
           <select id="form-status" class="form-select" required>
             <option value="sale">FOR SALE</option>
             <option value="rent">FOR RENT</option>
@@ -608,12 +651,12 @@
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">ALAMAT / LOKASI PENUH</label>
-          <input type="text" id="form-location" class="form-input" placeholder="Contoh: KLCC, Kuala Lumpur" required>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">FULL LOCATION / ADDRESS</label>
+          <input type="text" id="form-location" class="form-input" placeholder="e.g. Bangi, Selangor / KLCC, Kuala Lumpur" required>
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">NEGERI</label>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">STATE / REGION</label>
           <select id="form-region" class="form-select" required>
             <option value="Kuala Lumpur">Kuala Lumpur</option>
             <option value="Selangor">Selangor</option>
@@ -635,46 +678,61 @@
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">JENIS HARTANAH</label>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">PROPERTY TYPE</label>
           <select id="form-type" class="form-select" required>
-            <option value="Kondominium">Kondominium / Serviced Apt</option>
-            <option value="Teres">Rumah Teres / Link House</option>
+            <option value="Condominium">Condominium / Serviced Residence</option>
+            <option value="Terrace House">Terrace / Link House</option>
             <option value="Semi-D">Semi-D / Semi-Detached</option>
-            <option value="Banglo">Banglo / Villa</option>
+            <option value="Bungalow">Bungalow / Villa</option>
             <option value="Apartment">Apartment / Flat</option>
             <option value="Townhouse">Townhouse</option>
             <option value="Studio">Studio / SOHO / SOFO</option>
-            <option value="Kilang">Kilang / Gudang (Industrial)</option>
-            <option value="Tanah Industri">Tanah Industri / Commercial Land</option>
-            <option value="Kedai / Pejabat">Kedai / Pejabat (Shoplot / Office)</option>
-            <option value="Ruang Komersial">Ruang Komersial / Retail Space</option>
+            <option value="Land">Land / Agricultural Land</option>
+            <option value="Commercial Land">Commercial Land / Industrial Land</option>
+            <option value="Factory">Factory / Warehouse (Industrial)</option>
+            <option value="Shop / Office">Shop / Office (Shoplot / Office)</option>
+            <option value="Commercial Space">Commercial Space / Retail Space</option>
           </select>
         </div>
 
-        <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">BILIK</label>
-          <input type="number" id="form-beds" class="form-input" value="3" required>
+        <!-- BEDROOMS ROW (Clean Alignment) -->
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; margin-bottom: 16px;">
+          <div class="form-group" style="display: flex; flex-direction: column; justify-content: flex-end;">
+            <label style="display: flex; align-items: flex-end; min-height: 30px; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase;">BEDROOMS / ROOMS</label>
+            <input type="number" id="form-beds" class="form-input" placeholder="0" style="width: 100%;">
+          </div>
+          <div class="form-group" style="display: flex; flex-direction: column; justify-content: flex-end;">
+            <label style="display: flex; align-items: flex-end; min-height: 30px; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase;">EXTRA ROOMS (+)</label>
+            <input type="number" id="form-beds-plus" class="form-input" placeholder="0" style="width: 100%;">
+          </div>
+        </div>
+
+        <!-- BATHROOMS ROW (Clean Alignment) -->
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; margin-bottom: 16px;">
+          <div class="form-group" style="display: flex; flex-direction: column; justify-content: flex-end;">
+            <label style="display: flex; align-items: flex-end; min-height: 30px; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase;">BATHROOMS</label>
+            <input type="number" id="form-baths" class="form-input" placeholder="0" style="width: 100%;">
+          </div>
+          <div class="form-group" style="display: flex; flex-direction: column; justify-content: flex-end;">
+            <label style="display: flex; align-items: flex-end; min-height: 30px; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase;">EXTRA BATHS (+)</label>
+            <input type="number" id="form-baths-plus" class="form-input" placeholder="0" style="width: 100%;">
+          </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">B.AIR</label>
-          <input type="number" id="form-baths" class="form-input" value="2" required>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">LAND AREA (OPTIONAL)</label>
+          <input type="text" id="form-landSize" class="form-input" placeholder="e.g. 9.00 acre / 5.00 acre / 4,500 sqft">
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">SAIZ TANAH (LAND AREA)</label>
-          <input type="text" id="form-landSize" class="form-input" placeholder="Contoh: 2.11 acre atau 4500 sqft">
-        </div>
-
-        <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">SAIZ BINA-AN (BUILT-UP SQFT)</label>
-          <input type="number" id="form-size" class="form-input" placeholder="Contoh: 50407" required>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">BUILT-UP SIZE (SQFT - OPTIONAL)</label>
+          <input type="number" id="form-size" class="form-input" placeholder="e.g. 3000 (Leave blank if land)">
         </div>
 
         <div id="group-tenure" class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">PEGANGAN</label>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">TENURE</label>
           <select id="form-tenure" class="form-select">
-            <option value="-">- (TIDAK PERLU / FOR RENT)</option>
+            <option value="-">- N/A (FOR RENT)</option>
             <option value="Freehold">Freehold</option>
             <option value="Leasehold">Leasehold</option>
           </select>
@@ -683,22 +741,22 @@
         <div id="group-lotType" class="form-group" style="margin-bottom: 16px;">
           <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">LOT TYPE</label>
           <select id="form-lotType" class="form-select">
-            <option value="-">- (TIDAK PERLU / FOR RENT)</option>
+            <option value="-">- N/A (FOR RENT)</option>
             <option value="Non-Bumi Lot">Non-Bumi Lot</option>
             <option value="Bumi Lot">Bumi Lot</option>
             <option value="Open Title">Open Title</option>
-            <option value="Rezab Melayu">Rezab Melayu</option>
+            <option value="Malay Reserve">Malay Reserve</option>
           </select>
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">Pautan Rujukan / Referral Link (e.g. PropMall)</label>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">Referral Link (e.g. PropMall)</label>
           <input type="url" id="form-ref-url" class="form-input" placeholder="https://propmall.co/share/eezmfo1hta">
         </div>
 
         <!-- Image Upload & Drag Drop Grid -->
         <div class="form-group" style="margin-bottom: 18px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">GAMBAR HARTANAH (MUAT NAIK CLOUDFLARE R2)</label>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">PROPERTY IMAGES (CLOUDFLARE R2 UPLOAD)</label>
           <div style="display: flex; gap: 10px; margin-bottom: 6px;">
             <input type="file" id="form-image-file" multiple accept="image/*" class="form-input" onchange="handleImageUpload(event)">
           </div>
@@ -707,19 +765,19 @@
             <!-- Rendered thumbs -->
           </div>
           <p style="font-size: 0.78rem; color: #64748b; margin-top: 6px;">
-            💡 Tahan & seret gambar untuk ubah susunan. Gambar 1 adalah Gambar Utama.
+            Click & drag images to reorder. Image 1 will be used as the Cover Photo.
           </p>
         </div>
 
         <!-- Description with full height auto-expand -->
         <div class="form-group" style="margin-bottom: 24px;">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">DESKRIPSI HARTANAH (PAPARAN PENUH)</label>
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:6px; text-transform:uppercase;">PROPERTY DESCRIPTION (FULL DETAILS)</label>
           <textarea id="form-description" class="form-textarea" style="min-height: 180px; height: auto; overflow: hidden; resize: vertical;" oninput="autoResizeDescription(this)" required></textarea>
         </div>
 
-        <div style="display: flex; gap: 10px; justify-content: flex-end;">
-          <button type="button" onclick="closeModal()" class="btn btn-outline btn-sm">Batal</button>
-          <button type="submit" class="btn btn-accent btn-sm">Simpan Hartanah</button>
+        <div class="modal-action-row">
+          <button type="button" onclick="closeModal()" class="btn btn-outline" style="flex: 1;">Cancel</button>
+          <button type="submit" id="prop-submit-btn" class="btn btn-accent" style="flex: 2;">Save Property</button>
         </div>
       </form>
 
@@ -927,6 +985,14 @@
       }
     }
 
+    function slugify(text) {
+      if (!text) return "";
+      return text.toString().toLowerCase().trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
     async function saveProperty(e) {
       e.preventDefault();
       const submitBtn = e.target.querySelector('button[type="submit"]');
@@ -1019,11 +1085,15 @@
     async function saveToStorage() {
       localStorage.setItem('ZAIM_ROSLI_PROPERTIES', JSON.stringify(currentProperties));
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
         await fetch('https://zaimrosli-worker.huzaimrosli.workers.dev/api/properties', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(currentProperties)
+          body: JSON.stringify(currentProperties),
+          signal: controller.signal
         });
+        clearTimeout(timeoutId);
       } catch (e) {
         console.error('KV save error:', e);
       }
